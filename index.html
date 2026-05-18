@@ -63,6 +63,24 @@
   .t-core{background:#e5e7f5;color:#33409b;}
   .t-second{background:#ece7d3;color:#7a6310;}
 
+  /* subject revision decks */
+  .decks-panel{margin-bottom:22px;}
+  .decks-panel h2 .h2note{font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-left:auto;}
+  .decks{display:grid;gap:10px;grid-template-columns:repeat(2,1fr);}
+  @media(min-width:580px){.decks{grid-template-columns:repeat(3,1fr);}}
+  @media(min-width:920px){.decks{grid-template-columns:repeat(6,1fr);}}
+  .deck{display:flex;flex-direction:column;gap:6px;background:var(--paper);border:1.5px solid var(--line);border-left:4px solid var(--dc);border-radius:9px;padding:12px 13px;text-decoration:none;color:inherit;min-height:74px;}
+  .deck .dname{font-family:'Fraunces',serif;font-weight:600;font-size:1rem;line-height:1.12;}
+  .deck .dstatus{font-size:.74rem;font-weight:600;letter-spacing:.02em;margin-top:auto;}
+  a.deck{transition:border-color .15s ease,background .15s ease;}
+  a.deck .dname{color:var(--ink);}
+  a.deck .dstatus{color:var(--accent);}
+  a.deck:hover{border-color:var(--dc);background:var(--card);}
+  a.deck:focus-visible{outline:2px solid var(--dc);outline-offset:2px;}
+  .deck.soon{cursor:default;}
+  .deck.soon .dname{color:var(--soft);}
+  .deck.soon .dstatus{color:var(--faint);}
+
   /* strategy */
   .strategy{background:var(--card);border:1.5px solid var(--line);border-left:5px solid var(--accent);border-radius:12px;padding:22px 24px;margin-bottom:22px;}
   .strategy h3{font-family:'Fraunces',serif;font-size:1.32rem;font-weight:600;margin-bottom:7px;}
@@ -162,6 +180,36 @@
         <div class="grade"><span class="gdot" style="background:var(--eng)"></span><span class="gname">English Lit</span><span class="gscore">B · 86</span><span class="gtag t-second">Support</span></div>
         <div class="grade"><span class="gdot" style="background:var(--psy)"></span><span class="gname">Psychology</span><span class="gscore">B+ · 87</span><span class="gtag t-second">Support</span></div>
         <div class="grade"><span class="gdot" style="background:var(--fre)"></span><span class="gname">French A</span><span class="gscore">A− · 93</span><span class="gtag t-second">Support</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel decks-panel">
+    <h2>Subject revision decks <span class="h2note">1 of 6 ready</span></h2>
+    <div class="decks">
+      <div class="deck soon" style="--dc:var(--phy)">
+        <span class="dname">Physics HL</span>
+        <span class="dstatus">Revision page coming soon</span>
+      </div>
+      <div class="deck soon" style="--dc:var(--mat)">
+        <span class="dname">Math AA HL</span>
+        <span class="dstatus">Revision page coming soon</span>
+      </div>
+      <a class="deck" href="chemistry.html" style="--dc:var(--che)">
+        <span class="dname">Chemistry HL</span>
+        <span class="dstatus">Open revision deck ›</span>
+      </a>
+      <div class="deck soon" style="--dc:var(--eng)">
+        <span class="dname">English Lit</span>
+        <span class="dstatus">Revision page coming soon</span>
+      </div>
+      <div class="deck soon" style="--dc:var(--psy)">
+        <span class="dname">Psychology</span>
+        <span class="dstatus">Revision page coming soon</span>
+      </div>
+      <div class="deck soon" style="--dc:var(--fre)">
+        <span class="dname">French A</span>
+        <span class="dstatus">Revision page coming soon</span>
       </div>
     </div>
   </div>
