@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synth — IB Chemistry HL Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f3ef; --panel:#ffffff; --panel-2:#fbfaf7;
+    --ink:#211f1c; --ink-2:#615d56; --ink-3:#928d83;
+    --line:#e6e3db;
+    --plum:#5b3d8a; --plum-dk:#3f2767; --plum-tint:#efe9f6;
+    --amber:#c06a16; --amber-tint:#fbeed9;
+    --moss:#3a7d44; --moss-tint:#e5f1e3;
+    --rose:#b23a55; --rose-tint:#f8e4e8;
+    --r:20px; --r-sm:13px;
+    --sh:0 2px 4px rgba(33,31,28,.04),0 14px 30px -16px rgba(33,31,28,.18);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --display:"Fraunces",Georgia,serif;
+    --body:"Outfit",ui-sans-serif,system-ui,sans-serif;
+    --mono:"DM Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);color:var(--ink);font-family:var(--body);
+    font-size:clamp(15px,2.7vw,16px);line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 1px 1px,rgba(33,31,28,.05) 1px,transparent 0);
+    background-size:22px 22px;
+  }
+  sup,sub{font-size:.72em;line-height:0}
+  strong{font-weight:700}
+  table.tbl{border-collapse:collapse;margin:8px 0;font-size:.83em;width:100%}
+  table.tbl th,table.tbl td{border:1px solid var(--line);padding:5px 9px;text-align:left;vertical-align:top}
+  table.tbl th{background:var(--panel-2);font-weight:700}
+  em{font-style:italic}
+  .f{
+    font-family:var(--mono);font-size:.84em;background:var(--plum-tint);
+    color:var(--plum-dk);padding:.14em .44em;border-radius:6px;white-space:nowrap;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 clamp(13px,3.6vw,22px)}
+
+  /* header */
+  header{padding:18px 0 4px}
+  .brandrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;border-radius:12px}
+  .brand .backchev{
+    width:17px;height:17px;flex:none;color:var(--ink-3);margin-right:-3px;
+    transition:transform .2s var(--ease),color .2s;
+  }
+  .brand:hover .backchev{transform:translateX(-3px);color:var(--plum)}
+  .brand:hover h1{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
+  .brand:focus-visible{outline:2.5px solid var(--plum);outline-offset:3px}
+  .brand .mk{
+    width:38px;height:38px;border-radius:11px;flex:none;
+    background:linear-gradient(140deg,var(--plum),var(--plum-dk));
+    display:grid;place-items:center;box-shadow:0 6px 16px -6px rgba(91,61,138,.6);
+  }
+  .brand .mk svg{width:21px;height:21px}
+  .brand h1{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.01em}
+  .brand p{font-size:11.5px;color:var(--ink-3);font-weight:600;letter-spacing:.03em}
+  .scorepill{
+    flex:none;display:flex;align-items:center;gap:7px;
+    background:var(--panel);border:1px solid var(--line);border-radius:99px;
+    padding:6px 12px 6px 8px;box-shadow:var(--sh);
+  }
+  .scorepill .ring{
+    width:26px;height:26px;border-radius:99px;flex:none;
+    background:conic-gradient(var(--moss) 0deg,var(--line) 0deg);
+    display:grid;place-items:center;transition:background .6s var(--ease);
+  }
+  .scorepill .ring i{
+    width:18px;height:18px;border-radius:99px;background:var(--panel);
+    display:grid;place-items:center;font-size:9px;font-weight:700;color:var(--ink-2);
+  }
+  .scorepill b{font-size:12.5px;font-weight:700}
+  .scorepill span{font-size:11px;color:var(--ink-3);font-weight:600}
+
+  /* bento hero */
+  .bento{
+    display:grid;gap:11px;margin-top:14px;
+    grid-template-columns:1fr 1fr;
+  }
+  .cell{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--sh);padding:16px;
+  }
+  .cell.wide{grid-column:1/-1}
+  .cell.hero{
+    grid-column:1/-1;
+    background:linear-gradient(150deg,#fff 0%,var(--plum-tint) 130%);
+    padding:clamp(18px,5vw,26px);
+  }
+  .cell.hero .eyebrow{
+    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--plum);margin-bottom:9px;
+  }
+  .cell.hero h2{
+    font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+    font-size:clamp(23px,6.4vw,33px);
+  }
+  .cell.hero p{font-size:13px;color:var(--ink-2);margin-top:7px;max-width:42ch}
+
+  .stat .top{
+    display:flex;align-items:center;gap:7px;
+    font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  .stat .num{
+    font-family:var(--display);font-weight:600;letter-spacing:-.03em;
+    font-size:clamp(30px,9vw,42px);line-height:1;margin:8px 0 2px;
+  }
+  .stat.days .num{color:var(--plum-dk)}
+  .stat .cap{font-size:12px;color:var(--ink-2);font-weight:500}
+  .dot{width:8px;height:8px;border-radius:99px;flex:none}
+  .dot.p{background:var(--plum)} .dot.m{background:var(--moss)} .dot.a{background:var(--amber)}
+
+  .cell.progress .top{
+    display:flex;align-items:center;gap:7px;
+    font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:11px;
+  }
+  .bars{display:flex;gap:4px}
+  .bars i{
+    flex:1;height:34px;border-radius:6px;background:var(--panel-2);
+    border:1px solid var(--line);transition:background .4s var(--ease),border-color .4s;
+    position:relative;
+  }
+  .bars i.on{background:var(--moss);border-color:var(--moss)}
+  .bars i.partial{background:var(--moss-tint);border-color:var(--moss)}
+  .progmeta{display:flex;justify-content:space-between;margin-top:9px;font-size:12px;font-weight:600;color:var(--ink-2)}
+  .progmeta b{color:var(--moss);font-family:var(--display)}
+
+  /* topic list */
+  .sectionhdr{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin:24px 0 10px;
+  }
+  .sectionhdr h3{font-family:var(--display);font-weight:600;font-size:18px}
+  .sectionhdr span{font-size:12px;color:var(--ink-3);font-weight:600}
+
+  .topic{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--sh);margin-bottom:11px;overflow:hidden;
+  }
+  .thead{
+    width:100%;border:0;background:none;cursor:pointer;font:inherit;text-align:left;
+    display:flex;align-items:center;gap:13px;padding:15px;min-height:66px;color:var(--ink);
+    transition:background .2s;
+  }
+  .thead:hover{background:var(--panel-2)}
+  .tnum{
+    width:44px;height:44px;flex:none;border-radius:13px;
+    background:var(--plum-tint);color:var(--plum-dk);
+    display:grid;place-items:center;position:relative;
+    font-family:var(--display);font-weight:600;font-size:19px;
+    transition:background .3s,color .3s;
+  }
+  .topic.done .tnum{background:var(--moss);color:#fff}
+  .tnum .tk{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:scale(.4);transition:.3s var(--ease)}
+  .topic.done .tnum .tk{opacity:1;transform:scale(1)}
+  .topic.done .tnum .nm{opacity:0}
+  .tinfo{flex:1;min-width:0}
+  .tinfo h4{font-family:var(--display);font-weight:600;font-size:clamp(15px,3.7vw,17px);line-height:1.22;letter-spacing:-.01em}
+  .tinfo .meta{display:flex;align-items:center;gap:8px;margin-top:4px}
+  .tinfo .meta .rf{font-size:11px;color:var(--ink-3);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .scoretag{
+    flex:none;font-family:var(--mono);font-size:10.5px;font-weight:500;
+    padding:2px 7px;border-radius:5px;background:var(--panel-2);
+    border:1px solid var(--line);color:var(--ink-3);
+  }
+  .scoretag.has{background:var(--moss-tint);border-color:var(--moss);color:var(--moss)}
+  .tchev{width:24px;height:24px;flex:none;color:var(--ink-3);transition:transform .35s var(--ease)}
+  .thead[aria-expanded="true"] .tchev{transform:rotate(180deg)}
+
+  .panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .42s var(--ease)}
+  .panel.open{grid-template-rows:1fr}
+  .panel>.in{overflow:hidden}
+  .body{padding:0 15px 18px}
+
+  .sub{
+    font-family:var(--display);font-weight:600;font-size:14px;
+    color:var(--plum-dk);margin:16px 0 9px;display:flex;align-items:center;gap:8px;
+  }
+  .sub .pip{width:18px;height:18px;border-radius:6px;background:var(--plum-tint);display:grid;place-items:center}
+  .sub .pip svg{width:11px;height:11px;color:var(--plum)}
+
+  ul.take{list-style:none;display:flex;flex-direction:column;gap:8px}
+  ul.take>li{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:11px;
+    padding:10px 12px;font-size:14px;
+  }
+  ul.take ul{list-style:none;margin:7px 0 0;display:flex;flex-direction:column;gap:5px}
+  ul.take ul li{position:relative;padding-left:15px;font-size:13.4px;color:var(--ink-2)}
+  ul.take ul li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:99px;background:var(--plum)}
+
+  .callout{border-radius:var(--r-sm);padding:12px 14px;margin:13px 0;font-size:13.8px;border:1px solid}
+  .callout .lbl{font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+  .callout.pit{background:var(--amber-tint);border-color:#eed4a8}
+  .callout.pit .lbl{color:var(--amber)}
+  .callout.wkd{background:var(--moss-tint);border-color:#bcdcb8}
+  .callout.wkd .lbl{color:var(--moss)}
+
+  /* quiz */
+  .quizcard{
+    margin-top:16px;background:var(--panel-2);border:1px solid var(--line);
+    border-radius:var(--r-sm);padding:14px;
+  }
+  .quizcard .qhd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+  .quizcard .qhd b{font-family:var(--display);font-weight:600;font-size:15px}
+  .quizcard .qhd .mx{font-size:11px;font-weight:700;color:var(--ink-3)}
+  .quizcard .tip{font-size:12px;color:var(--ink-2);margin-bottom:12px}
+  .quizcard .tip b{color:var(--ink)}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:9px}
+  .q:last-of-type{margin-bottom:0}
+  .qhead{display:flex;gap:8px;align-items:flex-start}
+  .qt{flex:none;font-family:var(--mono);font-size:10.5px;color:var(--plum-dk);background:var(--plum-tint);padding:3px 6px;border-radius:5px;margin-top:1px}
+  .qx{flex:1;font-size:13.7px}
+  .qm{font-size:11.5px;font-weight:700;color:var(--ink-3)}
+  .reveal{
+    margin-top:9px;width:100%;cursor:pointer;font:inherit;font-size:12.5px;font-weight:700;
+    color:var(--plum-dk);background:var(--panel);border:1px dashed var(--plum);
+    border-radius:9px;min-height:40px;display:flex;align-items:center;justify-content:center;gap:7px;
+    transition:background .18s,transform .12s var(--ease);
+  }
+  .reveal:hover{background:var(--plum-tint)}
+  .reveal:active{transform:scale(.98)}
+  .reveal svg{width:13px;height:13px;transition:transform .3s var(--ease)}
+  .reveal.on svg{transform:rotate(180deg)}
+  .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease)}
+  .ans.open{grid-template-rows:1fr}
+  .ans>div{overflow:hidden}
+  .ansin{
+    margin-top:9px;background:#f1f7f0;border:1px solid #c4dcbf;border-left:3px solid var(--moss);
+    border-radius:9px;padding:11px 12px;font-size:13.3px;
+  }
+  .ansin .ml{font-family:var(--display);font-weight:600;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--moss);margin-bottom:5px}
+  .selfgrade{display:flex;gap:7px;margin-top:10px}
+  .selfgrade button{
+    flex:1;cursor:pointer;font:inherit;font-size:11.5px;font-weight:700;
+    min-height:38px;border-radius:8px;border:1px solid var(--line);background:var(--panel);
+    color:var(--ink-2);transition:.16s var(--ease);display:flex;align-items:center;justify-content:center;gap:5px;
+  }
+  .selfgrade button:active{transform:scale(.96)}
+  .selfgrade button.got.sel{background:var(--moss);border-color:var(--moss);color:#fff}
+  .selfgrade button.miss.sel{background:var(--rose);border-color:var(--rose);color:#fff}
+  .selfgrade button:not(.sel):hover{border-color:var(--ink-3)}
+
+  .topicfoot{
+    margin-top:14px;display:flex;align-items:center;gap:10px;
+    padding:12px;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);
+  }
+  .topicfoot .res{flex:1;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+  .topicfoot .res b{font-family:var(--display);color:var(--plum-dk);font-size:14px}
+  .donebtn{
+    flex:none;cursor:pointer;font:inherit;font-weight:700;font-size:13px;
+    min-height:42px;padding:0 16px;border-radius:10px;border:1.5px solid var(--moss);
+    background:var(--panel);color:var(--moss);display:flex;align-items:center;gap:7px;
+    transition:.18s var(--ease);
+  }
+  .donebtn svg{width:16px;height:16px}
+  .donebtn:active{transform:scale(.97)}
+  .topic.done .donebtn{background:var(--moss);color:#fff}
+
+  footer{
+    margin:26px 0 0;padding:20px 0 36px;border-top:1px solid var(--line);
+    color:var(--ink-3);font-size:12px;text-align:center;
+  }
+  footer b{color:var(--ink-2)}
+
+  .fade{opacity:0;transform:translateY(13px);animation:rise .5s var(--ease) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (min-width:620px){
+    .bento{grid-template-columns:repeat(3,1fr)}
+    .cell.hero{grid-column:1/-1}
+    .cell.progress{grid-column:1/-1}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    .fade{opacity:1;transform:none}
+  }
+  @media print{
+    body{background:#fff;background-image:none}
+    .scorepill,.reveal,.selfgrade,.topicfoot{display:none!important}
+    .panel,.ans{grid-template-rows:1fr!important}
+    .topic{break-inside:avoid;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brandrow">
+      <a class="brand" href="index.html" title="Back to Yasmine's Revision Planner">
+        <svg class="backchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        <div class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v6l-5 9a2 2 0 002 3h12a2 2 0 002-3l-5-9V3"/><path d="M8 3h8"/><path d="M7 16h10"/></svg></div>
+        <div>
+          <h1>Synth</h1>
+          <p>IB CHEMISTRY HL · REVISION</p>
+        </div>
+      </a>
+      <div class="scorepill" id="scorePill" title="Quiz marks scored so far">
+        <div class="ring" id="scoreRing"><i id="scorePct">0%</i></div>
+        <div><b id="scoreNum">0</b> <span>marks</span></div>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="cell hero fade">
+        <div class="eyebrow">End-of-Year Exam · Cumulative</div>
+        <h2>Study smarter, one topic at a time.</h2>
+        <p>Semester 1 + 2. Built from the Chemistry Exam Syllabus PDFs and <em>Chemistry for the IB Diploma</em> — Steve Owen, Cambridge 2023.</p>
+      </div>
+
+      <div class="cell stat days fade" style="animation-delay:.05s">
+        <div class="top"><span class="dot p"></span>Countdown</div>
+        <div class="num" id="cdNum">—</div>
+        <div class="cap">days to sample test<br>6 June 2026</div>
+      </div>
+
+      <div class="cell stat fade" style="animation-delay:.1s">
+        <div class="top"><span class="dot m"></span>Reviewed</div>
+        <div class="num" id="revNum" style="color:var(--moss)">0</div>
+        <div class="cap">of 13 topics<br>marked complete</div>
+      </div>
+
+      <div class="cell stat fade" style="animation-delay:.15s">
+        <div class="top"><span class="dot a"></span>Accuracy</div>
+        <div class="num" id="accNum" style="color:var(--amber)">—</div>
+        <div class="cap">of self-graded<br>quiz questions</div>
+      </div>
+
+      <div class="cell progress fade" style="animation-delay:.2s">
+        <div class="top"><span class="dot m"></span>Topic progress</div>
+        <div class="bars" id="bars"></div>
+        <div class="progmeta"><span>Tap a topic to begin</span><b id="progFrac">0 / 13</b></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="sectionhdr">
+    <h3>Topics</h3>
+    <span id="topicCount">All 13 topics</span>
+  </div>
+
+  <div id="topics"></div>
+
+  <footer>
+    Built from the Sem 1 + Sem 2 Chemistry exam syllabus.<br>
+    <b>Do each quiz first; reveal the mark scheme second.</b> Self-grading is private and resets on reload.
+  </footer>
+
+</div>
+
+<script>
+/* ===== SHARED REVISION CONTENT — IB Chemistry HL (Topics 1–4) ===== */
+const EXAM_DATE = "2026-06-06";          // Sample test
+const TOTAL_TOPICS = 13;                  // full course has 13 topics
+const TOPICS = [
+{
+  n:1, id:"t1",
+  title:"Particulate Matter, States & The Nuclear Atom",
+  short:"Particulate Matter & The Atom",
+  refs:"Structure 1.1.1–1.1.3 · 1.2.1–1.2.3 · Sem 1, Unit 1",
+  takeaways:[
+    `<strong>Elements</strong> can't be broken down chemically. <strong>Compounds</strong> = atoms of different elements bonded in fixed ratios. <strong>Mixtures</strong> = no fixed ratio, no chemical bonds, separable by physical methods (filtration, distillation, chromatography, evaporation).`,
+    `<strong>Kinetic molecular theory:</strong> all matter is made of particles in constant motion; temperature ∝ average kinetic energy. States differ in spacing, motion, and forces between particles.`,
+    `<strong>State symbols:</strong> (s), (l), (g), (aq). Use them in every equation.`,
+    `<strong>Temperature in Kelvin:</strong> <span class="f">T(K) = T(°C) + 273.15</span>. K is an absolute scale — 0 K = no particle motion.`,
+    `<strong>Nuclear atom:</strong> dense positive nucleus (protons + neutrons = nucleons) surrounded by electrons. <span class="f"><sup>A</sup><sub>Z</sub>X</span> → Z = protons, A = nucleons, A–Z = neutrons. For ions, adjust electrons (cations lose e⁻; anions gain e⁻).`,
+    `<strong>Isotopes:</strong> same element (same Z), different number of neutrons. Identical chemistry, different mass and physical properties (density, rate of diffusion).`,
+    `<strong>Relative atomic mass:</strong> <span class="f">A<sub>r</sub> = Σ(isotope mass × % abundance) ÷ 100</span>. From mass spectra, peak height = relative abundance, m/z = isotopic mass.`
+  ],
+  pitfall:`Forgetting to subtract/add electrons for ions; using Celsius in gas-law calculations; confusing the mass <em>number</em> A with the relative atomic mass A<sub>r</sub>; ignoring state symbols in thermochemical equations.`,
+  worked:`Chlorine has two isotopes: <sup>35</sup>Cl (75.78%) and <sup>37</sup>Cl (24.22%). A<sub>r</sub> = (35 × 75.78 + 37 × 24.22) ÷ 100 = (2652.3 + 896.14) ÷ 100 = <strong>35.48</strong>. (Data booklet gives 35.45 — round to your data.)`,
+  quiz:{max:21, questions:[
+    {tag:"1.1.1",marks:2,q:`State <strong>one</strong> physical method that could separate sand from salty water, and identify what is collected at each stage.`,a:`Filter — sand collected as residue [1]; evaporate the filtrate to obtain salt (or distill to also recover water) [1].`},
+    {tag:"1.1.2",marks:2,q:`Describe, in terms of particle arrangement and motion, the difference between a liquid and a gas.`,a:`Liquid: particles close together, random motion, weak forces still present [1]. Gas: particles far apart, rapid random motion, negligible intermolecular forces [1].`},
+    {tag:"1.1.3",marks:2,q:`Convert −78 °C to Kelvin and state what this temperature represents on a kinetic-energy basis.`,a:`−78 + 273.15 = <strong>195.15 K</strong> [1]. Particles have lower average kinetic energy than at 273 K but motion has not stopped [1].`},
+    {tag:"1.2.1",marks:2,q:`Deduce the number of protons, neutrons and electrons in <sup>56</sup><sub>26</sub>Fe<sup>3+</sup>.`,a:`p = 26, n = 56 − 26 = 30, e⁻ = 26 − 3 = 23. [Both numbers + charge handling = 2]`},
+    {tag:"1.2.1",marks:2,q:`An ion has 18 electrons, 20 neutrons and a charge of 2+. Identify the element and write its nuclear symbol.`,a:`Z = 18 + 2 = 20 → Ca [1]; A = 20 + 20 = 40, symbol <sup>40</sup><sub>20</sub>Ca<sup>2+</sup> [1].`},
+    {tag:"1.2.2",marks:2,q:`Explain why two isotopes of the same element have identical chemical properties but slightly different physical properties.`,a:`Same number of protons and electrons → same electron configuration → same chemistry [1]. Different number of neutrons → different mass → different density / diffusion rate / boiling point [1].`},
+    {tag:"1.2.2",marks:2,q:`Magnesium has three isotopes: <sup>24</sup>Mg (78.99%), <sup>25</sup>Mg (10.00%), <sup>26</sup>Mg (11.01%). Calculate A<sub>r</sub> to 2 d.p.`,a:`(24 × 78.99 + 25 × 10.00 + 26 × 11.01) ÷ 100 = (1895.76 + 250 + 286.26)/100 = <strong>24.32</strong> [working 1, answer 1].`},
+    {tag:"1.2.3",marks:3,q:`A mass spectrum shows peaks at m/z = 63 (69.2%) and 65 (30.8%). Identify the element and calculate A<sub>r</sub>.`,a:`63 protons + e⁻ pattern → Cu (Z = 29) [1]; A<sub>r</sub> = (63 × 69.2 + 65 × 30.8)/100 = (4359.6 + 2002)/100 = <strong>63.62</strong> [2].`},
+    {tag:"1.1.2",marks:2,q:`State and explain whether sublimation is endothermic or exothermic, in terms of particle energy.`,a:`Endothermic [1]. Energy is absorbed to overcome intermolecular forces and increase the kinetic/potential energy of particles as they move from solid to gas [1].`},
+    {tag:"1.2.1",marks:2,q:`State <strong>one</strong> similarity and <strong>one</strong> difference between an atom of <sup>14</sup>C and an atom of <sup>14</sup>N.`,a:`Similarity: same mass number (14) [1]. Difference: <sup>14</sup>C has 6 protons (8 neutrons), <sup>14</sup>N has 7 protons (7 neutrons) [1].`}
+  ]}
+},
+{
+  n:2, id:"t2",
+  title:"Electron Configurations & Ionisation Energy",
+  short:"Electron Config & IE",
+  refs:"Structure 1.3.1–1.3.7 · Sem 1, Unit 1/2",
+  takeaways:[
+    `<strong>EM spectrum:</strong> higher frequency ⇒ higher energy ⇒ shorter wavelength. <span class="f">c = λf</span>, <span class="f">E = hf</span>.`,
+    `<strong>Line emission spectrum:</strong> evidence for discrete energy levels. Excited electrons drop from higher n to lower n and emit a photon of fixed energy = ΔE between levels. Lines converge at higher frequency → convergence limit = ionisation.`,
+    `<strong>Hydrogen spectrum series:</strong> Lyman → n=1 (UV), Balmer → n=2 (visible), Paschen → n=3 (IR).`,
+    `<strong>Energy levels &amp; sublevels:</strong> max electrons in level n = 2n². Sublevels by energy: s (1 orbital, 2 e⁻), p (3 orbitals, 6 e⁻), d (5 orbitals, 10 e⁻), f (7 orbitals, 14 e⁻).`,
+    `<strong>Orbital shapes:</strong> s = sphere; p = three perpendicular dumbbells (p<sub>x</sub>, p<sub>y</sub>, p<sub>z</sub>).`,
+    `<strong>Three filling rules:</strong><ul><li><strong>Aufbau</strong> — fill lowest-energy orbital first (1s 2s 2p 3s 3p 4s 3d 4p…).</li><li><strong>Pauli exclusion</strong> — max 2 electrons per orbital, opposite spin.</li><li><strong>Hund's rule</strong> — degenerate orbitals fill singly with parallel spin before pairing.</li></ul>`,
+    `<strong>Exceptions (memorise!):</strong> Cr = [Ar] 3d⁵ 4s¹, Cu = [Ar] 3d¹⁰ 4s¹ — extra stability from half-filled / full d-subshell.`,
+    `<strong>Ion configurations:</strong> for transition-metal cations, remove 4s electrons <em>before</em> 3d. Fe = [Ar] 3d⁶ 4s² → Fe³⁺ = [Ar] 3d⁵.`,
+    `<strong>First ionisation energy (IE₁):</strong> energy to remove the most loosely held electron from <em>one mole of gaseous atoms</em>. Units kJ mol⁻¹; always endothermic, always positive.`,
+    `<strong>Trends in IE₁:</strong><ul><li><strong>Across a period</strong> — increases (nuclear charge ↑, shielding ≈ same, radius ↓).</li><li><strong>Down a group</strong> — decreases (more shells, more shielding, larger radius).</li><li><strong>Discontinuities</strong> — dips Be→B (2p above 2s) and N→O (paired 2p electrons repel).</li></ul>`,
+    `<strong>Convergence limit:</strong> at the limit a photon ionises the atom. <span class="f">IE = hf<sub>limit</sub> × N<sub>A</sub></span> (then J → kJ).`,
+    `<strong>Successive IE:</strong> big jumps indicate a move into a new (lower) energy level — used to deduce the group of an element.`
+  ],
+  pitfall:`Filling 3d before 4s when writing configs (correct order is 4s first); forgetting Cr/Cu exceptions; quoting IE as "energy to remove an electron" without specifying <em>one mole, gaseous, atom</em>; missing the dips at B and O in the period-2 trend.`,
+  worked:`Convergence limit for H is at λ = 91.2 nm. f = c/λ = (3.00 × 10⁸)/(91.2 × 10⁻⁹) = 3.29 × 10¹⁵ Hz. E = hf = (6.63 × 10⁻³⁴)(3.29 × 10¹⁵) = 2.18 × 10⁻¹⁸ J. IE = 2.18 × 10⁻¹⁸ × 6.022 × 10²³ = 1.31 × 10⁶ J mol⁻¹ = <strong>1310 kJ mol⁻¹</strong>.`,
+  quiz:{max:23, questions:[
+    {tag:"1.3.1",marks:3,q:`Distinguish between a continuous spectrum and a line spectrum, and state what a line spectrum is evidence of.`,a:`Continuous: all wavelengths present (no gaps) [1]. Line: only specific, discrete wavelengths [1]. Evidence that electrons occupy discrete (quantised) energy levels [1].`},
+    {tag:"1.3.2",marks:2,q:`Explain why the Lyman series appears in the UV region while the Balmer series appears in the visible region.`,a:`Lyman: transitions to n = 1 — larger ΔE → higher frequency → UV [1]. Balmer: transitions to n = 2 — smaller ΔE → lower frequency → visible [1].`},
+    {tag:"1.3.5",marks:3,q:`Write the full electron configuration of: (a) Mn (Z = 25); (b) Cu (Z = 29); (c) Fe³⁺.`,a:`(a) 1s²2s²2p⁶3s²3p⁶3d⁵4s² [1]; (b) 1s²2s²2p⁶3s²3p⁶3d¹⁰4s¹ (exception) [1]; (c) 1s²2s²2p⁶3s²3p⁶3d⁵ — remove 4s² then one 3d [1].`},
+    {tag:"1.3.4",marks:2,q:`Sketch a 2s orbital and the three 2p orbitals, and state where the electron density is greatest in each.`,a:`2s = single sphere [½]; 2p = three perpendicular dumbbells along x/y/z [1]; density highest near the nucleus for s, in two lobes either side of the nucleus for p [½].`},
+    {tag:"1.3.6",marks:2,q:`State and explain whether the first ionisation energy of magnesium is higher or lower than that of aluminium.`,a:`Mg has the higher IE₁ [1]. In Al the outer electron is in a 3p orbital, higher in energy than 3s and slightly shielded by 3s — easier to remove [1].`},
+    {tag:"1.3.6",marks:2,q:`Define <em>first ionisation energy</em> and give a symbolic equation for sodium.`,a:`Energy to remove one mole of electrons from one mole of gaseous atoms to form gaseous +1 ions [1]. Na(g) → Na⁺(g) + e⁻ [1].`},
+    {tag:"1.3.7",marks:2,q:`Successive IEs for element X (kJ mol⁻¹): 738, 1451, 7733, 10540… State the group of X and justify.`,a:`Group 2 [1]. Large jump between the 2nd and 3rd IE shows the 3rd electron comes from a lower energy level closer to the nucleus [1].`},
+    {tag:"1.3.6",marks:3,q:`The convergence limit in the H emission spectrum corresponds to f = 3.29 × 10¹⁵ Hz. Calculate IE₁(H) in kJ mol⁻¹.`,a:`E = hf = (6.63 × 10⁻³⁴)(3.29 × 10¹⁵) = 2.18 × 10⁻¹⁸ J [1]. × N<sub>A</sub> = 1.31 × 10⁶ J mol⁻¹ [1] = <strong>1.31 × 10³ kJ mol⁻¹</strong> [1].`},
+    {tag:"1.3.6",marks:2,q:`Explain the general trend in first ionisation energy down Group 1.`,a:`IE₁ decreases [1]. Atomic radius and shielding increase down the group — the outer electron is further from the nucleus and feels less effective nuclear attraction [1].`},
+    {tag:"1.3.6",marks:2,q:`Explain the small <em>decrease</em> in IE₁ between nitrogen and oxygen.`,a:`N has 2p³ — each 2p orbital singly occupied (half-filled stability) [1]. O has 2p⁴ — one orbital has paired electrons; mutual repulsion makes one easier to remove [1].`}
+  ]}
+},
+{
+  n:3, id:"t3",
+  title:"The Mole, Molar Mass & Concentration",
+  short:"The Mole",
+  refs:"Structure 1.4.1–1.4.3, 1.4.5–1.4.6 · Sem 1, Unit 1",
+  takeaways:[
+    `<strong>Mole (mol):</strong> SI unit of amount of substance. 1 mol contains <span class="f">N<sub>A</sub> = 6.022 × 10²³</span> entities (atoms, molecules, ions, electrons, formula units).`,
+    `<strong>Number of particles:</strong> <span class="f">N = n × N<sub>A</sub></span>.`,
+    `<strong>Relative atomic mass A<sub>r</sub>:</strong> average atomic mass relative to 1/12 the mass of a <sup>12</sup>C atom. <strong>Relative formula mass M<sub>r</sub>:</strong> sum of A<sub>r</sub> of all atoms in the formula unit.`,
+    `<strong>Molar mass M (g mol⁻¹):</strong> numerically equal to M<sub>r</sub>. <span class="f">n = m / M</span>.`,
+    `<strong>Concentration:</strong> <span class="f">c = n / V</span> (mol dm⁻³ when V is in dm³). 1 dm³ = 1000 cm³ = 1 L. Also expressible in g dm⁻³ via × M.`,
+    `<strong>Dilution:</strong> <span class="f">c₁V₁ = c₂V₂</span>.`,
+    `<strong>Preparing a standard solution:</strong> weigh accurately in a weighing bottle; dissolve in distilled water in a beaker; transfer with rinsing to a volumetric flask; make up to the mark; invert to mix. Apparatus: volumetric flask, pipette, beaker, glass rod, wash bottle.`,
+    `<strong>Avogadro's law:</strong> equal volumes of gases at the same T and P contain equal numbers of particles → for gases, mole ratio = volume ratio.`,
+    `<strong>Empirical formula:</strong> simplest whole-number ratio of atoms. <strong>Molecular formula = (empirical formula)<sub>n</sub></strong>, where n = M(molecular)/M(empirical).`
+  ],
+  pitfall:`Using V in cm³ instead of dm³ for concentration; mixing up A<sub>r</sub> and M; forgetting Avogadro's law applies only to <em>gaseous</em> species at the same T and P; not dividing by the smallest mole value when finding an empirical formula.`,
+  worked:`A compound is 40.0% C, 6.71% H, 53.3% O by mass. n(C) = 40.0/12 = 3.33; n(H) = 6.71/1 = 6.71; n(O) = 53.3/16 = 3.33. Divide by smallest (3.33) → 1 : 2 : 1 → empirical formula <strong>CH₂O</strong>. If M = 180 g mol⁻¹, n = 180/30 = 6 → molecular formula <strong>C₆H₁₂O₆</strong>.`,
+  quiz:{max:22, questions:[
+    {tag:"1.4.1",marks:2,q:`Calculate the number of oxygen <em>atoms</em> in 11.0 g of CO₂.`,a:`n(CO₂) = 11.0/44.01 = 0.250 mol [1]. Atoms of O = 0.250 × 2 × 6.022 × 10²³ = <strong>3.01 × 10²³</strong> [1].`},
+    {tag:"1.4.3",marks:2,q:`Calculate the mass of 0.250 mol of Ca(NO₃)₂.`,a:`M(Ca(NO₃)₂) = 40.08 + 2(14.01 + 3 × 16.00) = 164.10 g mol⁻¹ [1]. Mass = 0.250 × 164.10 = <strong>41.0 g</strong> [1].`},
+    {tag:"1.4.5",marks:2,q:`What volume (in cm³) of 0.500 mol dm⁻³ NaOH contains 2.00 g of NaOH?`,a:`n(NaOH) = 2.00/40.00 = 0.0500 mol [1]. V = n/c = 0.0500/0.500 = 0.100 dm³ = <strong>100 cm³</strong> [1].`},
+    {tag:"1.4.5",marks:1,q:`25.0 cm³ of 0.100 mol dm⁻³ HCl is diluted to 250.0 cm³. State the new concentration.`,a:`c₂ = (0.100 × 25.0)/250.0 = <strong>0.0100 mol dm⁻³</strong> [1].`},
+    {tag:"1.4.6",marks:3,q:`State Avogadro's law and use it to find the volume of O₂ needed to completely burn 50.0 cm³ of CH₄ (gases at same T and P).`,a:`Equal volumes of gases at the same T and P contain equal numbers of particles [1]. CH₄ + 2O₂ → CO₂ + 2H₂O, ratio CH₄ : O₂ = 1 : 2 [1]. V(O₂) = <strong>100 cm³</strong> [1].`},
+    {tag:"1.4.1",marks:2,q:`Calculate the total number of ions in 0.150 mol of (NH₄)₂SO₄.`,a:`Ions per formula unit = 3 (2 NH₄⁺ + 1 SO₄²⁻) [1]. Total = 0.150 × 3 × 6.022 × 10²³ = <strong>2.71 × 10²³</strong> [1].`},
+    {tag:"1.4.2",marks:2,q:`The atomic mass of bromine is given as 79.90 although no <sup>79.90</sup>Br isotope exists. Explain why.`,a:`Br exists as a mixture of two isotopes (<sup>79</sup>Br and <sup>81</sup>Br) in roughly equal abundance [1]. The relative atomic mass is the weighted average of their masses [1].`},
+    {tag:"1.4.5",marks:3,q:`Describe how to prepare 250 cm³ of 0.100 mol dm⁻³ sodium chloride solution, naming the apparatus.`,a:`n = c × V = 0.100 × 0.250 = 0.0250 mol; m = 0.0250 × 58.44 = 1.46 g [1]. Weigh accurately, dissolve in a beaker with distilled water, transfer with rinsing to a 250 cm³ volumetric flask, make up to the mark, invert to mix [2 — 1 for the flask/make-up step, 1 for the rinsing/transfer detail].`},
+    {tag:"1.4.4",marks:3,q:`A hydrocarbon contains 85.7% C by mass. Determine its empirical formula and, given M = 56 g mol⁻¹, its molecular formula.`,a:`%H = 14.3. n(C) = 85.7/12 = 7.14; n(H) = 14.3/1 = 14.3 → ratio C : H = 1 : 2 → empirical CH₂ [1]. M(CH₂) = 14 → n = 56/14 = 4 [1]. Molecular formula = <strong>C₄H₈</strong> [1].`},
+    {tag:"1.4.6",marks:2,q:`20 cm³ of N₂ reacts with 60 cm³ of H₂ to form NH₃. Identify the volume of NH₃ produced and the limiting reactant.`,a:`N₂ + 3H₂ → 2NH₃. 20 cm³ N₂ needs 60 cm³ H₂ — both react completely; neither is in excess (stoichiometric proportion) [1]. Volume of NH₃ = 2 × 20 = <strong>40 cm³</strong> [1].`}
+  ]}
+},
+{
+  n:4, id:"t4",
+  title:"Ideal Gases",
+  short:"Ideal Gases",
+  refs:"Structure 1.5.1–1.5.4 · Sem 1, Unit 1",
+  takeaways:[
+    `<strong>Ideal gas assumptions:</strong> (i) particles in continuous random motion; (ii) particle volume negligible vs container; (iii) no intermolecular forces; (iv) all collisions perfectly elastic; (v) average KE proportional to T (K).`,
+    `<strong>Real gas deviations:</strong> greatest at <strong>high pressure</strong> (particle volume no longer negligible) and <strong>low temperature</strong> (IMFs become significant — gas near liquefaction). Gases with stronger IMFs (NH₃, H₂O vapour) deviate more than noble gases or H₂.`,
+    `<strong>Ideal gas equation:</strong> <span class="f">PV = nRT</span>, with R = 8.31 J K⁻¹ mol⁻¹. Units must match: P in Pa, V in m³, T in K.`,
+    `<strong>Unit conversions (memorise!):</strong> 1 kPa = 1000 Pa; 1 atm = 101.3 kPa = 101 325 Pa; 1 dm³ = 1 × 10⁻³ m³; 1 cm³ = 1 × 10⁻⁶ m³; T(K) = T(°C) + 273.15.`,
+    `<strong>Combined gas law (fixed amount):</strong> <span class="f">P₁V₁/T₁ = P₂V₂/T₂</span>. Useful when n is constant.`,
+    `<strong>Three individual laws:</strong><ul><li>Boyle (constant T, n): P ∝ 1/V → P–V curve is a hyperbola.</li><li>Charles (constant P, n): V ∝ T → straight line through origin (T in K).</li><li>Gay-Lussac (constant V, n): P ∝ T.</li></ul>`,
+    `<strong>Molar volume of an ideal gas:</strong> at STP (T = 273.15 K, P = 100 kPa) V<sub>m</sub> = 22.7 dm³ mol⁻¹ (IB convention — check the data booklet).`
+  ],
+  pitfall:`Leaving T in Celsius; mixing kPa with R (use Pa); using cm³ in PV = nRT without converting (cm³ → m³: ÷ 10⁶); confusing the STP molar volume (22.7) with the older 22.4 dm³ value.`,
+  worked:`Calculate the volume of 2.50 g of CO₂ at 25.0 °C and 99.0 kPa. n = 2.50/44.01 = 0.0568 mol. T = 298.15 K. P = 99 000 Pa. V = nRT/P = (0.0568)(8.31)(298.15)/99 000 = 1.42 × 10⁻³ m³ = <strong>1.42 dm³</strong>.`,
+  quiz:{max:24, questions:[
+    {tag:"1.5.1",marks:3,q:`State <strong>three</strong> assumptions of the kinetic molecular theory for an ideal gas.`,a:`Any 3 of: random motion; negligible particle volume; no intermolecular forces; elastic collisions; KE ∝ T(K). [3]`},
+    {tag:"1.5.2",marks:2,q:`Explain why a real gas deviates most strongly from ideal behaviour at low temperature and high pressure.`,a:`Low T: particles move slowly, IMFs become significant relative to KE [1]. High P: particles forced close together; their own volume becomes significant vs container volume [1].`},
+    {tag:"1.5.4",marks:3,q:`Calculate the volume (in dm³) occupied by 0.450 mol of an ideal gas at 27.0 °C and 101 kPa.`,a:`T = 300 K, P = 101 000 Pa [1]. V = nRT/P = (0.450)(8.31)(300)/101 000 = 1.11 × 10⁻² m³ [1] = <strong>11.1 dm³</strong> [1].`},
+    {tag:"1.5.4",marks:2,q:`A gas sample occupies 2.50 dm³ at 300 K and 100 kPa. Find its volume at 350 K and 120 kPa.`,a:`V₂ = V₁(P₁/P₂)(T₂/T₁) = 2.50 × (100/120) × (350/300) = <strong>2.43 dm³</strong> [2].`},
+    {tag:"1.5.4",marks:3,q:`A 0.150 g sample of an unknown gas occupies 50.0 cm³ at 25 °C and 100 kPa. Calculate its molar mass and identify a likely gas.`,a:`T = 298.15 K, V = 50.0 × 10⁻⁶ m³, P = 100 000 Pa. n = PV/RT = (10⁵)(5.0 × 10⁻⁵)/(8.31 × 298.15) = 2.02 × 10⁻³ mol [1]. M = m/n = 0.150/2.02 × 10⁻³ = <strong>74.3 g mol⁻¹</strong> [1] — consistent with a candidate near M ≈ 74, e.g. butan-1-ol [1, any sensible candidate].`},
+    {tag:"1.5.3",marks:2,q:`Sketch P vs V for a fixed mass of ideal gas at constant T, and V vs T (in K) at constant P.`,a:`P vs V at constant T: hyperbola (P ↓ as V ↑) [1]. V vs T at constant P: straight line through the origin (T in K) [1].`},
+    {tag:"1.5.2",marks:2,q:`State one gas you would expect to behave more ideally than ammonia at room conditions, and justify.`,a:`Any noble gas (He, Ne) or H₂ [1]. Justification: weak/no hydrogen bonding, very small or no permanent dipole, so IMFs are nearly absent [1].`},
+    {tag:"1.5.4",marks:2,q:`A 0.500 mol sample of CO₂ at 27 °C is compressed from 24.0 dm³ to 6.0 dm³ at constant T. Determine the new pressure (kPa).`,a:`P₁ = nRT/V = (0.5)(8.31)(300)/(24 × 10⁻³) = 51 938 Pa ≈ 52 kPa [1]. P₂ = P₁ × V₁/V₂ = 52 × 24/6 = <strong>208 kPa</strong> [1].`},
+    {tag:"1.5.4",marks:3,q:`Calculate the volume of H₂ produced at 25.0 °C and 101 kPa when 0.270 g of Mg reacts completely with excess HCl.`,a:`n(Mg) = 0.270/24.31 = 0.01111 mol; Mg + 2HCl → MgCl₂ + H₂ → n(H₂) = 0.01111 mol [1]. V = nRT/P = (0.01111)(8.31)(298.15)/101 000 = 2.72 × 10⁻⁴ m³ = <strong>0.272 dm³</strong> = 272 cm³ [2].`},
+    {tag:"1.5.1",marks:2,q:`Explain, in terms of particle motion, why the pressure of a gas increases when temperature increases at constant volume.`,a:`Higher T → particles move faster → more frequent and more forceful collisions with the container walls [1] → pressure (force per unit area) increases [1].`}
+  ]}
+},
+/* ===== TOPIC 5 ===== */
+{
+  n:5, id:"t5",
+  title:"The Periodic Table & Periodicity",
+  short:"Periodic Table",
+  refs:"Structure 3.1.1–3.1.3, 3.1.7 · Sem 1, Unit 2",
+  takeaways:[
+    `<strong>Layout:</strong> rows = <em>periods</em> (= outer principal energy level n), columns = <em>groups</em> (= valence electrons for s/p block), <em>blocks</em> = s, p, d, f (named after the sublevel being filled).`,
+    `<strong>Categories:</strong> metals (left), non-metals (top right), metalloids (B, Si, Ge, As, Sb, Te — the staircase). Alkali metals = group 1; alkaline earth = group 2; halogens = group 17; noble gases = group 18.`,
+    `<strong>From position → electron config:</strong> period gives n of outer shell; group within block tells you how many electrons are in the outermost sublevel.`,
+    `<strong>From config → position:</strong> last sublevel filled identifies the block; total outer-shell electrons give the group (for s/p blocks).`,
+    `<strong>Periodic trends:</strong><ul><li><strong>Atomic radius:</strong> ↓ across period (nuclear charge ↑, shielding ≈ same); ↑ down group (more shells).</li><li><strong>Ionisation energy:</strong> ↑ across period; ↓ down group (mirror of radius, modulated by sublevel structure).</li><li><strong>Electron affinity:</strong> generally more negative across a period (more energy released on adding e⁻).</li><li><strong>Electronegativity:</strong> ↑ across period, ↓ down group. F is the most electronegative element.</li><li><strong>Metallic character:</strong> ↓ across, ↑ down.</li></ul>`,
+    `<strong>Discontinuities in IE₁ across period 2/3:</strong><ul><li>Drop Be → B and Mg → Al: outer electron now in p sublevel (slightly higher energy, slightly shielded by s electrons).</li><li>Drop N → O and P → S: paired electrons in one p orbital repel; the first one is easier to remove.</li><li>These two dips are <strong>evidence for the existence of sublevels</strong>.</li></ul>`,
+    `<strong>Oxide trends across period 3:</strong> Na₂O, MgO — basic → Al₂O₃ — amphoteric → SiO₂, P₄O₁₀, SO₃, Cl₂O₇ — acidic.`
+  ],
+  pitfall:`Claiming "across a period nuclear charge increases AND shielding stays the same" without explaining why this <em>increases attraction</em>; forgetting the <em>two</em> dips when explaining the period-2 IE trend; mixing up electron affinity and electronegativity.`,
+  worked:`Element X has electron configuration [Ar] 3d¹⁰ 4s² 4p³. Block = p (last sublevel filled is 4p) [½]. Period = 4 [½]. Group = 15 (outer electrons: 4s² + 4p³ = 5 valence → group 15) [1]. Identity: arsenic, As [1].`,
+  quiz:{max:22, questions:[
+    {tag:"3.1.1",marks:3,q:`State which block and period the element with electron configuration [Kr] 4d¹⁰ 5s² 5p² belongs to. Identify the element.`,a:`Block: p (last sublevel filled is 5p) [1]. Period: 5 [1]. Element: tin, Sn (group 14) [1].`},
+    {tag:"3.1.2",marks:2,q:`Deduce the electron configuration of an element in period 3, group 16.`,a:`Period 3, group 16 → S → 1s²2s²2p⁶3s²3p⁴ (or [Ne] 3s² 3p⁴) [2].`},
+    {tag:"3.1.3",marks:2,q:`State and explain the trend in atomic radius across period 3 from Na to Cl.`,a:`Atomic radius decreases [1] because nuclear charge increases while shielding stays roughly the same → greater effective nuclear attraction pulls electrons closer [1].`},
+    {tag:"3.1.3",marks:2,q:`Identify the most electronegative element in the periodic table and explain why.`,a:`Fluorine [1]. Smallest atomic radius among non-metals with high nuclear charge → strong attraction for bonding pairs; outer electrons close to nucleus with little shielding [1].`},
+    {tag:"3.1.7",marks:2,q:`Explain how the dip in IE₁ between Mg and Al provides evidence for the existence of sublevels.`,a:`If only n mattered, IE₁ would rise smoothly. The dip shows Al's outer electron is in a 3p sublevel higher in energy than 3s [1], so 3p must be a distinct (higher-energy) sublevel above 3s [1].`},
+    {tag:"3.1.3",marks:2,q:`State and explain whether Na or Cs has the larger first ionisation energy.`,a:`Na [1]. Cs is further down the group — more shells, greater shielding → outer electron further from nucleus and easier to remove [1].`},
+    {tag:"3.1.1",marks:2,q:`Identify the halogen with the lowest electronegativity and explain in terms of atomic structure.`,a:`Iodine (or astatine) [1]. Largest halogen — more shells → bonding pair further from nucleus, more shielding → weaker attraction for electrons [1].`},
+    {tag:"3.1.3",marks:2,q:`Predict which is more acidic in aqueous solution: SO₃ or MgO, and justify.`,a:`SO₃ [1]. Non-metal oxide; reacts with water to form H₂SO₄ (acidic). MgO is a metal oxide and is basic [1].`},
+    {tag:"3.1.7",marks:3,q:`Describe the trend in IE₁ across period 3 in one sentence and identify <strong>both</strong> discontinuities.`,a:`Overall increasing trend across the period [1]. Dip between Mg and Al (3p higher in energy than 3s) [1]. Dip between P and S (electron pairing in 3p raises repulsion) [1].`},
+    {tag:"3.1.2",marks:2,q:`An element forms a 2− ion with electron configuration [Ar]. Identify the element and state its position in the periodic table.`,a:`[Ar] = 18 electrons → neutral atom has 16 electrons → S [1]. Period 3, group 16 [1].`}
+  ]}
+},
+/* ===== TOPIC 6 ===== */
+{
+  n:6, id:"t6",
+  title:"Enthalpy, Calorimetry & Hess's Law",
+  short:"Enthalpy & Hess",
+  refs:"Reactivity 1.1.1–1.1.4 · Reactivity 1.2.2–1.2.3 · Sem 1, Unit 3",
+  takeaways:[
+    `<strong>System &amp; surroundings:</strong> system = reactants/products; surroundings = everything else (solvent, beaker, air). Energy is <em>conserved</em> overall.`,
+    `<strong>Endothermic (ΔH &gt; 0):</strong> heat absorbed <em>by</em> the system from surroundings → surroundings cool. <strong>Exothermic (ΔH &lt; 0):</strong> heat released to surroundings → surroundings warm.`,
+    `<strong>Energy profile:</strong> products higher than reactants ⇒ endothermic; products lower ⇒ exothermic. Activation energy E<sub>a</sub> = peak above reactants.`,
+    `<strong>Heat ≠ Temperature.</strong> Heat = total energy transferred; temperature = average KE per particle.`,
+    `<strong>Standard enthalpy change ΔH°:</strong> measured at 100 kPa with all species in standard states (normally 298 K). Units: kJ mol⁻¹.`,
+    `<strong>Calorimetry:</strong> <span class="f">q = m c ΔT</span> (q in J, m = mass of <em>solution</em> in g, c = 4.18 J g⁻¹ K⁻¹ for water, ΔT in K or °C). Then <span class="f">ΔH = −q / n</span> where n = moles of limiting reactant. Divide by 1000 for kJ.`,
+    `<strong>Sign convention:</strong> exothermic reaction → solution heats up → ΔT positive → q positive → ΔH negative (note the minus sign).`,
+    `<strong>Sources of error in calorimetry:</strong> heat loss to surroundings; assuming solution density and c = water; ignoring heat absorbed by the calorimeter; incomplete reaction. Improvements: insulate, use a lid, extrapolate the cooling curve.`,
+    `<strong>Hess's law:</strong> ΔH for a reaction is path-independent. ΔH<sub>target</sub> = Σ(ΔH for steps reorganised to give the target equation).`,
+    `<strong>Using ΔH<sub>f</sub>° (formation):</strong> <span class="f">ΔH<sub>rxn</sub>° = Σ ΔH<sub>f</sub>°(products) − Σ ΔH<sub>f</sub>°(reactants)</span>. Note ΔH<sub>f</sub>°(element in standard state) = 0.`,
+    `<strong>Using ΔH<sub>c</sub>° (combustion):</strong> <span class="f">ΔH<sub>rxn</sub>° = Σ ΔH<sub>c</sub>°(reactants) − Σ ΔH<sub>c</sub>°(products)</span> — opposite arrangement to ΔH<sub>f</sub>°.`
+  ],
+  pitfall:`Dropping the minus sign on q for an exothermic reaction; using mass of solute instead of solution; forgetting to convert to kJ; flipping the ΔH<sub>f</sub> / ΔH<sub>c</sub> sums; not multiplying by stoichiometric coefficients in Hess cycles.`,
+  worked:`50.0 cm³ of 1.00 mol dm⁻³ NaOH + 50.0 cm³ of 1.00 mol dm⁻³ HCl; T rises from 21.0 °C to 27.7 °C. m(soln) ≈ 100.0 g, c = 4.18 J g⁻¹ K⁻¹, ΔT = 6.7 K. q = (100)(4.18)(6.7) = 2800 J. n(reaction) = 0.0500 mol. ΔH = −q/n = −2800/0.0500 = −56 000 J mol⁻¹ = <strong>−56.0 kJ mol⁻¹</strong>.`,
+  quiz:{max:23, questions:[
+    {tag:"1.1.1",marks:2,q:`State the law of conservation of energy and explain its meaning in chemistry.`,a:`Energy cannot be created or destroyed, only transferred [1]. Heat lost by the system equals heat gained by the surroundings (or vice versa) [1].`},
+    {tag:"1.1.2",marks:2,q:`State, with reasons, whether the dissolution of NH₄NO₃(s) in water (which causes T to fall) is endo- or exothermic, and give the sign of ΔH.`,a:`Endothermic [1]. The system absorbs heat from the water; ΔH is positive [1].`},
+    {tag:"1.1.3",marks:3,q:`Sketch an energy profile for an exothermic reaction. Label: reactants, products, ΔH and E<sub>a</sub>.`,a:`Reactants higher than products [1]; arrow from reactants down to products labelled ΔH (negative) [1]; peak above reactants labelled E<sub>a</sub> [1].`},
+    {tag:"1.1.4",marks:3,q:`100 cm³ of water in a calorimeter is heated by burning 0.500 g of ethanol (M = 46.07 g mol⁻¹); ΔT = 22.4 °C. Calculate ΔH<sub>c</sub>(ethanol) in kJ mol⁻¹.`,a:`q = (100)(4.18)(22.4) = 9 363 J [1]. n(EtOH) = 0.500/46.07 = 0.01085 mol [1]. ΔH<sub>c</sub> = −q/n = −9 363/0.01085 = <strong>−863 kJ mol⁻¹</strong> [1].`},
+    {tag:"1.1.4",marks:2,q:`State <strong>two</strong> sources of error in the above experiment that would make ΔH<sub>c</sub> appear less exothermic than the literature value.`,a:`Any two: heat loss to surroundings; incomplete combustion; heat absorbed by calorimeter not counted; evaporation of ethanol before burning. [2]`},
+    {tag:"1.2.2",marks:2,q:`Given ΔH₁ = +180 kJ mol⁻¹ for N₂ + O₂ → 2NO, and ΔH₂ = −114 kJ mol⁻¹ for 2NO + O₂ → 2NO₂, use Hess's law to find ΔH for N₂ + 2O₂ → 2NO₂.`,a:`Add the two equations: ΔH = +180 + (−114) = <strong>+66 kJ mol⁻¹</strong> [2].`},
+    {tag:"1.2.3",marks:3,q:`Using ΔH<sub>f</sub>°(CO₂) = −393.5, ΔH<sub>f</sub>°(H₂O,l) = −285.8 and ΔH<sub>f</sub>°(C₂H₆) = −84.7 kJ mol⁻¹, calculate ΔH<sub>c</sub>°(C₂H₆).`,a:`C₂H₆ + 7/2 O₂ → 2CO₂ + 3H₂O [½]. ΔH = [2(−393.5) + 3(−285.8)] − [−84.7] = −1644.4 + 84.7 = <strong>−1559.7 kJ mol⁻¹</strong> [2½].`},
+    {tag:"1.1.4",marks:2,q:`Define the term <em>standard enthalpy of formation</em> and write the equation for ΔH<sub>f</sub>°(CH₃OH,l).`,a:`Enthalpy change when 1 mol of a compound is formed from its elements in their standard states at 100 kPa and 298 K [1]. C(s) + 2H₂(g) + ½O₂(g) → CH₃OH(l) [1].`},
+    {tag:"1.1.1",marks:2,q:`Distinguish between heat and temperature.`,a:`Heat: total thermal energy transferred between objects [1]. Temperature: average kinetic energy of particles in a substance [1].`},
+    {tag:"1.2.3",marks:2,q:`For C(s) + 2H₂(g) → CH₄(g), state why ΔH<sub>f</sub>°(C,s) and ΔH<sub>f</sub>°(H₂,g) are both zero.`,a:`Both are elements in their standard states [1]. By convention ΔH<sub>f</sub>°(element in standard state) = 0 [1].`}
+  ]}
+},
+/* ===== TOPIC 7 ===== */
+{
+  n:7, id:"t7",
+  title:"Bond Enthalpy, Entropy & Gibbs Energy",
+  short:"Bond E, Entropy & Gibbs",
+  refs:"Reactivity 1.2.1 · Reactivity 1.4.1–1.4.3 · Sem 2, Unit 3",
+  takeaways:[
+    `<strong>Bond enthalpy:</strong> energy required to break <strong>1 mol of bonds</strong> in <strong>gaseous</strong> covalent species (homolytic, gas phase). <strong>Breaking absorbs energy</strong> (endothermic); <strong>forming releases energy</strong> (exothermic).`,
+    `<strong>Calculating ΔH from bond enthalpies:</strong> <span class="f">ΔH ≈ Σ E(bonds broken) − Σ E(bonds formed)</span>. Use average values from the data booklet.`,
+    `<strong>Why bond enthalpies are approximate:</strong> tabulated values are <em>averages</em> across many molecules; actual strength depends on neighbouring atoms. Method only applies when all species are gaseous.`,
+    `<strong>Entropy S:</strong> measure of dispersal of matter and energy. Units: J K⁻¹ mol⁻¹ (note J, not kJ).`,
+    `<strong>Predicting ΔS sign:</strong> S(gas) ≫ S(liquid) > S(solid). More moles of gas on the right → ΔS > 0. Dissolving, dissociating ions, melting or vaporising → ΔS > 0. Fewer moles of gas → ΔS < 0.`,
+    `<strong>Calculating ΔS°:</strong> <span class="f">ΔS° = Σ S°(products) − Σ S°(reactants)</span>.`,
+    `<strong>Gibbs energy:</strong> <span class="f">ΔG° = ΔH° − T ΔS°</span>. <strong>Watch units!</strong> ΔH in kJ, ΔS in J K⁻¹ — convert ΔS to kJ K⁻¹ (÷ 1000) before subtracting.`,
+    `<strong>Spontaneity:</strong> ΔG &lt; 0 → spontaneous; ΔG = 0 → equilibrium; ΔG &gt; 0 → non-spontaneous (reverse is spontaneous).`,
+    `<strong>Spontaneity vs temperature:</strong><table class="tbl"><tr><th>ΔH</th><th>ΔS</th><th>ΔG behaviour</th></tr><tr><td>− (exo)</td><td>+</td><td>Always &lt; 0 — spontaneous at all T</td></tr><tr><td>+ (endo)</td><td>−</td><td>Always &gt; 0 — never spontaneous</td></tr><tr><td>− (exo)</td><td>−</td><td>Spontaneous only at low T (T &lt; ΔH/ΔS)</td></tr><tr><td>+ (endo)</td><td>+</td><td>Spontaneous only at high T (T &gt; ΔH/ΔS)</td></tr></table>`,
+    `<strong>Crossover temperature:</strong> set ΔG = 0 → <span class="f">T = ΔH / ΔS</span> (both in matching units, e.g. kJ and kJ K⁻¹).`
+  ],
+  pitfall:`Forgetting to convert ΔS from J to kJ before using ΔG = ΔH − TΔS; flipping the sign in Σ bonds broken − Σ bonds formed; assuming "spontaneous" means "fast" (it means thermodynamically favourable, not kinetically fast); concluding a reaction is non-spontaneous without checking the temperature range.`,
+  worked:`For CaCO₃(s) → CaO(s) + CO₂(g), ΔH = +178 kJ mol⁻¹, ΔS = +161 J K⁻¹ mol⁻¹. At 298 K: ΔG = 178 − (298)(0.161) = 178 − 47.98 = <strong>+130 kJ mol⁻¹</strong> (non-spontaneous). Crossover: T = ΔH/ΔS = 178/0.161 = <strong>1106 K</strong> — above this temperature the decomposition becomes spontaneous.`,
+  quiz:{max:25, questions:[
+    {tag:"1.2.1",marks:3,q:`Define <em>average bond enthalpy</em> and state <strong>two</strong> reasons why data-booklet values are averages.`,a:`Energy required to break one mole of a given bond in gaseous molecules under standard conditions [1]. Two of: averaged over many compounds; actual value depends on molecular environment / neighbouring atoms; only valid for gas phase. [2]`},
+    {tag:"1.2.1",marks:3,q:`Using E(C–H) = 414, E(O=O) = 498, E(C=O) = 804, E(O–H) = 463 kJ mol⁻¹, estimate ΔH for CH₄ + 2O₂ → CO₂ + 2H₂O.`,a:`Bonds broken: 4(C–H) + 2(O=O) = 4(414) + 2(498) = 2652 kJ [1]. Bonds formed: 2(C=O) + 4(O–H) = 1608 + 1852 = 3460 kJ [1]. ΔH = 2652 − 3460 = <strong>−808 kJ mol⁻¹</strong> [1].`},
+    {tag:"1.4.1",marks:2,q:`Predict, with brief justification, the sign of ΔS for: (a) 2H₂(g) + O₂(g) → 2H₂O(l); (b) NH₄Cl(s) → NH₃(g) + HCl(g).`,a:`(a) ΔS &lt; 0: 3 mol gas → liquid (fewer gas particles, more order) [1]. (b) ΔS &gt; 0: 1 mol solid → 2 mol gas [1].`},
+    {tag:"1.4.1",marks:2,q:`Calculate ΔS° for N₂(g) + 3H₂(g) → 2NH₃(g) using S°: N₂ = 192, H₂ = 131, NH₃ = 193 J K⁻¹ mol⁻¹.`,a:`ΔS° = 2(193) − [192 + 3(131)] = 386 − 585 = <strong>−199 J K⁻¹ mol⁻¹</strong> [2].`},
+    {tag:"1.4.2",marks:3,q:`Calculate ΔG° at 298 K for the reaction N₂ + 3H₂ → 2NH₃, given ΔH° = −92 kJ mol⁻¹ and ΔS° = −199 J K⁻¹ mol⁻¹. State whether it is spontaneous.`,a:`ΔS in kJ: −0.199 kJ K⁻¹ mol⁻¹ [½]. ΔG = −92 − (298)(−0.199) = −92 + 59.3 = <strong>−32.7 kJ mol⁻¹</strong> [1½]. ΔG &lt; 0 → spontaneous at 298 K [1].`},
+    {tag:"1.4.3",marks:3,q:`For a reaction ΔH = −60 kJ mol⁻¹ and ΔS = −140 J K⁻¹ mol⁻¹. Determine the maximum temperature at which the reaction is spontaneous.`,a:`Crossover T = ΔH/ΔS = (−60)/(−0.140) = <strong>429 K</strong> [2]. Both terms negative — spontaneous below 429 K [1].`},
+    {tag:"1.4.3",marks:2,q:`Explain how a reaction with ΔH &gt; 0 and ΔS &gt; 0 can still be spontaneous.`,a:`Although ΔH is positive (unfavourable), the TΔS term can be larger in magnitude at sufficiently high T [1] so ΔG = ΔH − TΔS becomes negative [1].`},
+    {tag:"1.2.1",marks:2,q:`Explain why ΔH calculated from bond enthalpies may differ from the experimental ΔH when the reaction involves liquids.`,a:`Bond-enthalpy method assumes all species are gaseous [1]. Liquids involve intermolecular forces / hydration energies not captured by bond enthalpies, so the values differ [1].`},
+    {tag:"1.4.1",marks:2,q:`State the sign of ΔS for the freezing of water and explain.`,a:`ΔS &lt; 0 [1]. Liquid water (disordered) becomes a solid with a fixed lattice (more ordered) [1].`},
+    {tag:"1.4.3",marks:3,q:`For a reaction with ΔH = +75 kJ mol⁻¹ and ΔS = +125 J K⁻¹ mol⁻¹, determine ΔG at 500 K and state whether it is spontaneous.`,a:`ΔS = +0.125 kJ K⁻¹ mol⁻¹ [½]. ΔG = 75 − 500(0.125) = 75 − 62.5 = <strong>+12.5 kJ mol⁻¹</strong> [1½]. ΔG &gt; 0 → not spontaneous at 500 K [1].`}
+  ]}
+},
+/* ===== TOPIC 8 ===== */
+{
+  n:8, id:"t8",
+  title:"Fuels: Combustion, Fossil Fuels & Biofuels",
+  short:"Fuels & Combustion",
+  refs:"Reactivity 1.3.1–1.3.4 · Sem 2, Unit 3",
+  takeaways:[
+    `<strong>Complete combustion (excess O₂):</strong> hydrocarbon + O₂ → CO₂ + H₂O. Hot, clean blue flame. Releases the maximum energy.`,
+    `<strong>Incomplete combustion (limited O₂):</strong> products include CO (toxic) and C (soot) along with H₂O. Yellow, sooty flame. Less energy released. CO is dangerous because it binds haemoglobin more strongly than O₂.`,
+    `<strong>General combustion forms:</strong><ul><li>Alkane: C<sub>n</sub>H<sub>2n+2</sub> + (3n+1)/2 O₂ → n CO₂ + (n+1) H₂O</li><li>Alcohol: C<sub>n</sub>H<sub>2n+1</sub>OH + (3n)/2 O₂ → n CO₂ + (n+1) H₂O</li></ul>`,
+    `<strong>Why larger hydrocarbons → more incomplete combustion:</strong> need disproportionately more O₂ per molecule; harder to vaporise and mix efficiently with air.`,
+    `<strong>Fossil fuels:</strong> coal, crude oil, natural gas — finite and non-renewable. All release CO₂ → enhanced greenhouse effect and climate change.`,
+    `<strong>Comparing fuels:</strong> natural gas (CH₄) releases the most energy per gram and the <em>least</em> CO₂ per unit energy → cleanest fossil fuel. Coal: most CO₂ per unit energy + soot, SO₂ → acid rain.`,
+    `<strong>Greenhouse effect:</strong> CO₂ absorbs IR radiation re-emitted from Earth's surface (asymmetric stretch). Enhanced by anthropogenic emissions → global warming.`,
+    `<strong>Biofuels:</strong> derived from biomass via recent photosynthesis (e.g. bioethanol from sugars, biodiesel from plant oils). Photosynthesis equation: <span class="f">6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</span>.`,
+    `<strong>Renewable vs non-renewable:</strong> renewable = replenished on a human timescale (biofuels, solar, wind). Non-renewable = finite (fossil fuels).`,
+    `<strong>Biofuels — advantages:</strong> carbon-neutral in principle (CO₂ released = CO₂ absorbed during growth); renewable; reduces import dependence. <strong>Disadvantages:</strong> land use competes with food crops; deforestation; lower energy density; fertilizer and processing emissions.`
+  ],
+  pitfall:`Forgetting to balance H₂O for alcohols; calling a fuel "carbon-free" when it just emits less CO₂; not distinguishing between renewable and carbon-neutral.`,
+  worked:`Balance complete combustion of propan-1-ol: C₃H₇OH + 9/2 O₂ → 3CO₂ + 4H₂O. Multiply by 2: <strong>2C₃H₇OH + 9O₂ → 6CO₂ + 8H₂O</strong>.`,
+  quiz:{max:22, questions:[
+    {tag:"1.3.1",marks:2,q:`Write a balanced equation for the complete combustion of octane (C₈H₁₈).`,a:`2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O [2].`},
+    {tag:"1.3.2",marks:2,q:`Write a balanced equation for the incomplete combustion of ethanol (C₂H₅OH) producing CO and H₂O.`,a:`C₂H₅OH + 2O₂ → 2CO + 3H₂O [2].`},
+    {tag:"1.3.2",marks:2,q:`State <strong>two</strong> health or environmental hazards associated with incomplete combustion.`,a:`CO is toxic (binds haemoglobin) [1]; soot/particulates cause respiratory disease and contribute to smog [1].`},
+    {tag:"1.3.3",marks:2,q:`Compare methane and coal as fuels in terms of CO₂ emissions per unit energy released.`,a:`Methane releases less CO₂ per kJ [1] because it has the highest H : C ratio — more energy comes from H–O bond formation rather than C–O [1].`},
+    {tag:"1.3.3",marks:2,q:`Explain how CO₂ contributes to the enhanced greenhouse effect.`,a:`CO₂ absorbs IR radiation re-emitted from Earth's surface [1]. Enhanced by anthropogenic emissions → more IR retained → average atmospheric temperature rises [1].`},
+    {tag:"1.3.4",marks:3,q:`State the equation for photosynthesis and explain why biofuels can be considered carbon-neutral.`,a:`6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ [1]. CO₂ released on burning the biofuel was originally absorbed during photosynthesis [1] → net CO₂ added to the atmosphere is theoretically zero [1].`},
+    {tag:"1.3.4",marks:2,q:`Give one <strong>advantage</strong> and one <strong>disadvantage</strong> of using bioethanol as a vehicle fuel.`,a:`Advantage: renewable / lower net CO₂ emissions [1]. Disadvantage: competes with food crops / deforestation / lower energy density than petrol [1].`},
+    {tag:"1.3.1",marks:3,q:`Calculate the mass of CO₂ produced when 1.00 kg of methane undergoes complete combustion.`,a:`CH₄ + 2O₂ → CO₂ + 2H₂O [½]. n(CH₄) = 1000/16.05 = 62.3 mol [1]. n(CO₂) = 62.3 mol; m(CO₂) = 62.3 × 44.01 = <strong>2740 g ≈ 2.74 kg</strong> [1½].`},
+    {tag:"1.3.3",marks:2,q:`Explain why larger hydrocarbons are more prone to incomplete combustion than smaller ones.`,a:`Larger hydrocarbons need disproportionately more O₂ per molecule [1]; harder to vaporise and mix uniformly with air, increasing the chance of CO and C forming [1].`},
+    {tag:"1.3.4",marks:2,q:`Distinguish between <em>renewable</em> and <em>non-renewable</em> energy sources, giving one example of each.`,a:`Renewable: replenished on a human timescale (e.g. solar, wind, biofuels) [1]. Non-renewable: finite reserves (e.g. coal, crude oil, natural gas) [1].`}
+  ]}
+},
+/* ===== TOPIC 9 ===== */
+{
+  n:9, id:"t9",
+  title:"Ionic Bonding, Lattices & Born–Haber Cycles",
+  short:"Ionic Bonding & Born–Haber",
+  refs:"Structure 2.1.3 · Reactivity 1.2.5 · Sem 2, Unit 4",
+  takeaways:[
+    `<strong>Ionic bonding:</strong> electrostatic attraction between oppositely charged ions formed by electron transfer (typically metal → non-metal).`,
+    `<strong>Lattice structure:</strong> 3-D regular array of alternating cations and anions; represented by an <em>empirical formula</em> — no discrete molecules.`,
+    `<strong>Physical properties of ionic compounds:</strong><ul><li>High melting/boiling points (strong ionic bonds throughout the lattice).</li><li>Conduct electricity only when <em>molten</em> or <em>dissolved</em> (ions mobile); poor conductors as solids.</li><li>Soluble in polar solvents when hydration energy ≥ lattice enthalpy; insoluble in non-polar solvents.</li><li>Brittle: shifting layers aligns like charges → repulsion → fracture.</li><li>Low volatility at room temperature.</li></ul>`,
+    `<strong>Lattice enthalpy ΔH<sub>lat</sub>°:</strong> energy to break 1 mol of ionic lattice into gaseous ions. Always positive (endothermic). Magnitude ∝ <span class="f">|q₊ × q₋| / (r₊ + r₋)</span> — increases with charge, decreases with ionic size.`,
+    `<strong>Trend example:</strong> NaCl &lt; MgO (MgO has 2+/2− vs 1+/1− → ~4× Coulombic attraction; m.p. MgO = 2852 °C vs NaCl = 801 °C).`,
+    `<strong>Born–Haber cycle</strong> (application of Hess's law) — steps for NaCl formation:<ul><li>Atomisation of Na: ΔH<sub>at</sub>(Na) = sublimation enthalpy</li><li>Atomisation of Cl: ½ E(Cl–Cl)</li><li>Ionisation of Na: IE₁(Na)</li><li>Electron affinity of Cl: EA(Cl) — usually negative</li><li>Lattice formation: = −ΔH<sub>lat</sub></li></ul>Sum = ΔH<sub>f</sub>°(NaCl).`,
+    `<strong>Key equation:</strong> ΔH<sub>f</sub>° = ΔH<sub>at</sub>(M) + ΔH<sub>at</sub>(X) + ΔH<sub>IE</sub>(M) + ΔH<sub>EA</sub>(X) − ΔH<sub>lat</sub>. Rearrange for the unknown.`,
+    `<strong>For divalent ions:</strong> use both IE₁ and IE₂; or both EA₁ and EA₂. EA₂ is usually <em>positive</em> (repulsion from the already-negative ion).`
+  ],
+  pitfall:`Forgetting EA₁ is generally negative but EA₂ is positive; missing the ½ for diatomic halogens (½Cl₂ → Cl); sign errors when going around the cycle; explaining solubility without distinguishing lattice vs hydration enthalpies.`,
+  worked:`For NaCl: ΔH<sub>at</sub>(Na) = +108, ½E(Cl–Cl) = +121, IE₁(Na) = +496, EA(Cl) = −349, ΔH<sub>f</sub>(NaCl) = −411 kJ mol⁻¹. Using Hess: ΔH<sub>f</sub> = 108 + 121 + 496 + (−349) − ΔH<sub>lat</sub>. −411 = 376 − ΔH<sub>lat</sub> → ΔH<sub>lat</sub> = <strong>+787 kJ mol⁻¹</strong>.`,
+  quiz:{max:23, questions:[
+    {tag:"2.1.3",marks:2,q:`Explain why solid NaCl does not conduct electricity but molten NaCl does.`,a:`In the solid, ions are held in fixed positions and cannot move [1]. When molten, the ions are free to move and carry charge [1].`},
+    {tag:"2.1.3",marks:2,q:`Explain, with reference to the lattice structure, why ionic compounds are brittle.`,a:`If the layers are displaced, ions of the same charge become aligned [1]; mutual repulsion causes the lattice to fracture [1].`},
+    {tag:"2.1.3",marks:3,q:`Rank in order of <em>increasing</em> melting point and justify: NaF, MgO, CsI.`,a:`CsI &lt; NaF &lt; MgO [1]. MgO has 2+/2− ions — much stronger Coulombic attraction [1]. Among 1+/1− pairs, NaF &gt; CsI because Na⁺ and F⁻ are smaller → shorter inter-ionic distance [1].`},
+    {tag:"1.2.5",marks:2,q:`Define <em>lattice enthalpy</em>, including the sign convention used in IB Chemistry.`,a:`Enthalpy change when 1 mol of ionic compound is dissociated into its gaseous ions [1]. Positive (endothermic) in the IB convention [1].`},
+    {tag:"1.2.5",marks:2,q:`State two factors that affect the magnitude of lattice enthalpy.`,a:`Charge of ions (greater |q| ⇒ greater ΔH<sub>lat</sub>) [1]; ionic radii / inter-ionic distance (smaller r ⇒ greater ΔH<sub>lat</sub>) [1].`},
+    {tag:"1.2.5",marks:3,q:`Using: ΔH<sub>at</sub>(K) = +89, ½E(Br–Br) = +112, IE₁(K) = +419, EA(Br) = −325, ΔH<sub>f</sub>(KBr) = −392 kJ mol⁻¹. Determine ΔH<sub>lat</sub>(KBr).`,a:`ΔH<sub>f</sub> = ΔH<sub>at</sub>(K) + ½E(Br–Br) + IE₁(K) + EA(Br) − ΔH<sub>lat</sub> [1]. −392 = 89 + 112 + 419 − 325 − ΔH<sub>lat</sub> = 295 − ΔH<sub>lat</sub> [1]. ΔH<sub>lat</sub> = <strong>+687 kJ mol⁻¹</strong> [1].`},
+    {tag:"1.2.5",marks:2,q:`Explain why the second electron affinity of oxygen is endothermic.`,a:`Adding an electron to an already-negative O⁻ requires energy to overcome repulsion between the incoming electron and the existing negative charge [2].`},
+    {tag:"2.1.3",marks:2,q:`Predict and justify which compound has the higher lattice enthalpy: LiF or NaF.`,a:`LiF [1]. Li⁺ is smaller than Na⁺ → shorter inter-ionic distance → stronger Coulombic attraction [1].`},
+    {tag:"2.1.3",marks:2,q:`Explain why ionic compounds dissolve readily in water but not in hexane.`,a:`Water is polar — H and O atoms hydrate the ions, releasing enough energy to overcome the lattice enthalpy [1]. Hexane is non-polar; London forces cannot release enough energy to compensate [1].`},
+    {tag:"1.2.5",marks:3,q:`Sketch the steps in a Born–Haber cycle for the formation of MgCl₂ and label which terms include a factor of 2.`,a:`Steps: ΔH<sub>at</sub>(Mg) → IE₁(Mg) → IE₂(Mg) → ΔH<sub>at</sub>(Cl) × 2 → EA(Cl) × 2 → −ΔH<sub>lat</sub>(MgCl₂) = ΔH<sub>f</sub> [2]. Factor of 2 appears for ΔH<sub>at</sub>(Cl) and EA(Cl) [1].`}
+  ]}
+},
+/* ===== TOPIC 10 ===== */
+{
+  n:10, id:"t10",
+  title:"Transition Elements & Coloured Complexes",
+  short:"Transition Metals",
+  refs:"Structure 3.1.8–3.1.10 · Sem 2, Unit 4",
+  takeaways:[
+    `<strong>Definition:</strong> a transition element has an incomplete d-sublevel in at least one of its common oxidation states. Sc and Zn are <em>not</em> transition metals by this definition: Sc³⁺ is d⁰; Zn²⁺ is d¹⁰.`,
+    `<strong>Characteristic properties:</strong><ul><li><strong>Variable oxidation states</strong> — 3d and 4s are similar in energy, so successive IEs are close.</li><li><strong>Coloured compounds</strong> — partly filled d-orbitals allow d–d electronic transitions.</li><li><strong>Paramagnetic behaviour</strong> — unpaired d-electrons.</li><li><strong>Catalytic activity</strong> — homogeneous (change oxidation state, e.g. Fe²⁺/Fe³⁺) or heterogeneous (adsorption, e.g. Fe in Haber, Pt in catalytic converters).</li><li><strong>Complex/ligand formation</strong> — central metal ion bonded to ligands (Lewis bases) via dative bonds.</li><li>High m.p./b.p. and high density.</li></ul>`,
+    `<strong>Variable oxidation state — electron configs (remove 4s before 3d):</strong><ul><li>Fe = [Ar] 3d⁶ 4s² → Fe²⁺ = [Ar] 3d⁶ → Fe³⁺ = [Ar] 3d⁵ (half-filled stability)</li><li>Mn = [Ar] 3d⁵ 4s² → max oxidation state +7 (e.g. MnO₄⁻)</li><li>Cu = [Ar] 3d¹⁰ 4s¹ → Cu²⁺ = [Ar] 3d⁹; Cu⁺ = [Ar] 3d¹⁰</li><li>Cr = [Ar] 3d⁵ 4s¹ → Cr³⁺ = [Ar] 3d³</li></ul>`,
+    `<strong>Why coloured complexes form:</strong><ul><li>Ligands split the 5 degenerate d-orbitals into 2 energy levels (splitting = Δ).</li><li>An electron is promoted from the lower to upper d-level by absorbing a photon whose energy matches Δ.</li><li>The colour <em>seen</em> is the complementary colour to the one absorbed.</li><li><span class="f">E = hf = hc/λ</span>; smaller Δ → longer λ absorbed.</li></ul>`,
+    `<strong>Factors affecting colour:</strong> identity and charge of the metal; identity of the ligand (different Δ → different colour); coordination number.`,
+    `<strong>Colour wheel (complementary pairs):</strong> red ↔ green, orange ↔ blue, yellow ↔ violet.`,
+    `<strong>Colourless transition complexes:</strong> d⁰ (e.g. Sc³⁺, Ti⁴⁺) or d¹⁰ (e.g. Zn²⁺, Cu⁺) — no d–d transitions possible.`
+  ],
+  pitfall:`Calling Zn a transition metal; writing Fe³⁺ as [Ar] 3d⁵ 4s² (4s electrons must be removed first); claiming the absorbed colour is the colour seen — it's the complementary colour.`,
+  worked:`A complex absorbs strongly at λ = 500 nm (green). The observed colour is the complementary colour → <strong>red</strong>. Δ = hc/λ = (6.63 × 10⁻³⁴)(3.00 × 10⁸)/(500 × 10⁻⁹) = 3.98 × 10⁻¹⁹ J per photon = 240 kJ mol⁻¹ (× N<sub>A</sub> / 1000).`,
+  quiz:{max:22, questions:[
+    {tag:"3.1.8",marks:2,q:`State the IB definition of a transition element and explain why Zn is excluded.`,a:`An element whose atoms have, or form at least one ion with, an incomplete d-sublevel [1]. Zn²⁺ is [Ar] 3d¹⁰ — full d-sublevel in its only common oxidation state, so excluded [1].`},
+    {tag:"3.1.9",marks:3,q:`Write the electron configuration of: (a) Mn²⁺; (b) Cu⁺; (c) Cr³⁺.`,a:`(a) [Ar] 3d⁵ [1]; (b) [Ar] 3d¹⁰ [1]; (c) [Ar] 3d³ [1].`},
+    {tag:"3.1.8",marks:2,q:`State <strong>four</strong> general properties of transition elements (other than colour).`,a:`Any 4 of: variable oxidation states; catalytic activity; paramagnetism; complex/ligand formation; high m.p./b.p.; high density. [2 — 1 mark per 2 properties]`},
+    {tag:"3.1.10",marks:3,q:`Explain why [Cu(H₂O)₆]²⁺ is blue while Cu⁺ compounds tend to be colourless.`,a:`Cu²⁺ has 3d⁹ (partly filled d) → d–d transitions absorb light whose energy matches Δ [1]. The colour seen is the complementary colour of the absorbed wavelength [1]. Cu⁺ is 3d¹⁰ — full d-sublevel, no d–d transitions → no visible absorption → colourless [1].`},
+    {tag:"3.1.10",marks:1,q:`A complex absorbs at 600 nm (orange). State the colour observed.`,a:`<strong>Blue</strong> (complementary to orange) [1].`},
+    {tag:"3.1.10",marks:3,q:`Calculate the energy in kJ mol⁻¹ of a photon with λ = 450 nm.`,a:`E = hc/λ = (6.63 × 10⁻³⁴)(3.00 × 10⁸)/(450 × 10⁻⁹) = 4.42 × 10⁻¹⁹ J per photon [1]. × N<sub>A</sub> = 2.66 × 10⁵ J mol⁻¹ [1] = <strong>266 kJ mol⁻¹</strong> [1].`},
+    {tag:"3.1.8",marks:2,q:`Outline how a transition metal acts as a catalyst, giving one named process and catalyst.`,a:`Provides an alternative pathway with lower activation energy [1]. E.g. Fe in the Haber process; V₂O₅ in the Contact process; Ni in hydrogenation [1].`},
+    {tag:"3.1.9",marks:2,q:`Explain why transition metals show variable oxidation states.`,a:`The 3d and 4s sublevels are close in energy [1], so successive IEs are similar in value and several electrons can be removed for comparable energy costs [1].`},
+    {tag:"3.1.10",marks:2,q:`Explain how the identity of the ligand affects the colour of a transition-metal complex.`,a:`Different ligands cause different magnitudes of d-orbital splitting Δ [1] → different wavelengths absorbed → different observed colours [1].`},
+    {tag:"3.1.8",marks:2,q:`State and explain whether [Sc(H₂O)₆]³⁺ is expected to be coloured.`,a:`Colourless [1]. Sc³⁺ is [Ar] 3d⁰ — no d electrons, so no d–d transitions are possible [1].`}
+  ]}
+},
+/* ===== TOPIC 11 ===== */
+{
+  n:11, id:"t11",
+  title:"Covalent Bonding: Lewis, VSEPR, Resonance & Hybridization",
+  short:"Covalent Bonding",
+  refs:"Structure 2.2.4, 2.2.11, 2.2.13–2.2.16 · Sem 2, Unit 5",
+  takeaways:[
+    `<strong>Lewis (electron-dot) formulas:</strong> show all valence electrons; bonding pairs drawn as lines, non-bonding as lone pairs. Octet rule for most period 2/3 elements.`,
+    `<strong>Expanded octet:</strong> period 3+ elements (P, S, Cl, Xe…) can have 5 or 6 electron domains (e.g. PCl₅, SF₆) using vacant d-orbitals.`,
+    `<strong>Formal charge:</strong> <span class="f">FC = (valence e⁻) − (non-bonding e⁻) − ½(bonding e⁻)</span>. Preferred Lewis structure minimises |FC| and places negative FC on the more electronegative atom.`,
+    `<strong>VSEPR — geometries:</strong><table class="tbl"><tr><th>Domains</th><th>e-domain geometry</th><th>All bonded</th><th>With lone pairs</th></tr><tr><td>2</td><td>Linear (180°)</td><td>Linear</td><td>—</td></tr><tr><td>3</td><td>Trigonal planar (120°)</td><td>Trig. planar</td><td>Bent (1 LP)</td></tr><tr><td>4</td><td>Tetrahedral (109.5°)</td><td>Tetrahedral</td><td>Trig. pyramidal (1 LP, 107°); Bent (2 LP, 104.5°)</td></tr><tr><td>5</td><td>Trig. bipyramidal</td><td>TBP</td><td>See-saw (1 LP), T-shape (2 LP), Linear (3 LP)</td></tr><tr><td>6</td><td>Octahedral (90°)</td><td>Octahedral</td><td>Sq. pyramidal (1 LP), Square planar (2 LP)</td></tr></table>`,
+    `<strong>Lone-pair effect on bond angles:</strong> LP–BP repulsion &gt; BP–BP → compresses angle ≈ 2° per lone pair. CH₄ (109.5°) → NH₃ (107°) → H₂O (104.5°).`,
+    `<strong>Resonance &amp; delocalisation:</strong> when more than one valid Lewis structure exists (O₃, NO₃⁻, CO₃²⁻, benzene), the real structure is a hybrid with equivalent bonds of intermediate length. Electrons are <em>delocalised</em>.`,
+    `<strong>σ and π bonds:</strong> σ = head-on overlap (along bond axis); π = sideways p-orbital overlap (density above/below). Single bond = 1σ; double = 1σ + 1π; triple = 1σ + 2π.`,
+    `<strong>Hybridization:</strong><table class="tbl"><tr><th>Hybridisation</th><th>Electron domains</th><th>Geometry</th><th>π bonds on that C</th></tr><tr><td>sp³</td><td>4</td><td>Tetrahedral / pyramidal / bent</td><td>0</td></tr><tr><td>sp²</td><td>3</td><td>Trigonal planar / bent</td><td>1</td></tr><tr><td>sp</td><td>2</td><td>Linear</td><td>2</td></tr></table>`,
+    `<strong>Quick rule:</strong> count electron domains around the central atom → 2 = sp, 3 = sp², 4 = sp³.`
+  ],
+  pitfall:`Counting double bonds as 2 domains in VSEPR (a double bond is 1 domain); forgetting lone pairs when predicting geometry; calling NH₃ "tetrahedral" instead of trigonal pyramidal; writing double bond = 2σ (it's 1σ + 1π).`,
+  worked:`Ethene (C₂H₄): each C has 3 electron domains → trigonal planar, ≈ 120°, sp² hybridised. C=C contains 1σ (sp²–sp² head-on overlap) + 1π (sideways overlap of unhybridised p<sub>z</sub> orbitals). Each C–H is a σ bond (sp²–s overlap).`,
+  quiz:{max:28, questions:[
+    {tag:"2.2.4",marks:4,q:`Draw the Lewis structure and predict the molecular geometry and bond angle of: (a) NH₃; (b) H₂O.`,a:`(a) N with 3 bonded H and 1 LP [1]; trigonal pyramidal [1]; ≈ 107° [½]. (b) O with 2 bonded H and 2 LP [½]; bent [1]; ≈ 104.5° [½ + ½].`},
+    {tag:"2.2.13",marks:3,q:`Draw the Lewis structure of SF₆ and state its molecular geometry and bond angle.`,a:`S central with 6 F single bonds, no LPs [1]. Octahedral [1]; 90° [1].`},
+    {tag:"2.2.13",marks:3,q:`Predict the geometry of XeF₄ and explain the role of the lone pairs.`,a:`XeF₄ has 6 electron domains (4 bonds + 2 LPs) [1]. LPs occupy opposite (axial) positions to minimise repulsion → square planar [1]; bond angle 90° [1].`},
+    {tag:"2.2.14",marks:3,q:`Two Lewis structures are proposed for OCN⁻: (i) O=C=N⁻; (ii) O−C≡N. Use formal charges to determine which is preferred.`,a:`Structure (ii): FC on O = 6−6−1 = −1; C = 4−0−4 = 0; N = 5−2−3 = 0 [2]. Preferred because the negative FC sits on the more electronegative O [1].`},
+    {tag:"2.2.11",marks:3,q:`Explain what is meant by delocalisation, using CO₃²⁻ as an example.`,a:`Electrons not confined to one atom/bond but spread across several [1]. CO₃²⁻ has 3 equivalent resonance structures; all C–O bonds are identical length between single and double [1]; described by 1σ framework + π system delocalised over all 3 O atoms [1].`},
+    {tag:"2.2.15",marks:3,q:`State the number of σ and π bonds in: (a) HCN; (b) CO₂; (c) C₂H₂.`,a:`(a) HCN: 2σ + 2π [1]; (b) CO₂: 2σ + 2π [1]; (c) C₂H₂ (ethyne): 3σ + 2π [1].`},
+    {tag:"2.2.16",marks:2,q:`State the hybridisation of the underlined atom in: (a) <u>C</u>H₄; (b) ethene <u>C</u>H₂=CH₂; (c) <u>N</u>H₃; (d) <u>C</u>O₂.`,a:`(a) sp³ [½]; (b) sp² [½]; (c) sp³ [½]; (d) sp [½].`},
+    {tag:"2.2.4",marks:2,q:`Explain why the H–C–H angle in CH₄ (109.5°) is larger than in NH₃ (107°), which is larger than in H₂O (104.5°).`,a:`Number of lone pairs increases 0 → 1 → 2 [1]. LP–BP repulsion &gt; BP–BP, so each lone pair compresses the H–X–H angle [1].`},
+    {tag:"2.2.16",marks:3,q:`Identify the hybridisation of each carbon in propene CH₃–CH=CH₂ and give the bond angles around each carbon.`,a:`CH₃ = sp³, 109.5° [1]; central CH= = sp², 120° [1]; =CH₂ = sp², 120° [1].`},
+    {tag:"2.2.15",marks:2,q:`Describe the formation of the π bond in ethene by sketching the overlap of p-orbitals.`,a:`Two unhybridised p<sub>z</sub> orbitals (one per C) overlap sideways above and below the σ framework [1]; this lateral overlap creates the π bond with electron density in two lobes parallel to the σ axis [1].`}
+  ]}
+},
+/* ===== TOPIC 12 ===== */
+{
+  n:12, id:"t12",
+  title:"Polarity, Intermolecular Forces & Covalent Networks",
+  short:"Polarity & IMFs",
+  refs:"Structure 2.2.5–2.2.9 · Sem 2, Unit 5",
+  takeaways:[
+    `<strong>Bond polarity:</strong> arises from a difference in electronegativity (ΔEN). ΔEN &gt; 0 → polar covalent; very large ΔEN (≈ &gt;1.8) → essentially ionic; ΔEN ≈ 0 → non-polar covalent.`,
+    `<strong>Showing polarity:</strong> arrow pointing from δ⁺ to δ⁻ along the bond, or partial-charge labels δ⁺/δ⁻.`,
+    `<strong>Molecular polarity:</strong> depends on (i) bond polarities AND (ii) molecular geometry. Symmetric molecules (CO₂, BF₃, CCl₄, SF₆) have polar bonds but zero net dipole. Asymmetric ones (H₂O, NH₃, CHCl₃) are polar.`,
+    `<strong>Intermolecular forces (IMFs) — all collectively van der Waals:</strong><ul><li><strong>London dispersion forces (LDF):</strong> in <em>all</em> molecules; caused by instantaneous dipoles. Strength ↑ with number of electrons (molar mass, surface area). Branching reduces contact → weaker LDF.</li><li><strong>Dipole–induced dipole:</strong> permanent dipole induces a temporary dipole in a non-polar neighbour.</li><li><strong>Dipole–dipole:</strong> between molecules with permanent dipoles.</li><li><strong>Hydrogen bonding:</strong> H attached to N, O or F interacting with a lone pair on N, O or F of another molecule. Strongest IMF at comparable molar mass.</li></ul>`,
+    `<strong>Relative strength (comparable molar mass):</strong> LDF &lt; dipole–dipole &lt; H-bonding.`,
+    `<strong>Physical properties governed by IMFs:</strong><ul><li>Boiling/melting point: stronger IMFs → higher b.p./m.p. (e.g. H₂O &gt; H₂S despite lower M because of H-bonding).</li><li>Volatility: stronger IMFs → less volatile.</li><li>Solubility — "like dissolves like": polar / H-bonded solutes in polar solvents; non-polar in non-polar.</li></ul>`,
+    `<strong>Covalent network structures:</strong><ul><li><strong>Diamond:</strong> each C sp³, 4 σ bonds, 3-D network. Very hard, high m.p., non-conductor.</li><li><strong>Graphite:</strong> each C sp², hexagonal layers with delocalised π electrons. Soft (layers slide), good conductor along layers.</li><li><strong>Graphene:</strong> single graphite layer. Strong, flexible, excellent conductor.</li><li><strong>Fullerenes (C₆₀):</strong> spherical sp² C cages. Soluble in some organic solvents.</li><li><strong>Silicon dioxide (SiO₂):</strong> each Si tetrahedrally bonded to 4 O, each O bridging 2 Si. Giant network, very high m.p.</li></ul>`,
+    `<strong>Boiling points in homologous series:</strong> ↑ with chain length (more electrons → stronger LDF). Branched isomers boil lower than straight-chain (less surface contact → weaker LDF).`
+  ],
+  pitfall:`Calling CO₂ polar (it isn't — linear geometry cancels dipoles); ranking IMFs by molar mass alone and ignoring H-bonding; claiming graphite is molecular (it is a giant covalent network); ignoring number of electrons when comparing LDFs.`,
+  worked:`Compare b.p.: CH₄ (−164 °C), H₂O (100 °C), HF (19.5 °C). Despite similar M, H₂O has the highest b.p. because each molecule can form up to 2 H-bonds (2 LP on O + 2 δ⁺ H). HF averages ≈1 H-bond per molecule. CH₄ has only weak LDF.`,
+  quiz:{max:26, questions:[
+    {tag:"2.2.5",marks:3,q:`Use electronegativity to deduce the polarity of: (a) HCl; (b) Cl₂; (c) C–O.`,a:`(a) ΔEN = 3.16 − 2.20 = 0.96 → polar [1]. (b) ΔEN = 0 → non-polar [1]. (c) ΔEN = 3.44 − 2.55 = 0.89 → polar (δ⁻ on O) [1].`},
+    {tag:"2.2.6",marks:4,q:`State and explain whether each molecule is polar overall: (a) CO₂; (b) H₂O; (c) CHCl₃; (d) BF₃.`,a:`(a) Polar C=O bonds but linear → dipoles cancel → non-polar [1]. (b) Bent → dipoles do not cancel → polar [1]. (c) Tetrahedral but asymmetric (one H, three Cl) → polar [1]. (d) Trigonal planar, symmetric → dipoles cancel → non-polar [1].`},
+    {tag:"2.2.8",marks:2,q:`State the type(s) of IMF present in: (a) HCl(l); (b) Ar(l); (c) CH₃OH(l); (d) CH₄(l).`,a:`(a) LDF + dipole–dipole [½]; (b) LDF only [½]; (c) LDF + dipole–dipole + H-bonding [½]; (d) LDF only [½].`},
+    {tag:"2.2.8",marks:3,q:`Explain why water has an unusually high boiling point compared to other group-16 hydrides (H₂S, H₂Se).`,a:`H₂O forms extensive H-bonds: each O has 2 LP and 2 δ⁺ H per molecule [1]. H₂S and H₂Se have weaker dipole–dipole and LDF — S and Se less electronegative, no significant H-bonding [1]. More energy needed to break IMFs in H₂O → higher b.p. [1].`},
+    {tag:"2.2.9",marks:3,q:`Rank by increasing boiling point and justify: CH₄, CH₃Cl, CH₃OH.`,a:`CH₄ &lt; CH₃Cl &lt; CH₃OH [1]. CH₄: LDF only. CH₃Cl is polar → adds dipole–dipole [1]. CH₃OH has H-bonding → strongest IMFs → highest b.p. [1].`},
+    {tag:"2.2.7",marks:3,q:`Compare the structure and electrical conductivity of diamond and graphite.`,a:`Diamond: C is sp³, 4 σ bonds, 3-D network — no delocalised electrons → does not conduct [1½]. Graphite: C is sp², hexagonal layers — delocalised π system → conducts along layers [1½].`},
+    {tag:"2.2.7",marks:2,q:`Explain why silicon dioxide (SiO₂) has a much higher melting point than carbon dioxide (CO₂).`,a:`SiO₂ is a covalent network — every Si–O is a strong covalent bond throughout the lattice [1]. CO₂ is molecular — held by weak LDF/dipole; easily broken [1].`},
+    {tag:"2.2.9",marks:2,q:`Explain why pentane (b.p. 36 °C) has a higher boiling point than 2,2-dimethylpropane (b.p. 9.5 °C) despite identical molar mass.`,a:`Pentane is a long straight chain with more surface contact → stronger LDF [1]. 2,2-dimethylpropane is highly branched, more spherical, less surface area → weaker LDF → lower b.p. [1].`},
+    {tag:"2.2.6",marks:2,q:`Sketch a CHCl₃ molecule and indicate the direction of the resultant dipole moment.`,a:`Tetrahedral CHCl₃: three δ⁻ Cl and one δ⁺ H [1]; net dipole moment points from H toward the Cl₃ face [1].`},
+    {tag:"2.2.8",marks:2,q:`State the requirements for hydrogen bonding and give one example of an inorganic compound that exhibits it.`,a:`H covalently bonded to N, O or F [1], interacting with a lone pair on N, O or F of another molecule. Example: HF, NH₃, or H₂O [1].`}
+  ]}
+},
+/* ===== TOPIC 13 ===== */
+{
+  n:13, id:"t13",
+  title:"Organic: Classification, Nomenclature, Isomerism & Spectroscopy",
+  short:"Organic & Spectroscopy",
+  refs:"Structure 1.4.4, 3.2.3–3.2.12 · Reactivity 2.1.1–2.1.4 · Sem 2, Unit 6",
+  takeaways:[
+    `<strong>Homologous series</strong> — same general formula, differ by CH₂, similar chemistry, gradual physical property changes:<table class="tbl"><tr><th>Series</th><th>Functional group</th><th>General formula</th><th>Suffix</th></tr><tr><td>Alkanes</td><td>—</td><td>C<sub>n</sub>H<sub>2n+2</sub></td><td>-ane</td></tr><tr><td>Alkenes</td><td>C=C</td><td>C<sub>n</sub>H<sub>2n</sub></td><td>-ene</td></tr><tr><td>Alkynes</td><td>C≡C</td><td>C<sub>n</sub>H<sub>2n−2</sub></td><td>-yne</td></tr><tr><td>Halogenoalkanes</td><td>−X</td><td>C<sub>n</sub>H<sub>2n+1</sub>X</td><td>halo-</td></tr><tr><td>Alcohols</td><td>−OH</td><td>C<sub>n</sub>H<sub>2n+1</sub>OH</td><td>-ol</td></tr><tr><td>Aldehydes</td><td>−CHO</td><td>C<sub>n</sub>H<sub>2n</sub>O</td><td>-al</td></tr><tr><td>Ketones</td><td>C=O (internal)</td><td>C<sub>n</sub>H<sub>2n</sub>O</td><td>-one</td></tr><tr><td>Carboxylic acids</td><td>−COOH</td><td>C<sub>n</sub>H<sub>2n</sub>O₂</td><td>-oic acid</td></tr><tr><td>Esters</td><td>−COOR</td><td>—</td><td>-yl -oate</td></tr><tr><td>Amines</td><td>−NH₂</td><td>—</td><td>-amine</td></tr><tr><td>Amides</td><td>−CONH₂</td><td>—</td><td>-amide</td></tr></table>`,
+    `<strong>IUPAC nomenclature — checklist:</strong><ul><li>Find the longest chain containing the principal functional group → stem (meth, eth, prop, but, pent…).</li><li>Number from the end that gives the principal group the lowest locant.</li><li>Name substituents alphabetically with locants; use di/tri prefixes for repeats (ignored in alphabetising).</li><li>Add the suffix for the principal functional group.</li></ul>`,
+    `<strong>Primary / secondary / tertiary:</strong> classify by the number of carbon atoms bonded to the carbon that carries the functional group.`,
+    `<strong>Structural isomers</strong> (same molecular formula, different connectivity):<ul><li><em>Chain isomerism</em> — different carbon skeleton (e.g. butane vs 2-methylpropane).</li><li><em>Position isomerism</em> — same skeleton, different position of functional group (e.g. propan-1-ol vs propan-2-ol).</li><li><em>Functional group isomerism</em> — different functional group (e.g. ethanol vs methoxymethane, both C₂H₆O).</li></ul>`,
+    `<strong>Stereoisomers</strong> (same connectivity, different 3-D arrangement):<ul><li><em>Cis/trans (geometric):</em> requires restricted rotation (C=C or ring) and two different groups on each restricted C. Cis = same side; trans = opposite.</li><li><em>Optical (chiral):</em> a chiral C has four different groups → two non-superimposable mirror images = enantiomers. A 1:1 mixture = racemic mixture (no net optical activity). Enantiomers differ in how they rotate plane-polarised light and in chiral environments.</li></ul>`,
+    `<strong>Mass spectrometry (MS):</strong> M⁺ peak = molecular mass. Key fragment losses: M−15 (CH₃), M−17 (OH), M−29 (CHO), M−45 (COOH). M+2 isotope peak for Cl or Br.`,
+    `<strong>Infrared (IR) spectroscopy — key absorptions:</strong><ul><li>O–H alcohol (broad): 3200–3600 cm⁻¹</li><li>O–H carboxylic acid (very broad): 2500–3000 cm⁻¹</li><li>N–H: 3300–3500 cm⁻¹</li><li>C=O: 1700–1750 cm⁻¹</li><li>C=C: 1620–1680 cm⁻¹</li></ul>IR-active bond must have a changing dipole moment during vibration (relevant: CO₂, H₂O, CH₄ as greenhouse gases).`,
+    `<strong>¹H NMR:</strong> number of signals = number of chemically distinct H environments; chemical shift δ (ppm) → environment (use data booklet); integration ratio → relative H count. Splitting (n+1 rule): n equivalent neighbouring H atoms split a signal into n+1 peaks.`,
+    `<strong>Reaction stoichiometry:</strong> limiting reactant = divide moles by coefficient, smallest value wins. Theoretical yield from moles of limiting reactant. <span class="f">% yield = (experimental / theoretical) × 100%</span>. Always &lt;100% in practice.`
+  ],
+  pitfall:`Using mass instead of moles to find the limiting reactant; ignoring isotope peaks in MS; mislabelling primary vs secondary vs tertiary; confusing the absorbed wavelength with the observed colour in a d–d analogy; forgetting the broad O–H IR band for carboxylic acids vs alcohols.`,
+  worked:`% yield example: 12.0 g methanol (M = 32.0) + excess ethanoic acid → methyl ethanoate (M = 74.0); actual yield = 18.0 g. n(MeOH) = 0.375 mol → theoretical n(ester) = 0.375 mol → theoretical mass = 27.75 g → % yield = 18/27.75 × 100 = <strong>64.9%</strong>.`,
+  quiz:{max:27, questions:[
+    {tag:"3.2.5",marks:3,q:`Give the IUPAC name of: (a) CH₃CH(OH)CH₂CH₃; (b) (CH₃)₂CHCH₂Cl; (c) CH₃CH₂COOH.`,a:`(a) butan-2-ol [1]; (b) 1-chloro-2-methylpropane [1]; (c) propanoic acid [1].`},
+    {tag:"3.2.6",marks:3,q:`Draw and name <strong>three</strong> structural isomers of C₄H₁₀O and classify each (primary/secondary/tertiary alcohol or ether).`,a:`Any three: butan-1-ol (1° alcohol) [1]; butan-2-ol (2° alcohol) [1]; 2-methylpropan-2-ol (3° alcohol) [1]; 2-methylpropan-1-ol (1°); methoxypropane (ether); ethoxyethane (ether). [1 mark per correct structure + name + class]`},
+    {tag:"3.2.7",marks:3,q:`Identify the type of stereoisomerism shown by: (a) but-2-ene; (b) butan-2-ol. Explain each.`,a:`(a) cis-trans (geometric) — restricted rotation around C=C, two different groups on each C [1½]. (b) optical (enantiomers) — C2 has 4 different groups (H, OH, CH₃, CH₂CH₃) → chiral centre [1½].`},
+    {tag:"3.2.7",marks:2,q:`State what is meant by a chiral carbon and a racemic mixture.`,a:`A carbon bonded to four <em>different</em> groups [1]. A racemic mixture contains equal amounts of both enantiomers — no net rotation of plane-polarised light [1].`},
+    {tag:"3.2.8",marks:3,q:`A molecular ion appears at m/z = 60. Peaks also appear at m/z = 45 and 29. Suggest a structure consistent with these fragments.`,a:`M⁺ = 60. M−15 = 45 (loss of CH₃) and M−31 = 29 (loss of CH₂OH or CHO⁺) [1]. Consistent with propan-1-ol (M = 60): CH₃⁺ lost (45 = C₂H₅O⁺) and CHO⁺ = 29 [2].`},
+    {tag:"3.2.9",marks:2,q:`Describe how IR spectroscopy can distinguish between propan-1-ol and propanal.`,a:`Propan-1-ol: broad O–H stretch at 3200–3600 cm⁻¹, no strong C=O peak [1]. Propanal: strong C=O stretch at ≈1720 cm⁻¹, no broad O–H [1].`},
+    {tag:"3.2.10",marks:3,q:`State the number of ¹H NMR signals expected for: (a) ethanol; (b) propan-2-ol; (c) propanone.`,a:`(a) ethanol CH₃CH₂OH → 3 signals (CH₃, CH₂, OH) [1]; (b) propan-2-ol (CH₃)₂CHOH → 3 signals (2×CH₃ equivalent, CH, OH) [1]; (c) propanone (CH₃)₂C=O → 1 signal [1].`},
+    {tag:"3.2.11",marks:2,q:`Predict the ¹H NMR splitting pattern for each signal in ethanol CH₃CH₂OH (apply the n+1 rule).`,a:`CH₃ (adjacent to 2H of CH₂) → triplet [1]. CH₂ (adjacent to 3H of CH₃) → quartet; OH typically singlet (fast exchange) [1].`},
+    {tag:"2.1.3",marks:4,q:`5.00 g of zinc reacts with 100 cm³ of 1.50 mol dm⁻³ HCl. Determine the limiting reactant and the maximum mass of H₂ produced.`,a:`n(Zn) = 5.00/65.38 = 0.0765 mol [1]. n(HCl) = 0.100 × 1.50 = 0.150 mol [1]. Zn + 2HCl → ZnCl₂ + H₂; 0.0765 mol Zn needs 0.153 mol HCl &gt; 0.150 available → HCl is limiting [1]. n(H₂) = 0.150/2 = 0.0750 mol; m(H₂) = 0.0750 × 2.02 = <strong>0.152 g</strong> [1].`},
+    {tag:"2.1.4",marks:2,q:`Theoretical yield of an ester is 6.40 g; experimental yield is 4.30 g. Calculate the % yield and suggest two reasons it is below 100%.`,a:`% yield = 4.30/6.40 × 100 = <strong>67.2%</strong> [1]. Any two: incomplete reaction; side reactions; losses on transfer/purification; equilibrium; impure reactants [1].`}
+  ]}
+}
+];
+
+(function(){
+  var ICON_CHEV='<svg class="tchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+  var CARET='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+  var TICK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  var BOOK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h12v16H6a2 2 0 00-2 2z"/><path d="M18 17H6"/></svg>';
+
+  var reviewed={};            // topicId -> bool
+  var grades={};              // "tid-qi" -> 'got'|'miss'
+  var totalQ=0, totalMarks=0;
+  TOPICS.forEach(function(t){ totalQ+=t.quiz.questions.length; });
+
+  /* countdown */
+  var days=Math.ceil((new Date(EXAM_DATE)-new Date())/86400000);
+  document.getElementById('cdNum').textContent= days>0?days:(days===0?'0':'past');
+
+  /* build topics */
+  var host=document.getElementById('topics');
+  TOPICS.forEach(function(t,i){
+    var sec=document.createElement('section');
+    sec.className='topic fade';sec.id=t.id;
+    sec.style.animationDelay=(.24+i*.05)+'s';
+
+    var take=t.takeaways.map(function(x){return '<li>'+x+'</li>';}).join('');
+    var quiz=t.quiz.questions.map(function(q,qi){
+      var key=t.id+'-'+qi;
+      return '<div class="q" data-q="'+key+'">'+
+        '<div class="qhead"><span class="qt">'+q.tag+'</span>'+
+        '<span class="qx">'+q.q+' <span class="qm">['+q.marks+']</span></span></div>'+
+        '<button class="reveal" data-rev="'+key+'">Reveal mark scheme'+CARET+'</button>'+
+        '<div class="ans" id="ans-'+key+'"><div>'+
+          '<div class="ansin"><div class="ml">Mark scheme · '+q.marks+' marks</div>'+q.a+
+          '<div class="selfgrade">'+
+            '<button class="got" data-grade="'+key+'" data-v="got" data-m="'+q.marks+'">'+TICK+' Got it</button>'+
+            '<button class="miss" data-grade="'+key+'" data-v="miss" data-m="'+q.marks+'">Review again</button>'+
+          '</div></div>'+
+        '</div></div>'+
+        '</div>';
+    }).join('');
+
+    sec.innerHTML=
+      '<button class="thead" aria-expanded="false" data-acc="'+t.id+'">'+
+        '<span class="tnum"><span class="nm">'+t.n+'</span><span class="tk">'+TICK+'</span></span>'+
+        '<span class="tinfo"><h4>Topic '+t.n+' — '+t.title+'</h4>'+
+        '<span class="meta"><span class="scoretag" id="tag-'+t.id+'">0 / '+t.quiz.max+'</span>'+
+        '<span class="rf">'+t.refs+'</span></span></span>'+
+        ICON_CHEV+
+      '</button>'+
+      '<div class="panel" id="panel-'+t.id+'"><div class="in"><div class="body">'+
+        '<div class="sub"><span class="pip">'+BOOK+'</span>Key takeaways</div>'+
+        '<ul class="take">'+take+'</ul>'+
+        '<div class="callout pit"><div class="lbl">⚠ Common mistakes</div>'+t.pitfall+'</div>'+
+        '<div class="callout wkd"><div class="lbl">✓ Worked example</div>'+t.worked+'</div>'+
+        '<div class="quizcard">'+
+          '<div class="qhd"><b>Quiz — Topic '+t.n+'</b><span class="mx">Max '+t.quiz.max+' marks</span></div>'+
+          '<div class="tip"><b>Answer in your notebook first.</b> Reveal the mark scheme, then grade yourself honestly.</div>'+
+          quiz+
+        '</div>'+
+        '<div class="topicfoot"><div class="res">Topic score <b id="res-'+t.id+'">0 / '+t.quiz.max+'</b></div>'+
+        '<button class="donebtn" data-review="'+t.id+'">'+TICK+'<span class="lab">Mark reviewed</span></button></div>'+
+      '</div></div></div>';
+    host.appendChild(sec);
+  });
+
+  /* progress bars */
+  var barHost=document.getElementById('bars');
+  TOPICS.forEach(function(t){
+    var b=document.createElement('i');b.dataset.bar=t.id;barHost.appendChild(b);
+  });
+  /* pad bars to 13 to represent full course */
+  for(var k=TOPICS.length;k<TOTAL_TOPICS;k++){
+    var pb=document.createElement('i');barHost.appendChild(pb);
+  }
+
+  function topicScore(tid){
+    var t=TOPICS.filter(function(x){return x.id===tid;})[0];
+    var s=0;
+    t.quiz.questions.forEach(function(q,qi){
+      if(grades[tid+'-'+qi]==='got') s+=q.marks;
+    });
+    return s;
+  }
+  function topicGraded(tid){
+    var t=TOPICS.filter(function(x){return x.id===tid;})[0];
+    var c=0;
+    t.quiz.questions.forEach(function(q,qi){ if(grades[tid+'-'+qi]) c++; });
+    return c;
+  }
+
+  function refresh(){
+    var doneCount=0, marks=0, got=0, gradedAll=0;
+    TOPICS.forEach(function(t){
+      var sc=topicScore(t.id);
+      marks+=sc;
+      document.getElementById('tag-'+t.id).textContent=sc+' / '+t.quiz.max;
+      document.getElementById('tag-'+t.id).classList.toggle('has',sc>0);
+      document.getElementById('res-'+t.id).textContent=sc+' / '+t.quiz.max;
+      var gc=topicGraded(t.id);
+      gradedAll+=gc;
+      t.quiz.questions.forEach(function(q,qi){ if(grades[t.id+'-'+qi]==='got') got++; });
+      var bar=document.querySelector('[data-bar="'+t.id+'"]');
+      if(reviewed[t.id]){doneCount++;bar.className='on';}
+      else if(gc>0){bar.className='partial';}
+      else{bar.className='';}
+    });
+    /* header score */
+    document.getElementById('scoreNum').textContent=marks;
+    var allMarks=0;TOPICS.forEach(function(t){allMarks+=t.quiz.max;});
+    var pct=allMarks?Math.round(marks/allMarks*100):0;
+    document.getElementById('scorePct').textContent=pct+'%';
+    document.getElementById('scoreRing').style.background=
+      'conic-gradient(var(--moss) '+(pct*3.6)+'deg,var(--line) 0deg)';
+    /* bento stats */
+    document.getElementById('revNum').textContent=doneCount;
+    document.getElementById('progFrac').textContent=doneCount+' / '+TOTAL_TOPICS;
+    var totGraded=0;TOPICS.forEach(function(t){totGraded+=topicGraded(t.id);});
+    document.getElementById('accNum').textContent=
+      totGraded? Math.round(got/totGraded*100)+'%' : '—';
+  }
+
+  function setAcc(id,open){
+    var h=document.querySelector('[data-acc="'+id+'"]');
+    document.getElementById('panel-'+id).classList.toggle('open',open);
+    h.setAttribute('aria-expanded',open?'true':'false');
+  }
+
+  document.body.addEventListener('click',function(e){
+    var acc=e.target.closest('[data-acc]');
+    if(acc){setAcc(acc.dataset.acc,acc.getAttribute('aria-expanded')!=='true');return;}
+
+    var rev=e.target.closest('[data-rev]');
+    if(rev){
+      var box=document.getElementById('ans-'+rev.dataset.rev);
+      var on=box.classList.toggle('open');
+      rev.classList.toggle('on',on);
+      rev.firstChild.textContent=on?'Hide mark scheme':'Reveal mark scheme';
+      return;
+    }
+
+    var g=e.target.closest('[data-grade]');
+    if(g){
+      var key=g.dataset.grade, v=g.dataset.v;
+      grades[key]= (grades[key]===v)? null : v;
+      var qEl=document.querySelector('[data-q="'+key+'"]');
+      qEl.querySelectorAll('[data-grade]').forEach(function(b){
+        b.classList.toggle('sel',grades[key]===b.dataset.v);
+      });
+      refresh();
+      return;
+    }
+
+    var rb=e.target.closest('[data-review]');
+    if(rb){
+      var id=rb.dataset.review;
+      reviewed[id]=!reviewed[id];
+      document.getElementById(id).classList.toggle('done',reviewed[id]);
+      rb.querySelector('.lab').textContent=reviewed[id]?'Reviewed':'Mark reviewed';
+      refresh();
+      return;
+    }
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>
