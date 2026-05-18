@@ -2,358 +2,363 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Synth — IB Chemistry HL Revision</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chemistry Revision Deck · Yasmine's Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f5f3ef; --panel:#ffffff; --panel-2:#fbfaf7;
-    --ink:#211f1c; --ink-2:#615d56; --ink-3:#928d83;
-    --line:#e6e3db;
-    --plum:#5b3d8a; --plum-dk:#3f2767; --plum-tint:#efe9f6;
-    --amber:#c06a16; --amber-tint:#fbeed9;
-    --moss:#3a7d44; --moss-tint:#e5f1e3;
-    --rose:#b23a55; --rose-tint:#f8e4e8;
-    --r:20px; --r-sm:13px;
-    --sh:0 2px 4px rgba(33,31,28,.04),0 14px 30px -16px rgba(33,31,28,.18);
-    --ease:cubic-bezier(.22,.61,.36,1);
-    --display:"Fraunces",Georgia,serif;
-    --body:"Outfit",ui-sans-serif,system-ui,sans-serif;
-    --mono:"DM Mono",ui-monospace,monospace;
+    --paper:#f7f3ea;
+    --card:#fffdf6;
+    --ink:#2a2620;
+    --soft:#6f665a;
+    --faint:#a59a89;
+    --line:#e3dccb;
+    --accent:#7c2d2d;
+    /* chemistry is the teal subject in the planner's colour-coding */
+    --che:#107a63;
+    --che-dk:#0b5546;
+    --che-tint:#dcefe9;
+    --warn-bg:#fbf1ef;
+    --warn-line:#e3b9af;
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
+    --sans:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --wrap:920px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-text-size-adjust:100%}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   body{
-    background:var(--bg);color:var(--ink);font-family:var(--body);
-    font-size:clamp(15px,2.7vw,16px);line-height:1.62;
-    -webkit-font-smoothing:antialiased;
-    background-image:radial-gradient(circle at 1px 1px,rgba(33,31,28,.05) 1px,transparent 0);
+    background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(var(--line) .6px,transparent .6px);
     background-size:22px 22px;
   }
-  sup,sub{font-size:.72em;line-height:0}
-  strong{font-weight:700}
-  table.tbl{border-collapse:collapse;margin:8px 0;font-size:.83em;width:100%}
-  table.tbl th,table.tbl td{border:1px solid var(--line);padding:5px 9px;text-align:left;vertical-align:top}
-  table.tbl th{background:var(--panel-2);font-weight:700}
+  strong,b{font-weight:700}
   em{font-style:italic}
+  sup,sub{font-size:.72em;line-height:0}
+  button{font-family:inherit}
+  :focus-visible{outline:2px solid var(--che);outline-offset:2px}
+
   .f{
-    font-family:var(--mono);font-size:.84em;background:var(--plum-tint);
-    color:var(--plum-dk);padding:.14em .44em;border-radius:6px;white-space:nowrap;
+    font-variant-numeric:tabular-nums;background:var(--che-tint);color:var(--che-dk);
+    padding:.08em .4em;border-radius:4px;font-weight:600;white-space:nowrap;font-size:.93em;
   }
 
-  .wrap{max-width:760px;margin:0 auto;padding:0 clamp(13px,3.6vw,22px)}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:clamp(20px,5vw,46px) clamp(15px,4.5vw,28px) 80px}
 
-  /* header */
-  header{padding:18px 0 4px}
-  .brandrow{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;border-radius:12px}
-  .brand .backchev{
-    width:17px;height:17px;flex:none;color:var(--ink-3);margin-right:-3px;
-    transition:transform .2s var(--ease),color .2s;
+  /* ---------- back link ---------- */
+  .backlink{
+    display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+    font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+    color:var(--accent);margin-bottom:22px;
   }
-  .brand:hover .backchev{transform:translateX(-3px);color:var(--plum)}
-  .brand:hover h1{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:3px}
-  .brand:focus-visible{outline:2.5px solid var(--plum);outline-offset:3px}
-  .brand .mk{
-    width:38px;height:38px;border-radius:11px;flex:none;
-    background:linear-gradient(140deg,var(--plum),var(--plum-dk));
-    display:grid;place-items:center;box-shadow:0 6px 16px -6px rgba(91,61,138,.6);
-  }
-  .brand .mk svg{width:21px;height:21px}
-  .brand h1{font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.01em}
-  .brand p{font-size:11.5px;color:var(--ink-3);font-weight:600;letter-spacing:.03em}
-  .scorepill{
-    flex:none;display:flex;align-items:center;gap:7px;
-    background:var(--panel);border:1px solid var(--line);border-radius:99px;
-    padding:6px 12px 6px 8px;box-shadow:var(--sh);
-  }
-  .scorepill .ring{
-    width:26px;height:26px;border-radius:99px;flex:none;
-    background:conic-gradient(var(--moss) 0deg,var(--line) 0deg);
-    display:grid;place-items:center;transition:background .6s var(--ease);
-  }
-  .scorepill .ring i{
-    width:18px;height:18px;border-radius:99px;background:var(--panel);
-    display:grid;place-items:center;font-size:9px;font-weight:700;color:var(--ink-2);
-  }
-  .scorepill b{font-size:12.5px;font-weight:700}
-  .scorepill span{font-size:11px;color:var(--ink-3);font-weight:600}
+  .backlink .ch{font-size:1.15em;line-height:1;transition:transform .15s ease}
+  .backlink:hover .ch{transform:translateX(-3px)}
+  .backlink:hover .txt{text-decoration:underline;text-underline-offset:3px}
 
-  /* bento hero */
-  .bento{
-    display:grid;gap:11px;margin-top:14px;
-    grid-template-columns:1fr 1fr;
+  /* ---------- header ---------- */
+  header{border-bottom:2.5px solid var(--ink);padding-bottom:24px;margin-bottom:26px}
+  .eyebrow{
+    font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
+    font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
   }
-  .cell{
-    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
-    box-shadow:var(--sh);padding:16px;
+  .badge{
+    background:var(--ink);color:var(--paper);padding:3px 10px;border-radius:20px;
+    letter-spacing:.12em;font-size:.66rem;
   }
-  .cell.wide{grid-column:1/-1}
-  .cell.hero{
-    grid-column:1/-1;
-    background:linear-gradient(150deg,#fff 0%,var(--plum-tint) 130%);
-    padding:clamp(18px,5vw,26px);
+  h1{
+    font-family:var(--serif);font-weight:900;font-size:clamp(2.1rem,7vw,3.5rem);
+    line-height:1.03;margin:.22em 0 .16em;letter-spacing:-.015em;
   }
-  .cell.hero .eyebrow{
-    font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--plum);margin-bottom:9px;
+  .sub{font-size:1rem;color:var(--soft);max-width:62ch}
+  .meta{display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:22px}
+  .stat{display:flex;flex-direction:column}
+  .stat b{font-family:var(--serif);font-size:1.5rem;font-weight:600;line-height:1}
+  .stat span{
+    font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+    margin-top:6px;font-weight:600;
   }
-  .cell.hero h2{
-    font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.1;
-    font-size:clamp(23px,6.4vw,33px);
-  }
-  .cell.hero p{font-size:13px;color:var(--ink-2);margin-top:7px;max-width:42ch}
+  .stat.countdown b{color:var(--accent)}
+  .stat.che b{color:var(--che)}
 
-  .stat .top{
-    display:flex;align-items:center;gap:7px;
-    font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-    color:var(--ink-3);
+  /* ---------- info band ---------- */
+  .band{display:grid;grid-template-columns:1fr;gap:18px;margin-bottom:24px}
+  @media(min-width:720px){.band{grid-template-columns:1.15fr 1fr}}
+  .panel{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:18px 20px}
+  .panel h2{
+    font-family:var(--serif);font-size:1.05rem;font-weight:600;margin-bottom:13px;
+    display:flex;align-items:center;gap:8px;
   }
-  .stat .num{
-    font-family:var(--display);font-weight:600;letter-spacing:-.03em;
-    font-size:clamp(30px,9vw,42px);line-height:1;margin:8px 0 2px;
+  .panel h2::before{content:"";width:9px;height:9px;background:var(--accent);border-radius:2px;flex:none}
+  .exam-sep{
+    font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);
+    padding:11px 0 4px;font-weight:600;
   }
-  .stat.days .num{color:var(--plum-dk)}
-  .stat .cap{font-size:12px;color:var(--ink-2);font-weight:500}
-  .dot{width:8px;height:8px;border-radius:99px;flex:none}
-  .dot.p{background:var(--plum)} .dot.m{background:var(--moss)} .dot.a{background:var(--amber)}
+  .exam-sep:first-child{padding-top:0}
 
-  .cell.progress .top{
-    display:flex;align-items:center;gap:7px;
-    font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
-    color:var(--ink-3);margin-bottom:11px;
+  /* contents list */
+  .trow{
+    display:flex;align-items:center;gap:11px;padding:8px 4px;
+    border-bottom:1px dashed var(--line);text-decoration:none;color:inherit;font-size:.9rem;
   }
-  .bars{display:flex;gap:4px}
-  .bars i{
-    flex:1;height:34px;border-radius:6px;background:var(--panel-2);
-    border:1px solid var(--line);transition:background .4s var(--ease),border-color .4s;
-    position:relative;
+  .trow:last-child{border-bottom:none}
+  .trow-n{
+    font-variant-numeric:tabular-nums;font-weight:700;color:var(--che);
+    font-size:.82rem;width:22px;flex:none;
   }
-  .bars i.on{background:var(--moss);border-color:var(--moss)}
-  .bars i.partial{background:var(--moss-tint);border-color:var(--moss)}
-  .progmeta{display:flex;justify-content:space-between;margin-top:9px;font-size:12px;font-weight:600;color:var(--ink-2)}
-  .progmeta b{color:var(--moss);font-family:var(--display)}
+  .trow-name{flex:1;font-weight:500}
+  .trow-st{
+    font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+    color:var(--faint);white-space:nowrap;
+  }
+  a.trow{cursor:pointer;border-radius:6px}
+  a.trow .trow-st{color:var(--che)}
+  a.trow:hover{background:#f3ede0}
+  a.trow:hover .trow-name{text-decoration:underline;text-underline-offset:2px}
+  .trow.done .trow-n,.trow.done .trow-st{color:var(--che)}
+  .trow.soon{opacity:.55}
 
-  /* topic list */
-  .sectionhdr{
-    display:flex;align-items:baseline;justify-content:space-between;
-    margin:24px 0 10px;
+  /* progress */
+  .prog{margin-bottom:13px}
+  .prog:last-of-type{margin-bottom:0}
+  .prog-row{display:flex;justify-content:space-between;align-items:baseline;font-size:.86rem;margin-bottom:7px}
+  .prog-row span{color:var(--soft);font-weight:500}
+  .prog-row b{font-family:var(--serif);font-weight:600;font-size:1rem;color:var(--ink)}
+  .ptrack{height:9px;background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .ptrack i{display:block;height:100%;background:var(--che);border-radius:20px;width:0;transition:width .5s ease}
+  .pnote{
+    font-size:.74rem;color:var(--faint);margin-top:13px;padding-top:11px;
+    border-top:1px dashed var(--line);
   }
-  .sectionhdr h3{font-family:var(--display);font-weight:600;font-size:18px}
-  .sectionhdr span{font-size:12px;color:var(--ink-3);font-weight:600}
 
+  /* ---------- strategy ---------- */
+  .strategy{
+    background:var(--card);border:1.5px solid var(--line);border-left:5px solid var(--accent);
+    border-radius:12px;padding:20px 22px;margin-bottom:28px;
+  }
+  .strategy h3{font-family:var(--serif);font-size:1.22rem;font-weight:600;margin-bottom:7px}
+  .strategy p{font-size:.93rem;color:var(--soft);max-width:84ch}
+  .strategy p b{color:var(--ink)}
+
+  /* ---------- deck head ---------- */
+  .deck-head{display:flex;align-items:baseline;gap:14px;margin-bottom:15px}
+  .deck-head .dn{font-family:var(--serif);font-size:1.3rem;font-weight:600}
+  .deck-head .dr{font-size:.8rem;color:var(--faint);letter-spacing:.04em;white-space:nowrap}
+  .deck-head .dl{flex:1;height:1.5px;background:var(--line)}
+
+  /* ---------- topic accordion ---------- */
   .topic{
-    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
-    box-shadow:var(--sh);margin-bottom:11px;overflow:hidden;
+    background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+    margin-bottom:14px;overflow:hidden;scroll-margin-top:14px;
   }
+  .topic.done{border-color:#cbe2da}
   .thead{
-    width:100%;border:0;background:none;cursor:pointer;font:inherit;text-align:left;
-    display:flex;align-items:center;gap:13px;padding:15px;min-height:66px;color:var(--ink);
-    transition:background .2s;
+    width:100%;border:none;background:none;text-align:left;cursor:pointer;
+    display:flex;align-items:center;gap:13px;padding:14px 15px;color:var(--ink);
   }
-  .thead:hover{background:var(--panel-2)}
+  .thead:hover{background:#fbf8ef}
   .tnum{
-    width:44px;height:44px;flex:none;border-radius:13px;
-    background:var(--plum-tint);color:var(--plum-dk);
+    width:46px;height:46px;flex:none;border-radius:9px;background:var(--che-tint);
     display:grid;place-items:center;position:relative;
-    font-family:var(--display);font-weight:600;font-size:19px;
-    transition:background .3s,color .3s;
   }
-  .topic.done .tnum{background:var(--moss);color:#fff}
-  .tnum .tk{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:scale(.4);transition:.3s var(--ease)}
-  .topic.done .tnum .tk{opacity:1;transform:scale(1)}
-  .topic.done .tnum .nm{opacity:0}
-  .tinfo{flex:1;min-width:0}
-  .tinfo h4{font-family:var(--display);font-weight:600;font-size:clamp(15px,3.7vw,17px);line-height:1.22;letter-spacing:-.01em}
-  .tinfo .meta{display:flex;align-items:center;gap:8px;margin-top:4px}
-  .tinfo .meta .rf{font-size:11px;color:var(--ink-3);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .scoretag{
-    flex:none;font-family:var(--mono);font-size:10.5px;font-weight:500;
-    padding:2px 7px;border-radius:5px;background:var(--panel-2);
-    border:1px solid var(--line);color:var(--ink-3);
+  .tnum .num{font-family:var(--serif);font-weight:600;font-size:1.4rem;color:var(--che-dk)}
+  .tnum .tick{
+    position:absolute;inset:0;display:grid;place-items:center;color:#fff;
+    font-weight:700;font-size:1.3rem;opacity:0;transition:opacity .2s ease;
   }
-  .scoretag.has{background:var(--moss-tint);border-color:var(--moss);color:var(--moss)}
-  .tchev{width:24px;height:24px;flex:none;color:var(--ink-3);transition:transform .35s var(--ease)}
-  .thead[aria-expanded="true"] .tchev{transform:rotate(180deg)}
-
-  .panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .42s var(--ease)}
-  .panel.open{grid-template-rows:1fr}
-  .panel>.in{overflow:hidden}
-  .body{padding:0 15px 18px}
-
-  .sub{
-    font-family:var(--display);font-weight:600;font-size:14px;
-    color:var(--plum-dk);margin:16px 0 9px;display:flex;align-items:center;gap:8px;
+  .topic.done .tnum{background:var(--che)}
+  .topic.done .tnum .num{opacity:0}
+  .topic.done .tnum .tick{opacity:1}
+  .ttext{flex:1;min-width:0}
+  .ttitle{
+    display:block;font-family:var(--serif);font-weight:600;font-size:1.04rem;
+    line-height:1.25;letter-spacing:-.005em;
   }
-  .sub .pip{width:18px;height:18px;border-radius:6px;background:var(--plum-tint);display:grid;place-items:center}
-  .sub .pip svg{width:11px;height:11px;color:var(--plum)}
-
-  ul.take{list-style:none;display:flex;flex-direction:column;gap:8px}
-  ul.take>li{
-    background:var(--panel-2);border:1px solid var(--line);border-radius:11px;
-    padding:10px 12px;font-size:14px;
+  .trefs{display:block;font-size:.72rem;color:var(--faint);margin-top:3px;font-weight:500}
+  .tchev{
+    flex:none;color:var(--accent);font-size:1.55rem;line-height:1;font-weight:400;
+    transition:transform .3s ease;
   }
-  ul.take ul{list-style:none;margin:7px 0 0;display:flex;flex-direction:column;gap:5px}
-  ul.take ul li{position:relative;padding-left:15px;font-size:13.4px;color:var(--ink-2)}
-  ul.take ul li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:99px;background:var(--plum)}
+  .thead[aria-expanded="true"] .tchev{transform:rotate(90deg)}
 
-  .callout{border-radius:var(--r-sm);padding:12px 14px;margin:13px 0;font-size:13.8px;border:1px solid}
-  .callout .lbl{font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:6px}
-  .callout.pit{background:var(--amber-tint);border-color:#eed4a8}
-  .callout.pit .lbl{color:var(--amber)}
-  .callout.wkd{background:var(--moss-tint);border-color:#bcdcb8}
-  .callout.wkd .lbl{color:var(--moss)}
+  .tpanel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+  .tpanel.open{grid-template-rows:1fr}
+  .tpanel>.tinner{overflow:hidden}
+  .tbody{padding:14px 16px 18px;border-top:1px solid var(--line)}
+
+  .blockh{
+    font-family:var(--serif);font-size:1.04rem;font-weight:600;margin:18px 0 10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .blockh::before{content:"";width:9px;height:9px;background:var(--che);border-radius:2px;flex:none}
+  .blockh:first-child{margin-top:2px}
+
+  ul.takeaways{list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.takeaways>li{position:relative;padding-left:20px;font-size:.92rem;line-height:1.55}
+  ul.takeaways>li::before{
+    content:"";position:absolute;left:3px;top:.6em;width:7px;height:7px;
+    background:var(--che);transform:rotate(45deg);
+  }
+  ul.takeaways ul{list-style:none;margin:7px 0 0;display:flex;flex-direction:column;gap:5px}
+  ul.takeaways ul li{position:relative;padding-left:15px;font-size:.87rem;color:var(--soft)}
+  ul.takeaways ul li::before{content:"\2013";position:absolute;left:2px;color:var(--che);font-weight:700}
+
+  .callout{border-radius:9px;padding:12px 14px;margin:14px 0;font-size:.9rem;line-height:1.5}
+  .callout .clabel{
+    display:block;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+    font-weight:700;margin-bottom:5px;
+  }
+  .callout.warn{background:var(--warn-bg);border:1px solid var(--warn-line)}
+  .callout.warn .clabel{color:var(--accent)}
+  .callout.work{background:var(--che-tint);border:1px solid #b9d8ce}
+  .callout.work .clabel{color:var(--che-dk)}
 
   /* quiz */
-  .quizcard{
-    margin-top:16px;background:var(--panel-2);border:1px solid var(--line);
-    border-radius:var(--r-sm);padding:14px;
+  .quiz{margin-top:18px}
+  .qnote{
+    font-size:.78rem;color:var(--soft);background:var(--paper);
+    border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:10px 0 4px;
   }
-  .quizcard .qhd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
-  .quizcard .qhd b{font-family:var(--display);font-weight:600;font-size:15px}
-  .quizcard .qhd .mx{font-size:11px;font-weight:700;color:var(--ink-3)}
-  .quizcard .tip{font-size:12px;color:var(--ink-2);margin-bottom:12px}
-  .quizcard .tip b{color:var(--ink)}
-  .q{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:9px}
-  .q:last-of-type{margin-bottom:0}
-  .qhead{display:flex;gap:8px;align-items:flex-start}
-  .qt{flex:none;font-family:var(--mono);font-size:10.5px;color:var(--plum-dk);background:var(--plum-tint);padding:3px 6px;border-radius:5px;margin-top:1px}
-  .qx{flex:1;font-size:13.7px}
-  .qm{font-size:11.5px;font-weight:700;color:var(--ink-3)}
+  .qnote b{color:var(--ink)}
+  .q{padding:13px 0;border-bottom:1px dashed var(--line)}
+  .q:last-of-type{border-bottom:none}
+  .qhead{display:flex;gap:11px;align-items:flex-start}
+  .qno{
+    font-family:var(--serif);font-weight:600;font-size:1.15rem;color:var(--accent);
+    flex:none;width:22px;line-height:1.3;
+  }
+  .qmain{flex:1;min-width:0}
+  .qtag{
+    display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.03em;
+    font-variant-numeric:tabular-nums;color:var(--che-dk);background:var(--che-tint);
+    padding:2px 7px;border-radius:5px;margin-right:6px;vertical-align:1px;
+  }
+  .qtext{font-size:.9rem;line-height:1.5}
+  .qmarks{
+    font-size:.76rem;font-weight:700;color:var(--faint);
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
   .reveal{
-    margin-top:9px;width:100%;cursor:pointer;font:inherit;font-size:12.5px;font-weight:700;
-    color:var(--plum-dk);background:var(--panel);border:1px dashed var(--plum);
-    border-radius:9px;min-height:40px;display:flex;align-items:center;justify-content:center;gap:7px;
-    transition:background .18s,transform .12s var(--ease);
+    margin:9px 0 0 33px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    font-size:.78rem;font-weight:700;color:var(--che-dk);background:var(--card);
+    border:1.3px solid var(--line);border-radius:8px;padding:7px 12px;
   }
-  .reveal:hover{background:var(--plum-tint)}
-  .reveal:active{transform:scale(.98)}
-  .reveal svg{width:13px;height:13px;transition:transform .3s var(--ease)}
-  .reveal.on svg{transform:rotate(180deg)}
-  .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease)}
+  .reveal:hover{background:var(--che-tint);border-color:var(--che)}
+  .reveal .rc{font-size:1.1em;line-height:1;transition:transform .25s ease}
+  .reveal.on .rc{transform:rotate(90deg)}
+  .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;margin-left:33px}
   .ans.open{grid-template-rows:1fr}
   .ans>div{overflow:hidden}
-  .ansin{
-    margin-top:9px;background:#f1f7f0;border:1px solid #c4dcbf;border-left:3px solid var(--moss);
-    border-radius:9px;padding:11px 12px;font-size:13.3px;
+  .ansbox{
+    margin-top:9px;background:var(--che-tint);border:1px solid #b9d8ce;
+    border-left:3px solid var(--che);border-radius:8px;padding:11px 13px;
+    font-size:.86rem;line-height:1.5;
   }
-  .ansin .ml{font-family:var(--display);font-weight:600;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--moss);margin-bottom:5px}
-  .selfgrade{display:flex;gap:7px;margin-top:10px}
-  .selfgrade button{
-    flex:1;cursor:pointer;font:inherit;font-size:11.5px;font-weight:700;
-    min-height:38px;border-radius:8px;border:1px solid var(--line);background:var(--panel);
-    color:var(--ink-2);transition:.16s var(--ease);display:flex;align-items:center;justify-content:center;gap:5px;
+  .anslabel{
+    display:block;font-family:var(--serif);font-size:.66rem;font-weight:600;
+    letter-spacing:.09em;text-transform:uppercase;color:var(--che-dk);margin-bottom:5px;
   }
-  .selfgrade button:active{transform:scale(.96)}
-  .selfgrade button.got.sel{background:var(--moss);border-color:var(--moss);color:#fff}
-  .selfgrade button.miss.sel{background:var(--rose);border-color:var(--rose);color:#fff}
-  .selfgrade button:not(.sel):hover{border-color:var(--ink-3)}
+  .grade{display:flex;gap:8px;margin-top:11px}
+  .grade button{
+    flex:1;cursor:pointer;font-size:.76rem;font-weight:700;padding:8px 6px;
+    border-radius:7px;border:1.3px solid #c4d8d1;background:#fff;color:var(--soft);
+  }
+  .grade button:hover{border-color:var(--che)}
+  .grade button.got.on{background:var(--che);border-color:var(--che);color:#fff}
+  .grade button.miss.on{background:var(--accent);border-color:var(--accent);color:#fff}
 
-  .topicfoot{
-    margin-top:14px;display:flex;align-items:center;gap:10px;
-    padding:12px;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);
+  .reviewrow{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .reviewbtn{
+    width:100%;cursor:pointer;font-weight:700;font-size:.86rem;padding:11px;
+    border-radius:9px;border:1.5px solid var(--che);background:var(--card);color:var(--che-dk);
+    display:flex;align-items:center;justify-content:center;gap:8px;
   }
-  .topicfoot .res{flex:1;font-size:12.5px;font-weight:600;color:var(--ink-2)}
-  .topicfoot .res b{font-family:var(--display);color:var(--plum-dk);font-size:14px}
-  .donebtn{
-    flex:none;cursor:pointer;font:inherit;font-weight:700;font-size:13px;
-    min-height:42px;padding:0 16px;border-radius:10px;border:1.5px solid var(--moss);
-    background:var(--panel);color:var(--moss);display:flex;align-items:center;gap:7px;
-    transition:.18s var(--ease);
-  }
-  .donebtn svg{width:16px;height:16px}
-  .donebtn:active{transform:scale(.97)}
-  .topic.done .donebtn{background:var(--moss);color:#fff}
+  .reviewbtn:hover{background:var(--che-tint)}
+  .reviewbtn .rk{font-size:1.05em}
+  .topic.done .reviewbtn{background:var(--che);border-color:var(--che);color:#fff}
 
-  footer{
-    margin:26px 0 0;padding:20px 0 36px;border-top:1px solid var(--line);
-    color:var(--ink-3);font-size:12px;text-align:center;
-  }
-  footer b{color:var(--ink-2)}
+  /* footer */
+  footer{margin-top:42px;border-top:1.5px solid var(--line);padding-top:22px;font-size:.83rem;color:var(--soft)}
+  footer h5{font-family:var(--serif);font-size:1rem;color:var(--ink);margin-bottom:9px}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  footer li{padding-left:18px;position:relative}
+  footer li::before{content:"\203A";position:absolute;left:0;color:var(--accent);font-weight:700}
+  footer .fend{margin-top:15px;font-size:.78rem;color:var(--faint);font-style:italic}
 
-  .fade{opacity:0;transform:translateY(13px);animation:rise .5s var(--ease) forwards}
-  @keyframes rise{to{opacity:1;transform:none}}
-  @media (min-width:620px){
-    .bento{grid-template-columns:repeat(3,1fr)}
-    .cell.hero{grid-column:1/-1}
-    .cell.progress{grid-column:1/-1}
-  }
   @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
-    .fade{opacity:1;transform:none}
+    *{transition:none!important;scroll-behavior:auto!important}
   }
   @media print{
     body{background:#fff;background-image:none}
-    .scorepill,.reveal,.selfgrade,.topicfoot{display:none!important}
-    .panel,.ans{grid-template-rows:1fr!important}
-    .topic{break-inside:avoid;box-shadow:none}
+    .backlink,.reveal,.grade,.reviewrow,.tchev,.pnote{display:none!important}
+    .tpanel,.ans{grid-template-rows:1fr!important}
+    .topic,.panel{break-inside:avoid}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
+  <a class="backlink" href="index.html"><span class="ch">&lsaquo;</span><span class="txt">Yasmine's Revision Planner</span></a>
+
   <header>
-    <div class="brandrow">
-      <a class="brand" href="index.html" title="Back to Yasmine's Revision Planner">
-        <svg class="backchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        <div class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v6l-5 9a2 2 0 002 3h12a2 2 0 002-3l-5-9V3"/><path d="M8 3h8"/><path d="M7 16h10"/></svg></div>
-        <div>
-          <h1>Synth</h1>
-          <p>IB CHEMISTRY HL · REVISION</p>
-        </div>
-      </a>
-      <div class="scorepill" id="scorePill" title="Quiz marks scored so far">
-        <div class="ring" id="scoreRing"><i id="scorePct">0%</i></div>
-        <div><b id="scoreNum">0</b> <span>marks</span></div>
-      </div>
-    </div>
-
-    <div class="bento">
-      <div class="cell hero fade">
-        <div class="eyebrow">End-of-Year Exam · Cumulative</div>
-        <h2>Study smarter, one topic at a time.</h2>
-        <p>Semester 1 + 2. Built from the Chemistry Exam Syllabus PDFs and <em>Chemistry for the IB Diploma</em> — Steve Owen, Cambridge 2023.</p>
-      </div>
-
-      <div class="cell stat days fade" style="animation-delay:.05s">
-        <div class="top"><span class="dot p"></span>Countdown</div>
-        <div class="num" id="cdNum">—</div>
-        <div class="cap">days to sample test<br>6 June 2026</div>
-      </div>
-
-      <div class="cell stat fade" style="animation-delay:.1s">
-        <div class="top"><span class="dot m"></span>Reviewed</div>
-        <div class="num" id="revNum" style="color:var(--moss)">0</div>
-        <div class="cap">of 13 topics<br>marked complete</div>
-      </div>
-
-      <div class="cell stat fade" style="animation-delay:.15s">
-        <div class="top"><span class="dot a"></span>Accuracy</div>
-        <div class="num" id="accNum" style="color:var(--amber)">—</div>
-        <div class="cap">of self-graded<br>quiz questions</div>
-      </div>
-
-      <div class="cell progress fade" style="animation-delay:.2s">
-        <div class="top"><span class="dot m"></span>Topic progress</div>
-        <div class="bars" id="bars"></div>
-        <div class="progmeta"><span>Tap a topic to begin</span><b id="progFrac">0 / 13</b></div>
-      </div>
+    <div class="eyebrow"><span class="badge">Revision</span> Chemistry HL · End-of-Year Deck</div>
+    <h1>Chemistry Revision Deck</h1>
+    <p class="sub">Key takeaways, examiner pitfalls, worked examples and quizzes for the cumulative end-of-year exam — Semester 1 + Semester 2.</p>
+    <div class="meta">
+      <div class="stat countdown"><b id="cdTest">—</b><span>Days to sample test</span></div>
+      <div class="stat"><b>6 Jun</b><span>Sample test</span></div>
+      <div class="stat"><b>15 Jun</b><span>IB Chemistry HL exam</span></div>
+      <div class="stat che"><b>4 / 13</b><span>Topics ready</span></div>
+      <div class="stat"><b>90</b><span>Quiz marks in deck</span></div>
     </div>
   </header>
 
-  <div class="sectionhdr">
-    <h3>Topics</h3>
-    <span id="topicCount">All 13 topics</span>
+  <div class="band">
+    <div class="panel">
+      <h2>Topic contents</h2>
+      <div id="contents"></div>
+    </div>
+    <div class="panel">
+      <h2>Your progress</h2>
+      <div class="prog">
+        <div class="prog-row"><span>Topics reviewed</span><b id="revTxt">0 / 13</b></div>
+        <div class="ptrack"><i id="revBar"></i></div>
+      </div>
+      <div class="prog">
+        <div class="prog-row"><span>Quiz marks scored</span><b id="markTxt">0 / 90</b></div>
+        <div class="ptrack"><i id="markBar"></i></div>
+      </div>
+      <div class="prog">
+        <div class="prog-row"><span>Quiz accuracy</span><b id="accTxt">—</b></div>
+        <div class="ptrack"><i id="accBar"></i></div>
+      </div>
+      <p class="pnote">Self-grading is private to this device and resets when the page reloads.</p>
+    </div>
+  </div>
+
+  <div class="strategy">
+    <h3>How to use this deck</h3>
+    <p>Each topic opens to its <b>key takeaways</b>, the <b>mistakes examiners see most often</b>, and a <b>worked example</b> — then a quiz. <b>Answer every question in your notebook first</b> and reveal the mark scheme only afterwards, then grade yourself honestly so the progress panel stays meaningful. Tap a topic in the contents list to jump straight to it.</p>
+  </div>
+
+  <div class="deck-head">
+    <span class="dn">Topic deck</span>
+    <span class="dr">Topics 1–4 of 13</span>
+    <span class="dl"></span>
   </div>
 
   <div id="topics"></div>
 
   <footer>
-    Built from the Sem 1 + Sem 2 Chemistry exam syllabus.<br>
-    <b>Do each quiz first; reveal the mark scheme second.</b> Self-grading is private and resets on reload.
+    <h5>Notes</h5>
+    <ul>
+      <li>Mark schemes are hidden by default — reveal them only after writing your own answer. Doing the quiz cold is what builds exam recall.</li>
+      <li>Source of truth: the Chemistry Exam Syllabus PDFs (Sem 1 + Sem 2) and <em>Chemistry for the IB Diploma Coursebook</em> — Steve Owen, Cambridge 2023.</li>
+      <li>Topics 5–13 use the same layout and will be added to the deck. Progress is counted out of the full 13-topic course.</li>
+    </ul>
+    <div class="fend">Part of Yasmine's Revision Planner · Chemistry HL · Plan A — Weighted Mastery</div>
   </footer>
 
 </div>
@@ -485,441 +490,145 @@ const TOPICS = [
     {tag:"1.5.4",marks:3,q:`Calculate the volume of H₂ produced at 25.0 °C and 101 kPa when 0.270 g of Mg reacts completely with excess HCl.`,a:`n(Mg) = 0.270/24.31 = 0.01111 mol; Mg + 2HCl → MgCl₂ + H₂ → n(H₂) = 0.01111 mol [1]. V = nRT/P = (0.01111)(8.31)(298.15)/101 000 = 2.72 × 10⁻⁴ m³ = <strong>0.272 dm³</strong> = 272 cm³ [2].`},
     {tag:"1.5.1",marks:2,q:`Explain, in terms of particle motion, why the pressure of a gas increases when temperature increases at constant volume.`,a:`Higher T → particles move faster → more frequent and more forceful collisions with the container walls [1] → pressure (force per unit area) increases [1].`}
   ]}
-},
-/* ===== TOPIC 5 ===== */
-{
-  n:5, id:"t5",
-  title:"The Periodic Table & Periodicity",
-  short:"Periodic Table",
-  refs:"Structure 3.1.1–3.1.3, 3.1.7 · Sem 1, Unit 2",
-  takeaways:[
-    `<strong>Layout:</strong> rows = <em>periods</em> (= outer principal energy level n), columns = <em>groups</em> (= valence electrons for s/p block), <em>blocks</em> = s, p, d, f (named after the sublevel being filled).`,
-    `<strong>Categories:</strong> metals (left), non-metals (top right), metalloids (B, Si, Ge, As, Sb, Te — the staircase). Alkali metals = group 1; alkaline earth = group 2; halogens = group 17; noble gases = group 18.`,
-    `<strong>From position → electron config:</strong> period gives n of outer shell; group within block tells you how many electrons are in the outermost sublevel.`,
-    `<strong>From config → position:</strong> last sublevel filled identifies the block; total outer-shell electrons give the group (for s/p blocks).`,
-    `<strong>Periodic trends:</strong><ul><li><strong>Atomic radius:</strong> ↓ across period (nuclear charge ↑, shielding ≈ same); ↑ down group (more shells).</li><li><strong>Ionisation energy:</strong> ↑ across period; ↓ down group (mirror of radius, modulated by sublevel structure).</li><li><strong>Electron affinity:</strong> generally more negative across a period (more energy released on adding e⁻).</li><li><strong>Electronegativity:</strong> ↑ across period, ↓ down group. F is the most electronegative element.</li><li><strong>Metallic character:</strong> ↓ across, ↑ down.</li></ul>`,
-    `<strong>Discontinuities in IE₁ across period 2/3:</strong><ul><li>Drop Be → B and Mg → Al: outer electron now in p sublevel (slightly higher energy, slightly shielded by s electrons).</li><li>Drop N → O and P → S: paired electrons in one p orbital repel; the first one is easier to remove.</li><li>These two dips are <strong>evidence for the existence of sublevels</strong>.</li></ul>`,
-    `<strong>Oxide trends across period 3:</strong> Na₂O, MgO — basic → Al₂O₃ — amphoteric → SiO₂, P₄O₁₀, SO₃, Cl₂O₇ — acidic.`
-  ],
-  pitfall:`Claiming "across a period nuclear charge increases AND shielding stays the same" without explaining why this <em>increases attraction</em>; forgetting the <em>two</em> dips when explaining the period-2 IE trend; mixing up electron affinity and electronegativity.`,
-  worked:`Element X has electron configuration [Ar] 3d¹⁰ 4s² 4p³. Block = p (last sublevel filled is 4p) [½]. Period = 4 [½]. Group = 15 (outer electrons: 4s² + 4p³ = 5 valence → group 15) [1]. Identity: arsenic, As [1].`,
-  quiz:{max:22, questions:[
-    {tag:"3.1.1",marks:3,q:`State which block and period the element with electron configuration [Kr] 4d¹⁰ 5s² 5p² belongs to. Identify the element.`,a:`Block: p (last sublevel filled is 5p) [1]. Period: 5 [1]. Element: tin, Sn (group 14) [1].`},
-    {tag:"3.1.2",marks:2,q:`Deduce the electron configuration of an element in period 3, group 16.`,a:`Period 3, group 16 → S → 1s²2s²2p⁶3s²3p⁴ (or [Ne] 3s² 3p⁴) [2].`},
-    {tag:"3.1.3",marks:2,q:`State and explain the trend in atomic radius across period 3 from Na to Cl.`,a:`Atomic radius decreases [1] because nuclear charge increases while shielding stays roughly the same → greater effective nuclear attraction pulls electrons closer [1].`},
-    {tag:"3.1.3",marks:2,q:`Identify the most electronegative element in the periodic table and explain why.`,a:`Fluorine [1]. Smallest atomic radius among non-metals with high nuclear charge → strong attraction for bonding pairs; outer electrons close to nucleus with little shielding [1].`},
-    {tag:"3.1.7",marks:2,q:`Explain how the dip in IE₁ between Mg and Al provides evidence for the existence of sublevels.`,a:`If only n mattered, IE₁ would rise smoothly. The dip shows Al's outer electron is in a 3p sublevel higher in energy than 3s [1], so 3p must be a distinct (higher-energy) sublevel above 3s [1].`},
-    {tag:"3.1.3",marks:2,q:`State and explain whether Na or Cs has the larger first ionisation energy.`,a:`Na [1]. Cs is further down the group — more shells, greater shielding → outer electron further from nucleus and easier to remove [1].`},
-    {tag:"3.1.1",marks:2,q:`Identify the halogen with the lowest electronegativity and explain in terms of atomic structure.`,a:`Iodine (or astatine) [1]. Largest halogen — more shells → bonding pair further from nucleus, more shielding → weaker attraction for electrons [1].`},
-    {tag:"3.1.3",marks:2,q:`Predict which is more acidic in aqueous solution: SO₃ or MgO, and justify.`,a:`SO₃ [1]. Non-metal oxide; reacts with water to form H₂SO₄ (acidic). MgO is a metal oxide and is basic [1].`},
-    {tag:"3.1.7",marks:3,q:`Describe the trend in IE₁ across period 3 in one sentence and identify <strong>both</strong> discontinuities.`,a:`Overall increasing trend across the period [1]. Dip between Mg and Al (3p higher in energy than 3s) [1]. Dip between P and S (electron pairing in 3p raises repulsion) [1].`},
-    {tag:"3.1.2",marks:2,q:`An element forms a 2− ion with electron configuration [Ar]. Identify the element and state its position in the periodic table.`,a:`[Ar] = 18 electrons → neutral atom has 16 electrons → S [1]. Period 3, group 16 [1].`}
-  ]}
-},
-/* ===== TOPIC 6 ===== */
-{
-  n:6, id:"t6",
-  title:"Enthalpy, Calorimetry & Hess's Law",
-  short:"Enthalpy & Hess",
-  refs:"Reactivity 1.1.1–1.1.4 · Reactivity 1.2.2–1.2.3 · Sem 1, Unit 3",
-  takeaways:[
-    `<strong>System &amp; surroundings:</strong> system = reactants/products; surroundings = everything else (solvent, beaker, air). Energy is <em>conserved</em> overall.`,
-    `<strong>Endothermic (ΔH &gt; 0):</strong> heat absorbed <em>by</em> the system from surroundings → surroundings cool. <strong>Exothermic (ΔH &lt; 0):</strong> heat released to surroundings → surroundings warm.`,
-    `<strong>Energy profile:</strong> products higher than reactants ⇒ endothermic; products lower ⇒ exothermic. Activation energy E<sub>a</sub> = peak above reactants.`,
-    `<strong>Heat ≠ Temperature.</strong> Heat = total energy transferred; temperature = average KE per particle.`,
-    `<strong>Standard enthalpy change ΔH°:</strong> measured at 100 kPa with all species in standard states (normally 298 K). Units: kJ mol⁻¹.`,
-    `<strong>Calorimetry:</strong> <span class="f">q = m c ΔT</span> (q in J, m = mass of <em>solution</em> in g, c = 4.18 J g⁻¹ K⁻¹ for water, ΔT in K or °C). Then <span class="f">ΔH = −q / n</span> where n = moles of limiting reactant. Divide by 1000 for kJ.`,
-    `<strong>Sign convention:</strong> exothermic reaction → solution heats up → ΔT positive → q positive → ΔH negative (note the minus sign).`,
-    `<strong>Sources of error in calorimetry:</strong> heat loss to surroundings; assuming solution density and c = water; ignoring heat absorbed by the calorimeter; incomplete reaction. Improvements: insulate, use a lid, extrapolate the cooling curve.`,
-    `<strong>Hess's law:</strong> ΔH for a reaction is path-independent. ΔH<sub>target</sub> = Σ(ΔH for steps reorganised to give the target equation).`,
-    `<strong>Using ΔH<sub>f</sub>° (formation):</strong> <span class="f">ΔH<sub>rxn</sub>° = Σ ΔH<sub>f</sub>°(products) − Σ ΔH<sub>f</sub>°(reactants)</span>. Note ΔH<sub>f</sub>°(element in standard state) = 0.`,
-    `<strong>Using ΔH<sub>c</sub>° (combustion):</strong> <span class="f">ΔH<sub>rxn</sub>° = Σ ΔH<sub>c</sub>°(reactants) − Σ ΔH<sub>c</sub>°(products)</span> — opposite arrangement to ΔH<sub>f</sub>°.`
-  ],
-  pitfall:`Dropping the minus sign on q for an exothermic reaction; using mass of solute instead of solution; forgetting to convert to kJ; flipping the ΔH<sub>f</sub> / ΔH<sub>c</sub> sums; not multiplying by stoichiometric coefficients in Hess cycles.`,
-  worked:`50.0 cm³ of 1.00 mol dm⁻³ NaOH + 50.0 cm³ of 1.00 mol dm⁻³ HCl; T rises from 21.0 °C to 27.7 °C. m(soln) ≈ 100.0 g, c = 4.18 J g⁻¹ K⁻¹, ΔT = 6.7 K. q = (100)(4.18)(6.7) = 2800 J. n(reaction) = 0.0500 mol. ΔH = −q/n = −2800/0.0500 = −56 000 J mol⁻¹ = <strong>−56.0 kJ mol⁻¹</strong>.`,
-  quiz:{max:23, questions:[
-    {tag:"1.1.1",marks:2,q:`State the law of conservation of energy and explain its meaning in chemistry.`,a:`Energy cannot be created or destroyed, only transferred [1]. Heat lost by the system equals heat gained by the surroundings (or vice versa) [1].`},
-    {tag:"1.1.2",marks:2,q:`State, with reasons, whether the dissolution of NH₄NO₃(s) in water (which causes T to fall) is endo- or exothermic, and give the sign of ΔH.`,a:`Endothermic [1]. The system absorbs heat from the water; ΔH is positive [1].`},
-    {tag:"1.1.3",marks:3,q:`Sketch an energy profile for an exothermic reaction. Label: reactants, products, ΔH and E<sub>a</sub>.`,a:`Reactants higher than products [1]; arrow from reactants down to products labelled ΔH (negative) [1]; peak above reactants labelled E<sub>a</sub> [1].`},
-    {tag:"1.1.4",marks:3,q:`100 cm³ of water in a calorimeter is heated by burning 0.500 g of ethanol (M = 46.07 g mol⁻¹); ΔT = 22.4 °C. Calculate ΔH<sub>c</sub>(ethanol) in kJ mol⁻¹.`,a:`q = (100)(4.18)(22.4) = 9 363 J [1]. n(EtOH) = 0.500/46.07 = 0.01085 mol [1]. ΔH<sub>c</sub> = −q/n = −9 363/0.01085 = <strong>−863 kJ mol⁻¹</strong> [1].`},
-    {tag:"1.1.4",marks:2,q:`State <strong>two</strong> sources of error in the above experiment that would make ΔH<sub>c</sub> appear less exothermic than the literature value.`,a:`Any two: heat loss to surroundings; incomplete combustion; heat absorbed by calorimeter not counted; evaporation of ethanol before burning. [2]`},
-    {tag:"1.2.2",marks:2,q:`Given ΔH₁ = +180 kJ mol⁻¹ for N₂ + O₂ → 2NO, and ΔH₂ = −114 kJ mol⁻¹ for 2NO + O₂ → 2NO₂, use Hess's law to find ΔH for N₂ + 2O₂ → 2NO₂.`,a:`Add the two equations: ΔH = +180 + (−114) = <strong>+66 kJ mol⁻¹</strong> [2].`},
-    {tag:"1.2.3",marks:3,q:`Using ΔH<sub>f</sub>°(CO₂) = −393.5, ΔH<sub>f</sub>°(H₂O,l) = −285.8 and ΔH<sub>f</sub>°(C₂H₆) = −84.7 kJ mol⁻¹, calculate ΔH<sub>c</sub>°(C₂H₆).`,a:`C₂H₆ + 7/2 O₂ → 2CO₂ + 3H₂O [½]. ΔH = [2(−393.5) + 3(−285.8)] − [−84.7] = −1644.4 + 84.7 = <strong>−1559.7 kJ mol⁻¹</strong> [2½].`},
-    {tag:"1.1.4",marks:2,q:`Define the term <em>standard enthalpy of formation</em> and write the equation for ΔH<sub>f</sub>°(CH₃OH,l).`,a:`Enthalpy change when 1 mol of a compound is formed from its elements in their standard states at 100 kPa and 298 K [1]. C(s) + 2H₂(g) + ½O₂(g) → CH₃OH(l) [1].`},
-    {tag:"1.1.1",marks:2,q:`Distinguish between heat and temperature.`,a:`Heat: total thermal energy transferred between objects [1]. Temperature: average kinetic energy of particles in a substance [1].`},
-    {tag:"1.2.3",marks:2,q:`For C(s) + 2H₂(g) → CH₄(g), state why ΔH<sub>f</sub>°(C,s) and ΔH<sub>f</sub>°(H₂,g) are both zero.`,a:`Both are elements in their standard states [1]. By convention ΔH<sub>f</sub>°(element in standard state) = 0 [1].`}
-  ]}
-},
-/* ===== TOPIC 7 ===== */
-{
-  n:7, id:"t7",
-  title:"Bond Enthalpy, Entropy & Gibbs Energy",
-  short:"Bond E, Entropy & Gibbs",
-  refs:"Reactivity 1.2.1 · Reactivity 1.4.1–1.4.3 · Sem 2, Unit 3",
-  takeaways:[
-    `<strong>Bond enthalpy:</strong> energy required to break <strong>1 mol of bonds</strong> in <strong>gaseous</strong> covalent species (homolytic, gas phase). <strong>Breaking absorbs energy</strong> (endothermic); <strong>forming releases energy</strong> (exothermic).`,
-    `<strong>Calculating ΔH from bond enthalpies:</strong> <span class="f">ΔH ≈ Σ E(bonds broken) − Σ E(bonds formed)</span>. Use average values from the data booklet.`,
-    `<strong>Why bond enthalpies are approximate:</strong> tabulated values are <em>averages</em> across many molecules; actual strength depends on neighbouring atoms. Method only applies when all species are gaseous.`,
-    `<strong>Entropy S:</strong> measure of dispersal of matter and energy. Units: J K⁻¹ mol⁻¹ (note J, not kJ).`,
-    `<strong>Predicting ΔS sign:</strong> S(gas) ≫ S(liquid) > S(solid). More moles of gas on the right → ΔS > 0. Dissolving, dissociating ions, melting or vaporising → ΔS > 0. Fewer moles of gas → ΔS < 0.`,
-    `<strong>Calculating ΔS°:</strong> <span class="f">ΔS° = Σ S°(products) − Σ S°(reactants)</span>.`,
-    `<strong>Gibbs energy:</strong> <span class="f">ΔG° = ΔH° − T ΔS°</span>. <strong>Watch units!</strong> ΔH in kJ, ΔS in J K⁻¹ — convert ΔS to kJ K⁻¹ (÷ 1000) before subtracting.`,
-    `<strong>Spontaneity:</strong> ΔG &lt; 0 → spontaneous; ΔG = 0 → equilibrium; ΔG &gt; 0 → non-spontaneous (reverse is spontaneous).`,
-    `<strong>Spontaneity vs temperature:</strong><table class="tbl"><tr><th>ΔH</th><th>ΔS</th><th>ΔG behaviour</th></tr><tr><td>− (exo)</td><td>+</td><td>Always &lt; 0 — spontaneous at all T</td></tr><tr><td>+ (endo)</td><td>−</td><td>Always &gt; 0 — never spontaneous</td></tr><tr><td>− (exo)</td><td>−</td><td>Spontaneous only at low T (T &lt; ΔH/ΔS)</td></tr><tr><td>+ (endo)</td><td>+</td><td>Spontaneous only at high T (T &gt; ΔH/ΔS)</td></tr></table>`,
-    `<strong>Crossover temperature:</strong> set ΔG = 0 → <span class="f">T = ΔH / ΔS</span> (both in matching units, e.g. kJ and kJ K⁻¹).`
-  ],
-  pitfall:`Forgetting to convert ΔS from J to kJ before using ΔG = ΔH − TΔS; flipping the sign in Σ bonds broken − Σ bonds formed; assuming "spontaneous" means "fast" (it means thermodynamically favourable, not kinetically fast); concluding a reaction is non-spontaneous without checking the temperature range.`,
-  worked:`For CaCO₃(s) → CaO(s) + CO₂(g), ΔH = +178 kJ mol⁻¹, ΔS = +161 J K⁻¹ mol⁻¹. At 298 K: ΔG = 178 − (298)(0.161) = 178 − 47.98 = <strong>+130 kJ mol⁻¹</strong> (non-spontaneous). Crossover: T = ΔH/ΔS = 178/0.161 = <strong>1106 K</strong> — above this temperature the decomposition becomes spontaneous.`,
-  quiz:{max:25, questions:[
-    {tag:"1.2.1",marks:3,q:`Define <em>average bond enthalpy</em> and state <strong>two</strong> reasons why data-booklet values are averages.`,a:`Energy required to break one mole of a given bond in gaseous molecules under standard conditions [1]. Two of: averaged over many compounds; actual value depends on molecular environment / neighbouring atoms; only valid for gas phase. [2]`},
-    {tag:"1.2.1",marks:3,q:`Using E(C–H) = 414, E(O=O) = 498, E(C=O) = 804, E(O–H) = 463 kJ mol⁻¹, estimate ΔH for CH₄ + 2O₂ → CO₂ + 2H₂O.`,a:`Bonds broken: 4(C–H) + 2(O=O) = 4(414) + 2(498) = 2652 kJ [1]. Bonds formed: 2(C=O) + 4(O–H) = 1608 + 1852 = 3460 kJ [1]. ΔH = 2652 − 3460 = <strong>−808 kJ mol⁻¹</strong> [1].`},
-    {tag:"1.4.1",marks:2,q:`Predict, with brief justification, the sign of ΔS for: (a) 2H₂(g) + O₂(g) → 2H₂O(l); (b) NH₄Cl(s) → NH₃(g) + HCl(g).`,a:`(a) ΔS &lt; 0: 3 mol gas → liquid (fewer gas particles, more order) [1]. (b) ΔS &gt; 0: 1 mol solid → 2 mol gas [1].`},
-    {tag:"1.4.1",marks:2,q:`Calculate ΔS° for N₂(g) + 3H₂(g) → 2NH₃(g) using S°: N₂ = 192, H₂ = 131, NH₃ = 193 J K⁻¹ mol⁻¹.`,a:`ΔS° = 2(193) − [192 + 3(131)] = 386 − 585 = <strong>−199 J K⁻¹ mol⁻¹</strong> [2].`},
-    {tag:"1.4.2",marks:3,q:`Calculate ΔG° at 298 K for the reaction N₂ + 3H₂ → 2NH₃, given ΔH° = −92 kJ mol⁻¹ and ΔS° = −199 J K⁻¹ mol⁻¹. State whether it is spontaneous.`,a:`ΔS in kJ: −0.199 kJ K⁻¹ mol⁻¹ [½]. ΔG = −92 − (298)(−0.199) = −92 + 59.3 = <strong>−32.7 kJ mol⁻¹</strong> [1½]. ΔG &lt; 0 → spontaneous at 298 K [1].`},
-    {tag:"1.4.3",marks:3,q:`For a reaction ΔH = −60 kJ mol⁻¹ and ΔS = −140 J K⁻¹ mol⁻¹. Determine the maximum temperature at which the reaction is spontaneous.`,a:`Crossover T = ΔH/ΔS = (−60)/(−0.140) = <strong>429 K</strong> [2]. Both terms negative — spontaneous below 429 K [1].`},
-    {tag:"1.4.3",marks:2,q:`Explain how a reaction with ΔH &gt; 0 and ΔS &gt; 0 can still be spontaneous.`,a:`Although ΔH is positive (unfavourable), the TΔS term can be larger in magnitude at sufficiently high T [1] so ΔG = ΔH − TΔS becomes negative [1].`},
-    {tag:"1.2.1",marks:2,q:`Explain why ΔH calculated from bond enthalpies may differ from the experimental ΔH when the reaction involves liquids.`,a:`Bond-enthalpy method assumes all species are gaseous [1]. Liquids involve intermolecular forces / hydration energies not captured by bond enthalpies, so the values differ [1].`},
-    {tag:"1.4.1",marks:2,q:`State the sign of ΔS for the freezing of water and explain.`,a:`ΔS &lt; 0 [1]. Liquid water (disordered) becomes a solid with a fixed lattice (more ordered) [1].`},
-    {tag:"1.4.3",marks:3,q:`For a reaction with ΔH = +75 kJ mol⁻¹ and ΔS = +125 J K⁻¹ mol⁻¹, determine ΔG at 500 K and state whether it is spontaneous.`,a:`ΔS = +0.125 kJ K⁻¹ mol⁻¹ [½]. ΔG = 75 − 500(0.125) = 75 − 62.5 = <strong>+12.5 kJ mol⁻¹</strong> [1½]. ΔG &gt; 0 → not spontaneous at 500 K [1].`}
-  ]}
-},
-/* ===== TOPIC 8 ===== */
-{
-  n:8, id:"t8",
-  title:"Fuels: Combustion, Fossil Fuels & Biofuels",
-  short:"Fuels & Combustion",
-  refs:"Reactivity 1.3.1–1.3.4 · Sem 2, Unit 3",
-  takeaways:[
-    `<strong>Complete combustion (excess O₂):</strong> hydrocarbon + O₂ → CO₂ + H₂O. Hot, clean blue flame. Releases the maximum energy.`,
-    `<strong>Incomplete combustion (limited O₂):</strong> products include CO (toxic) and C (soot) along with H₂O. Yellow, sooty flame. Less energy released. CO is dangerous because it binds haemoglobin more strongly than O₂.`,
-    `<strong>General combustion forms:</strong><ul><li>Alkane: C<sub>n</sub>H<sub>2n+2</sub> + (3n+1)/2 O₂ → n CO₂ + (n+1) H₂O</li><li>Alcohol: C<sub>n</sub>H<sub>2n+1</sub>OH + (3n)/2 O₂ → n CO₂ + (n+1) H₂O</li></ul>`,
-    `<strong>Why larger hydrocarbons → more incomplete combustion:</strong> need disproportionately more O₂ per molecule; harder to vaporise and mix efficiently with air.`,
-    `<strong>Fossil fuels:</strong> coal, crude oil, natural gas — finite and non-renewable. All release CO₂ → enhanced greenhouse effect and climate change.`,
-    `<strong>Comparing fuels:</strong> natural gas (CH₄) releases the most energy per gram and the <em>least</em> CO₂ per unit energy → cleanest fossil fuel. Coal: most CO₂ per unit energy + soot, SO₂ → acid rain.`,
-    `<strong>Greenhouse effect:</strong> CO₂ absorbs IR radiation re-emitted from Earth's surface (asymmetric stretch). Enhanced by anthropogenic emissions → global warming.`,
-    `<strong>Biofuels:</strong> derived from biomass via recent photosynthesis (e.g. bioethanol from sugars, biodiesel from plant oils). Photosynthesis equation: <span class="f">6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</span>.`,
-    `<strong>Renewable vs non-renewable:</strong> renewable = replenished on a human timescale (biofuels, solar, wind). Non-renewable = finite (fossil fuels).`,
-    `<strong>Biofuels — advantages:</strong> carbon-neutral in principle (CO₂ released = CO₂ absorbed during growth); renewable; reduces import dependence. <strong>Disadvantages:</strong> land use competes with food crops; deforestation; lower energy density; fertilizer and processing emissions.`
-  ],
-  pitfall:`Forgetting to balance H₂O for alcohols; calling a fuel "carbon-free" when it just emits less CO₂; not distinguishing between renewable and carbon-neutral.`,
-  worked:`Balance complete combustion of propan-1-ol: C₃H₇OH + 9/2 O₂ → 3CO₂ + 4H₂O. Multiply by 2: <strong>2C₃H₇OH + 9O₂ → 6CO₂ + 8H₂O</strong>.`,
-  quiz:{max:22, questions:[
-    {tag:"1.3.1",marks:2,q:`Write a balanced equation for the complete combustion of octane (C₈H₁₈).`,a:`2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O [2].`},
-    {tag:"1.3.2",marks:2,q:`Write a balanced equation for the incomplete combustion of ethanol (C₂H₅OH) producing CO and H₂O.`,a:`C₂H₅OH + 2O₂ → 2CO + 3H₂O [2].`},
-    {tag:"1.3.2",marks:2,q:`State <strong>two</strong> health or environmental hazards associated with incomplete combustion.`,a:`CO is toxic (binds haemoglobin) [1]; soot/particulates cause respiratory disease and contribute to smog [1].`},
-    {tag:"1.3.3",marks:2,q:`Compare methane and coal as fuels in terms of CO₂ emissions per unit energy released.`,a:`Methane releases less CO₂ per kJ [1] because it has the highest H : C ratio — more energy comes from H–O bond formation rather than C–O [1].`},
-    {tag:"1.3.3",marks:2,q:`Explain how CO₂ contributes to the enhanced greenhouse effect.`,a:`CO₂ absorbs IR radiation re-emitted from Earth's surface [1]. Enhanced by anthropogenic emissions → more IR retained → average atmospheric temperature rises [1].`},
-    {tag:"1.3.4",marks:3,q:`State the equation for photosynthesis and explain why biofuels can be considered carbon-neutral.`,a:`6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ [1]. CO₂ released on burning the biofuel was originally absorbed during photosynthesis [1] → net CO₂ added to the atmosphere is theoretically zero [1].`},
-    {tag:"1.3.4",marks:2,q:`Give one <strong>advantage</strong> and one <strong>disadvantage</strong> of using bioethanol as a vehicle fuel.`,a:`Advantage: renewable / lower net CO₂ emissions [1]. Disadvantage: competes with food crops / deforestation / lower energy density than petrol [1].`},
-    {tag:"1.3.1",marks:3,q:`Calculate the mass of CO₂ produced when 1.00 kg of methane undergoes complete combustion.`,a:`CH₄ + 2O₂ → CO₂ + 2H₂O [½]. n(CH₄) = 1000/16.05 = 62.3 mol [1]. n(CO₂) = 62.3 mol; m(CO₂) = 62.3 × 44.01 = <strong>2740 g ≈ 2.74 kg</strong> [1½].`},
-    {tag:"1.3.3",marks:2,q:`Explain why larger hydrocarbons are more prone to incomplete combustion than smaller ones.`,a:`Larger hydrocarbons need disproportionately more O₂ per molecule [1]; harder to vaporise and mix uniformly with air, increasing the chance of CO and C forming [1].`},
-    {tag:"1.3.4",marks:2,q:`Distinguish between <em>renewable</em> and <em>non-renewable</em> energy sources, giving one example of each.`,a:`Renewable: replenished on a human timescale (e.g. solar, wind, biofuels) [1]. Non-renewable: finite reserves (e.g. coal, crude oil, natural gas) [1].`}
-  ]}
-},
-/* ===== TOPIC 9 ===== */
-{
-  n:9, id:"t9",
-  title:"Ionic Bonding, Lattices & Born–Haber Cycles",
-  short:"Ionic Bonding & Born–Haber",
-  refs:"Structure 2.1.3 · Reactivity 1.2.5 · Sem 2, Unit 4",
-  takeaways:[
-    `<strong>Ionic bonding:</strong> electrostatic attraction between oppositely charged ions formed by electron transfer (typically metal → non-metal).`,
-    `<strong>Lattice structure:</strong> 3-D regular array of alternating cations and anions; represented by an <em>empirical formula</em> — no discrete molecules.`,
-    `<strong>Physical properties of ionic compounds:</strong><ul><li>High melting/boiling points (strong ionic bonds throughout the lattice).</li><li>Conduct electricity only when <em>molten</em> or <em>dissolved</em> (ions mobile); poor conductors as solids.</li><li>Soluble in polar solvents when hydration energy ≥ lattice enthalpy; insoluble in non-polar solvents.</li><li>Brittle: shifting layers aligns like charges → repulsion → fracture.</li><li>Low volatility at room temperature.</li></ul>`,
-    `<strong>Lattice enthalpy ΔH<sub>lat</sub>°:</strong> energy to break 1 mol of ionic lattice into gaseous ions. Always positive (endothermic). Magnitude ∝ <span class="f">|q₊ × q₋| / (r₊ + r₋)</span> — increases with charge, decreases with ionic size.`,
-    `<strong>Trend example:</strong> NaCl &lt; MgO (MgO has 2+/2− vs 1+/1− → ~4× Coulombic attraction; m.p. MgO = 2852 °C vs NaCl = 801 °C).`,
-    `<strong>Born–Haber cycle</strong> (application of Hess's law) — steps for NaCl formation:<ul><li>Atomisation of Na: ΔH<sub>at</sub>(Na) = sublimation enthalpy</li><li>Atomisation of Cl: ½ E(Cl–Cl)</li><li>Ionisation of Na: IE₁(Na)</li><li>Electron affinity of Cl: EA(Cl) — usually negative</li><li>Lattice formation: = −ΔH<sub>lat</sub></li></ul>Sum = ΔH<sub>f</sub>°(NaCl).`,
-    `<strong>Key equation:</strong> ΔH<sub>f</sub>° = ΔH<sub>at</sub>(M) + ΔH<sub>at</sub>(X) + ΔH<sub>IE</sub>(M) + ΔH<sub>EA</sub>(X) − ΔH<sub>lat</sub>. Rearrange for the unknown.`,
-    `<strong>For divalent ions:</strong> use both IE₁ and IE₂; or both EA₁ and EA₂. EA₂ is usually <em>positive</em> (repulsion from the already-negative ion).`
-  ],
-  pitfall:`Forgetting EA₁ is generally negative but EA₂ is positive; missing the ½ for diatomic halogens (½Cl₂ → Cl); sign errors when going around the cycle; explaining solubility without distinguishing lattice vs hydration enthalpies.`,
-  worked:`For NaCl: ΔH<sub>at</sub>(Na) = +108, ½E(Cl–Cl) = +121, IE₁(Na) = +496, EA(Cl) = −349, ΔH<sub>f</sub>(NaCl) = −411 kJ mol⁻¹. Using Hess: ΔH<sub>f</sub> = 108 + 121 + 496 + (−349) − ΔH<sub>lat</sub>. −411 = 376 − ΔH<sub>lat</sub> → ΔH<sub>lat</sub> = <strong>+787 kJ mol⁻¹</strong>.`,
-  quiz:{max:23, questions:[
-    {tag:"2.1.3",marks:2,q:`Explain why solid NaCl does not conduct electricity but molten NaCl does.`,a:`In the solid, ions are held in fixed positions and cannot move [1]. When molten, the ions are free to move and carry charge [1].`},
-    {tag:"2.1.3",marks:2,q:`Explain, with reference to the lattice structure, why ionic compounds are brittle.`,a:`If the layers are displaced, ions of the same charge become aligned [1]; mutual repulsion causes the lattice to fracture [1].`},
-    {tag:"2.1.3",marks:3,q:`Rank in order of <em>increasing</em> melting point and justify: NaF, MgO, CsI.`,a:`CsI &lt; NaF &lt; MgO [1]. MgO has 2+/2− ions — much stronger Coulombic attraction [1]. Among 1+/1− pairs, NaF &gt; CsI because Na⁺ and F⁻ are smaller → shorter inter-ionic distance [1].`},
-    {tag:"1.2.5",marks:2,q:`Define <em>lattice enthalpy</em>, including the sign convention used in IB Chemistry.`,a:`Enthalpy change when 1 mol of ionic compound is dissociated into its gaseous ions [1]. Positive (endothermic) in the IB convention [1].`},
-    {tag:"1.2.5",marks:2,q:`State two factors that affect the magnitude of lattice enthalpy.`,a:`Charge of ions (greater |q| ⇒ greater ΔH<sub>lat</sub>) [1]; ionic radii / inter-ionic distance (smaller r ⇒ greater ΔH<sub>lat</sub>) [1].`},
-    {tag:"1.2.5",marks:3,q:`Using: ΔH<sub>at</sub>(K) = +89, ½E(Br–Br) = +112, IE₁(K) = +419, EA(Br) = −325, ΔH<sub>f</sub>(KBr) = −392 kJ mol⁻¹. Determine ΔH<sub>lat</sub>(KBr).`,a:`ΔH<sub>f</sub> = ΔH<sub>at</sub>(K) + ½E(Br–Br) + IE₁(K) + EA(Br) − ΔH<sub>lat</sub> [1]. −392 = 89 + 112 + 419 − 325 − ΔH<sub>lat</sub> = 295 − ΔH<sub>lat</sub> [1]. ΔH<sub>lat</sub> = <strong>+687 kJ mol⁻¹</strong> [1].`},
-    {tag:"1.2.5",marks:2,q:`Explain why the second electron affinity of oxygen is endothermic.`,a:`Adding an electron to an already-negative O⁻ requires energy to overcome repulsion between the incoming electron and the existing negative charge [2].`},
-    {tag:"2.1.3",marks:2,q:`Predict and justify which compound has the higher lattice enthalpy: LiF or NaF.`,a:`LiF [1]. Li⁺ is smaller than Na⁺ → shorter inter-ionic distance → stronger Coulombic attraction [1].`},
-    {tag:"2.1.3",marks:2,q:`Explain why ionic compounds dissolve readily in water but not in hexane.`,a:`Water is polar — H and O atoms hydrate the ions, releasing enough energy to overcome the lattice enthalpy [1]. Hexane is non-polar; London forces cannot release enough energy to compensate [1].`},
-    {tag:"1.2.5",marks:3,q:`Sketch the steps in a Born–Haber cycle for the formation of MgCl₂ and label which terms include a factor of 2.`,a:`Steps: ΔH<sub>at</sub>(Mg) → IE₁(Mg) → IE₂(Mg) → ΔH<sub>at</sub>(Cl) × 2 → EA(Cl) × 2 → −ΔH<sub>lat</sub>(MgCl₂) = ΔH<sub>f</sub> [2]. Factor of 2 appears for ΔH<sub>at</sub>(Cl) and EA(Cl) [1].`}
-  ]}
-},
-/* ===== TOPIC 10 ===== */
-{
-  n:10, id:"t10",
-  title:"Transition Elements & Coloured Complexes",
-  short:"Transition Metals",
-  refs:"Structure 3.1.8–3.1.10 · Sem 2, Unit 4",
-  takeaways:[
-    `<strong>Definition:</strong> a transition element has an incomplete d-sublevel in at least one of its common oxidation states. Sc and Zn are <em>not</em> transition metals by this definition: Sc³⁺ is d⁰; Zn²⁺ is d¹⁰.`,
-    `<strong>Characteristic properties:</strong><ul><li><strong>Variable oxidation states</strong> — 3d and 4s are similar in energy, so successive IEs are close.</li><li><strong>Coloured compounds</strong> — partly filled d-orbitals allow d–d electronic transitions.</li><li><strong>Paramagnetic behaviour</strong> — unpaired d-electrons.</li><li><strong>Catalytic activity</strong> — homogeneous (change oxidation state, e.g. Fe²⁺/Fe³⁺) or heterogeneous (adsorption, e.g. Fe in Haber, Pt in catalytic converters).</li><li><strong>Complex/ligand formation</strong> — central metal ion bonded to ligands (Lewis bases) via dative bonds.</li><li>High m.p./b.p. and high density.</li></ul>`,
-    `<strong>Variable oxidation state — electron configs (remove 4s before 3d):</strong><ul><li>Fe = [Ar] 3d⁶ 4s² → Fe²⁺ = [Ar] 3d⁶ → Fe³⁺ = [Ar] 3d⁵ (half-filled stability)</li><li>Mn = [Ar] 3d⁵ 4s² → max oxidation state +7 (e.g. MnO₄⁻)</li><li>Cu = [Ar] 3d¹⁰ 4s¹ → Cu²⁺ = [Ar] 3d⁹; Cu⁺ = [Ar] 3d¹⁰</li><li>Cr = [Ar] 3d⁵ 4s¹ → Cr³⁺ = [Ar] 3d³</li></ul>`,
-    `<strong>Why coloured complexes form:</strong><ul><li>Ligands split the 5 degenerate d-orbitals into 2 energy levels (splitting = Δ).</li><li>An electron is promoted from the lower to upper d-level by absorbing a photon whose energy matches Δ.</li><li>The colour <em>seen</em> is the complementary colour to the one absorbed.</li><li><span class="f">E = hf = hc/λ</span>; smaller Δ → longer λ absorbed.</li></ul>`,
-    `<strong>Factors affecting colour:</strong> identity and charge of the metal; identity of the ligand (different Δ → different colour); coordination number.`,
-    `<strong>Colour wheel (complementary pairs):</strong> red ↔ green, orange ↔ blue, yellow ↔ violet.`,
-    `<strong>Colourless transition complexes:</strong> d⁰ (e.g. Sc³⁺, Ti⁴⁺) or d¹⁰ (e.g. Zn²⁺, Cu⁺) — no d–d transitions possible.`
-  ],
-  pitfall:`Calling Zn a transition metal; writing Fe³⁺ as [Ar] 3d⁵ 4s² (4s electrons must be removed first); claiming the absorbed colour is the colour seen — it's the complementary colour.`,
-  worked:`A complex absorbs strongly at λ = 500 nm (green). The observed colour is the complementary colour → <strong>red</strong>. Δ = hc/λ = (6.63 × 10⁻³⁴)(3.00 × 10⁸)/(500 × 10⁻⁹) = 3.98 × 10⁻¹⁹ J per photon = 240 kJ mol⁻¹ (× N<sub>A</sub> / 1000).`,
-  quiz:{max:22, questions:[
-    {tag:"3.1.8",marks:2,q:`State the IB definition of a transition element and explain why Zn is excluded.`,a:`An element whose atoms have, or form at least one ion with, an incomplete d-sublevel [1]. Zn²⁺ is [Ar] 3d¹⁰ — full d-sublevel in its only common oxidation state, so excluded [1].`},
-    {tag:"3.1.9",marks:3,q:`Write the electron configuration of: (a) Mn²⁺; (b) Cu⁺; (c) Cr³⁺.`,a:`(a) [Ar] 3d⁵ [1]; (b) [Ar] 3d¹⁰ [1]; (c) [Ar] 3d³ [1].`},
-    {tag:"3.1.8",marks:2,q:`State <strong>four</strong> general properties of transition elements (other than colour).`,a:`Any 4 of: variable oxidation states; catalytic activity; paramagnetism; complex/ligand formation; high m.p./b.p.; high density. [2 — 1 mark per 2 properties]`},
-    {tag:"3.1.10",marks:3,q:`Explain why [Cu(H₂O)₆]²⁺ is blue while Cu⁺ compounds tend to be colourless.`,a:`Cu²⁺ has 3d⁹ (partly filled d) → d–d transitions absorb light whose energy matches Δ [1]. The colour seen is the complementary colour of the absorbed wavelength [1]. Cu⁺ is 3d¹⁰ — full d-sublevel, no d–d transitions → no visible absorption → colourless [1].`},
-    {tag:"3.1.10",marks:1,q:`A complex absorbs at 600 nm (orange). State the colour observed.`,a:`<strong>Blue</strong> (complementary to orange) [1].`},
-    {tag:"3.1.10",marks:3,q:`Calculate the energy in kJ mol⁻¹ of a photon with λ = 450 nm.`,a:`E = hc/λ = (6.63 × 10⁻³⁴)(3.00 × 10⁸)/(450 × 10⁻⁹) = 4.42 × 10⁻¹⁹ J per photon [1]. × N<sub>A</sub> = 2.66 × 10⁵ J mol⁻¹ [1] = <strong>266 kJ mol⁻¹</strong> [1].`},
-    {tag:"3.1.8",marks:2,q:`Outline how a transition metal acts as a catalyst, giving one named process and catalyst.`,a:`Provides an alternative pathway with lower activation energy [1]. E.g. Fe in the Haber process; V₂O₅ in the Contact process; Ni in hydrogenation [1].`},
-    {tag:"3.1.9",marks:2,q:`Explain why transition metals show variable oxidation states.`,a:`The 3d and 4s sublevels are close in energy [1], so successive IEs are similar in value and several electrons can be removed for comparable energy costs [1].`},
-    {tag:"3.1.10",marks:2,q:`Explain how the identity of the ligand affects the colour of a transition-metal complex.`,a:`Different ligands cause different magnitudes of d-orbital splitting Δ [1] → different wavelengths absorbed → different observed colours [1].`},
-    {tag:"3.1.8",marks:2,q:`State and explain whether [Sc(H₂O)₆]³⁺ is expected to be coloured.`,a:`Colourless [1]. Sc³⁺ is [Ar] 3d⁰ — no d electrons, so no d–d transitions are possible [1].`}
-  ]}
-},
-/* ===== TOPIC 11 ===== */
-{
-  n:11, id:"t11",
-  title:"Covalent Bonding: Lewis, VSEPR, Resonance & Hybridization",
-  short:"Covalent Bonding",
-  refs:"Structure 2.2.4, 2.2.11, 2.2.13–2.2.16 · Sem 2, Unit 5",
-  takeaways:[
-    `<strong>Lewis (electron-dot) formulas:</strong> show all valence electrons; bonding pairs drawn as lines, non-bonding as lone pairs. Octet rule for most period 2/3 elements.`,
-    `<strong>Expanded octet:</strong> period 3+ elements (P, S, Cl, Xe…) can have 5 or 6 electron domains (e.g. PCl₅, SF₆) using vacant d-orbitals.`,
-    `<strong>Formal charge:</strong> <span class="f">FC = (valence e⁻) − (non-bonding e⁻) − ½(bonding e⁻)</span>. Preferred Lewis structure minimises |FC| and places negative FC on the more electronegative atom.`,
-    `<strong>VSEPR — geometries:</strong><table class="tbl"><tr><th>Domains</th><th>e-domain geometry</th><th>All bonded</th><th>With lone pairs</th></tr><tr><td>2</td><td>Linear (180°)</td><td>Linear</td><td>—</td></tr><tr><td>3</td><td>Trigonal planar (120°)</td><td>Trig. planar</td><td>Bent (1 LP)</td></tr><tr><td>4</td><td>Tetrahedral (109.5°)</td><td>Tetrahedral</td><td>Trig. pyramidal (1 LP, 107°); Bent (2 LP, 104.5°)</td></tr><tr><td>5</td><td>Trig. bipyramidal</td><td>TBP</td><td>See-saw (1 LP), T-shape (2 LP), Linear (3 LP)</td></tr><tr><td>6</td><td>Octahedral (90°)</td><td>Octahedral</td><td>Sq. pyramidal (1 LP), Square planar (2 LP)</td></tr></table>`,
-    `<strong>Lone-pair effect on bond angles:</strong> LP–BP repulsion &gt; BP–BP → compresses angle ≈ 2° per lone pair. CH₄ (109.5°) → NH₃ (107°) → H₂O (104.5°).`,
-    `<strong>Resonance &amp; delocalisation:</strong> when more than one valid Lewis structure exists (O₃, NO₃⁻, CO₃²⁻, benzene), the real structure is a hybrid with equivalent bonds of intermediate length. Electrons are <em>delocalised</em>.`,
-    `<strong>σ and π bonds:</strong> σ = head-on overlap (along bond axis); π = sideways p-orbital overlap (density above/below). Single bond = 1σ; double = 1σ + 1π; triple = 1σ + 2π.`,
-    `<strong>Hybridization:</strong><table class="tbl"><tr><th>Hybridisation</th><th>Electron domains</th><th>Geometry</th><th>π bonds on that C</th></tr><tr><td>sp³</td><td>4</td><td>Tetrahedral / pyramidal / bent</td><td>0</td></tr><tr><td>sp²</td><td>3</td><td>Trigonal planar / bent</td><td>1</td></tr><tr><td>sp</td><td>2</td><td>Linear</td><td>2</td></tr></table>`,
-    `<strong>Quick rule:</strong> count electron domains around the central atom → 2 = sp, 3 = sp², 4 = sp³.`
-  ],
-  pitfall:`Counting double bonds as 2 domains in VSEPR (a double bond is 1 domain); forgetting lone pairs when predicting geometry; calling NH₃ "tetrahedral" instead of trigonal pyramidal; writing double bond = 2σ (it's 1σ + 1π).`,
-  worked:`Ethene (C₂H₄): each C has 3 electron domains → trigonal planar, ≈ 120°, sp² hybridised. C=C contains 1σ (sp²–sp² head-on overlap) + 1π (sideways overlap of unhybridised p<sub>z</sub> orbitals). Each C–H is a σ bond (sp²–s overlap).`,
-  quiz:{max:28, questions:[
-    {tag:"2.2.4",marks:4,q:`Draw the Lewis structure and predict the molecular geometry and bond angle of: (a) NH₃; (b) H₂O.`,a:`(a) N with 3 bonded H and 1 LP [1]; trigonal pyramidal [1]; ≈ 107° [½]. (b) O with 2 bonded H and 2 LP [½]; bent [1]; ≈ 104.5° [½ + ½].`},
-    {tag:"2.2.13",marks:3,q:`Draw the Lewis structure of SF₆ and state its molecular geometry and bond angle.`,a:`S central with 6 F single bonds, no LPs [1]. Octahedral [1]; 90° [1].`},
-    {tag:"2.2.13",marks:3,q:`Predict the geometry of XeF₄ and explain the role of the lone pairs.`,a:`XeF₄ has 6 electron domains (4 bonds + 2 LPs) [1]. LPs occupy opposite (axial) positions to minimise repulsion → square planar [1]; bond angle 90° [1].`},
-    {tag:"2.2.14",marks:3,q:`Two Lewis structures are proposed for OCN⁻: (i) O=C=N⁻; (ii) O−C≡N. Use formal charges to determine which is preferred.`,a:`Structure (ii): FC on O = 6−6−1 = −1; C = 4−0−4 = 0; N = 5−2−3 = 0 [2]. Preferred because the negative FC sits on the more electronegative O [1].`},
-    {tag:"2.2.11",marks:3,q:`Explain what is meant by delocalisation, using CO₃²⁻ as an example.`,a:`Electrons not confined to one atom/bond but spread across several [1]. CO₃²⁻ has 3 equivalent resonance structures; all C–O bonds are identical length between single and double [1]; described by 1σ framework + π system delocalised over all 3 O atoms [1].`},
-    {tag:"2.2.15",marks:3,q:`State the number of σ and π bonds in: (a) HCN; (b) CO₂; (c) C₂H₂.`,a:`(a) HCN: 2σ + 2π [1]; (b) CO₂: 2σ + 2π [1]; (c) C₂H₂ (ethyne): 3σ + 2π [1].`},
-    {tag:"2.2.16",marks:2,q:`State the hybridisation of the underlined atom in: (a) <u>C</u>H₄; (b) ethene <u>C</u>H₂=CH₂; (c) <u>N</u>H₃; (d) <u>C</u>O₂.`,a:`(a) sp³ [½]; (b) sp² [½]; (c) sp³ [½]; (d) sp [½].`},
-    {tag:"2.2.4",marks:2,q:`Explain why the H–C–H angle in CH₄ (109.5°) is larger than in NH₃ (107°), which is larger than in H₂O (104.5°).`,a:`Number of lone pairs increases 0 → 1 → 2 [1]. LP–BP repulsion &gt; BP–BP, so each lone pair compresses the H–X–H angle [1].`},
-    {tag:"2.2.16",marks:3,q:`Identify the hybridisation of each carbon in propene CH₃–CH=CH₂ and give the bond angles around each carbon.`,a:`CH₃ = sp³, 109.5° [1]; central CH= = sp², 120° [1]; =CH₂ = sp², 120° [1].`},
-    {tag:"2.2.15",marks:2,q:`Describe the formation of the π bond in ethene by sketching the overlap of p-orbitals.`,a:`Two unhybridised p<sub>z</sub> orbitals (one per C) overlap sideways above and below the σ framework [1]; this lateral overlap creates the π bond with electron density in two lobes parallel to the σ axis [1].`}
-  ]}
-},
-/* ===== TOPIC 12 ===== */
-{
-  n:12, id:"t12",
-  title:"Polarity, Intermolecular Forces & Covalent Networks",
-  short:"Polarity & IMFs",
-  refs:"Structure 2.2.5–2.2.9 · Sem 2, Unit 5",
-  takeaways:[
-    `<strong>Bond polarity:</strong> arises from a difference in electronegativity (ΔEN). ΔEN &gt; 0 → polar covalent; very large ΔEN (≈ &gt;1.8) → essentially ionic; ΔEN ≈ 0 → non-polar covalent.`,
-    `<strong>Showing polarity:</strong> arrow pointing from δ⁺ to δ⁻ along the bond, or partial-charge labels δ⁺/δ⁻.`,
-    `<strong>Molecular polarity:</strong> depends on (i) bond polarities AND (ii) molecular geometry. Symmetric molecules (CO₂, BF₃, CCl₄, SF₆) have polar bonds but zero net dipole. Asymmetric ones (H₂O, NH₃, CHCl₃) are polar.`,
-    `<strong>Intermolecular forces (IMFs) — all collectively van der Waals:</strong><ul><li><strong>London dispersion forces (LDF):</strong> in <em>all</em> molecules; caused by instantaneous dipoles. Strength ↑ with number of electrons (molar mass, surface area). Branching reduces contact → weaker LDF.</li><li><strong>Dipole–induced dipole:</strong> permanent dipole induces a temporary dipole in a non-polar neighbour.</li><li><strong>Dipole–dipole:</strong> between molecules with permanent dipoles.</li><li><strong>Hydrogen bonding:</strong> H attached to N, O or F interacting with a lone pair on N, O or F of another molecule. Strongest IMF at comparable molar mass.</li></ul>`,
-    `<strong>Relative strength (comparable molar mass):</strong> LDF &lt; dipole–dipole &lt; H-bonding.`,
-    `<strong>Physical properties governed by IMFs:</strong><ul><li>Boiling/melting point: stronger IMFs → higher b.p./m.p. (e.g. H₂O &gt; H₂S despite lower M because of H-bonding).</li><li>Volatility: stronger IMFs → less volatile.</li><li>Solubility — "like dissolves like": polar / H-bonded solutes in polar solvents; non-polar in non-polar.</li></ul>`,
-    `<strong>Covalent network structures:</strong><ul><li><strong>Diamond:</strong> each C sp³, 4 σ bonds, 3-D network. Very hard, high m.p., non-conductor.</li><li><strong>Graphite:</strong> each C sp², hexagonal layers with delocalised π electrons. Soft (layers slide), good conductor along layers.</li><li><strong>Graphene:</strong> single graphite layer. Strong, flexible, excellent conductor.</li><li><strong>Fullerenes (C₆₀):</strong> spherical sp² C cages. Soluble in some organic solvents.</li><li><strong>Silicon dioxide (SiO₂):</strong> each Si tetrahedrally bonded to 4 O, each O bridging 2 Si. Giant network, very high m.p.</li></ul>`,
-    `<strong>Boiling points in homologous series:</strong> ↑ with chain length (more electrons → stronger LDF). Branched isomers boil lower than straight-chain (less surface contact → weaker LDF).`
-  ],
-  pitfall:`Calling CO₂ polar (it isn't — linear geometry cancels dipoles); ranking IMFs by molar mass alone and ignoring H-bonding; claiming graphite is molecular (it is a giant covalent network); ignoring number of electrons when comparing LDFs.`,
-  worked:`Compare b.p.: CH₄ (−164 °C), H₂O (100 °C), HF (19.5 °C). Despite similar M, H₂O has the highest b.p. because each molecule can form up to 2 H-bonds (2 LP on O + 2 δ⁺ H). HF averages ≈1 H-bond per molecule. CH₄ has only weak LDF.`,
-  quiz:{max:26, questions:[
-    {tag:"2.2.5",marks:3,q:`Use electronegativity to deduce the polarity of: (a) HCl; (b) Cl₂; (c) C–O.`,a:`(a) ΔEN = 3.16 − 2.20 = 0.96 → polar [1]. (b) ΔEN = 0 → non-polar [1]. (c) ΔEN = 3.44 − 2.55 = 0.89 → polar (δ⁻ on O) [1].`},
-    {tag:"2.2.6",marks:4,q:`State and explain whether each molecule is polar overall: (a) CO₂; (b) H₂O; (c) CHCl₃; (d) BF₃.`,a:`(a) Polar C=O bonds but linear → dipoles cancel → non-polar [1]. (b) Bent → dipoles do not cancel → polar [1]. (c) Tetrahedral but asymmetric (one H, three Cl) → polar [1]. (d) Trigonal planar, symmetric → dipoles cancel → non-polar [1].`},
-    {tag:"2.2.8",marks:2,q:`State the type(s) of IMF present in: (a) HCl(l); (b) Ar(l); (c) CH₃OH(l); (d) CH₄(l).`,a:`(a) LDF + dipole–dipole [½]; (b) LDF only [½]; (c) LDF + dipole–dipole + H-bonding [½]; (d) LDF only [½].`},
-    {tag:"2.2.8",marks:3,q:`Explain why water has an unusually high boiling point compared to other group-16 hydrides (H₂S, H₂Se).`,a:`H₂O forms extensive H-bonds: each O has 2 LP and 2 δ⁺ H per molecule [1]. H₂S and H₂Se have weaker dipole–dipole and LDF — S and Se less electronegative, no significant H-bonding [1]. More energy needed to break IMFs in H₂O → higher b.p. [1].`},
-    {tag:"2.2.9",marks:3,q:`Rank by increasing boiling point and justify: CH₄, CH₃Cl, CH₃OH.`,a:`CH₄ &lt; CH₃Cl &lt; CH₃OH [1]. CH₄: LDF only. CH₃Cl is polar → adds dipole–dipole [1]. CH₃OH has H-bonding → strongest IMFs → highest b.p. [1].`},
-    {tag:"2.2.7",marks:3,q:`Compare the structure and electrical conductivity of diamond and graphite.`,a:`Diamond: C is sp³, 4 σ bonds, 3-D network — no delocalised electrons → does not conduct [1½]. Graphite: C is sp², hexagonal layers — delocalised π system → conducts along layers [1½].`},
-    {tag:"2.2.7",marks:2,q:`Explain why silicon dioxide (SiO₂) has a much higher melting point than carbon dioxide (CO₂).`,a:`SiO₂ is a covalent network — every Si–O is a strong covalent bond throughout the lattice [1]. CO₂ is molecular — held by weak LDF/dipole; easily broken [1].`},
-    {tag:"2.2.9",marks:2,q:`Explain why pentane (b.p. 36 °C) has a higher boiling point than 2,2-dimethylpropane (b.p. 9.5 °C) despite identical molar mass.`,a:`Pentane is a long straight chain with more surface contact → stronger LDF [1]. 2,2-dimethylpropane is highly branched, more spherical, less surface area → weaker LDF → lower b.p. [1].`},
-    {tag:"2.2.6",marks:2,q:`Sketch a CHCl₃ molecule and indicate the direction of the resultant dipole moment.`,a:`Tetrahedral CHCl₃: three δ⁻ Cl and one δ⁺ H [1]; net dipole moment points from H toward the Cl₃ face [1].`},
-    {tag:"2.2.8",marks:2,q:`State the requirements for hydrogen bonding and give one example of an inorganic compound that exhibits it.`,a:`H covalently bonded to N, O or F [1], interacting with a lone pair on N, O or F of another molecule. Example: HF, NH₃, or H₂O [1].`}
-  ]}
-},
-/* ===== TOPIC 13 ===== */
-{
-  n:13, id:"t13",
-  title:"Organic: Classification, Nomenclature, Isomerism & Spectroscopy",
-  short:"Organic & Spectroscopy",
-  refs:"Structure 1.4.4, 3.2.3–3.2.12 · Reactivity 2.1.1–2.1.4 · Sem 2, Unit 6",
-  takeaways:[
-    `<strong>Homologous series</strong> — same general formula, differ by CH₂, similar chemistry, gradual physical property changes:<table class="tbl"><tr><th>Series</th><th>Functional group</th><th>General formula</th><th>Suffix</th></tr><tr><td>Alkanes</td><td>—</td><td>C<sub>n</sub>H<sub>2n+2</sub></td><td>-ane</td></tr><tr><td>Alkenes</td><td>C=C</td><td>C<sub>n</sub>H<sub>2n</sub></td><td>-ene</td></tr><tr><td>Alkynes</td><td>C≡C</td><td>C<sub>n</sub>H<sub>2n−2</sub></td><td>-yne</td></tr><tr><td>Halogenoalkanes</td><td>−X</td><td>C<sub>n</sub>H<sub>2n+1</sub>X</td><td>halo-</td></tr><tr><td>Alcohols</td><td>−OH</td><td>C<sub>n</sub>H<sub>2n+1</sub>OH</td><td>-ol</td></tr><tr><td>Aldehydes</td><td>−CHO</td><td>C<sub>n</sub>H<sub>2n</sub>O</td><td>-al</td></tr><tr><td>Ketones</td><td>C=O (internal)</td><td>C<sub>n</sub>H<sub>2n</sub>O</td><td>-one</td></tr><tr><td>Carboxylic acids</td><td>−COOH</td><td>C<sub>n</sub>H<sub>2n</sub>O₂</td><td>-oic acid</td></tr><tr><td>Esters</td><td>−COOR</td><td>—</td><td>-yl -oate</td></tr><tr><td>Amines</td><td>−NH₂</td><td>—</td><td>-amine</td></tr><tr><td>Amides</td><td>−CONH₂</td><td>—</td><td>-amide</td></tr></table>`,
-    `<strong>IUPAC nomenclature — checklist:</strong><ul><li>Find the longest chain containing the principal functional group → stem (meth, eth, prop, but, pent…).</li><li>Number from the end that gives the principal group the lowest locant.</li><li>Name substituents alphabetically with locants; use di/tri prefixes for repeats (ignored in alphabetising).</li><li>Add the suffix for the principal functional group.</li></ul>`,
-    `<strong>Primary / secondary / tertiary:</strong> classify by the number of carbon atoms bonded to the carbon that carries the functional group.`,
-    `<strong>Structural isomers</strong> (same molecular formula, different connectivity):<ul><li><em>Chain isomerism</em> — different carbon skeleton (e.g. butane vs 2-methylpropane).</li><li><em>Position isomerism</em> — same skeleton, different position of functional group (e.g. propan-1-ol vs propan-2-ol).</li><li><em>Functional group isomerism</em> — different functional group (e.g. ethanol vs methoxymethane, both C₂H₆O).</li></ul>`,
-    `<strong>Stereoisomers</strong> (same connectivity, different 3-D arrangement):<ul><li><em>Cis/trans (geometric):</em> requires restricted rotation (C=C or ring) and two different groups on each restricted C. Cis = same side; trans = opposite.</li><li><em>Optical (chiral):</em> a chiral C has four different groups → two non-superimposable mirror images = enantiomers. A 1:1 mixture = racemic mixture (no net optical activity). Enantiomers differ in how they rotate plane-polarised light and in chiral environments.</li></ul>`,
-    `<strong>Mass spectrometry (MS):</strong> M⁺ peak = molecular mass. Key fragment losses: M−15 (CH₃), M−17 (OH), M−29 (CHO), M−45 (COOH). M+2 isotope peak for Cl or Br.`,
-    `<strong>Infrared (IR) spectroscopy — key absorptions:</strong><ul><li>O–H alcohol (broad): 3200–3600 cm⁻¹</li><li>O–H carboxylic acid (very broad): 2500–3000 cm⁻¹</li><li>N–H: 3300–3500 cm⁻¹</li><li>C=O: 1700–1750 cm⁻¹</li><li>C=C: 1620–1680 cm⁻¹</li></ul>IR-active bond must have a changing dipole moment during vibration (relevant: CO₂, H₂O, CH₄ as greenhouse gases).`,
-    `<strong>¹H NMR:</strong> number of signals = number of chemically distinct H environments; chemical shift δ (ppm) → environment (use data booklet); integration ratio → relative H count. Splitting (n+1 rule): n equivalent neighbouring H atoms split a signal into n+1 peaks.`,
-    `<strong>Reaction stoichiometry:</strong> limiting reactant = divide moles by coefficient, smallest value wins. Theoretical yield from moles of limiting reactant. <span class="f">% yield = (experimental / theoretical) × 100%</span>. Always &lt;100% in practice.`
-  ],
-  pitfall:`Using mass instead of moles to find the limiting reactant; ignoring isotope peaks in MS; mislabelling primary vs secondary vs tertiary; confusing the absorbed wavelength with the observed colour in a d–d analogy; forgetting the broad O–H IR band for carboxylic acids vs alcohols.`,
-  worked:`% yield example: 12.0 g methanol (M = 32.0) + excess ethanoic acid → methyl ethanoate (M = 74.0); actual yield = 18.0 g. n(MeOH) = 0.375 mol → theoretical n(ester) = 0.375 mol → theoretical mass = 27.75 g → % yield = 18/27.75 × 100 = <strong>64.9%</strong>.`,
-  quiz:{max:27, questions:[
-    {tag:"3.2.5",marks:3,q:`Give the IUPAC name of: (a) CH₃CH(OH)CH₂CH₃; (b) (CH₃)₂CHCH₂Cl; (c) CH₃CH₂COOH.`,a:`(a) butan-2-ol [1]; (b) 1-chloro-2-methylpropane [1]; (c) propanoic acid [1].`},
-    {tag:"3.2.6",marks:3,q:`Draw and name <strong>three</strong> structural isomers of C₄H₁₀O and classify each (primary/secondary/tertiary alcohol or ether).`,a:`Any three: butan-1-ol (1° alcohol) [1]; butan-2-ol (2° alcohol) [1]; 2-methylpropan-2-ol (3° alcohol) [1]; 2-methylpropan-1-ol (1°); methoxypropane (ether); ethoxyethane (ether). [1 mark per correct structure + name + class]`},
-    {tag:"3.2.7",marks:3,q:`Identify the type of stereoisomerism shown by: (a) but-2-ene; (b) butan-2-ol. Explain each.`,a:`(a) cis-trans (geometric) — restricted rotation around C=C, two different groups on each C [1½]. (b) optical (enantiomers) — C2 has 4 different groups (H, OH, CH₃, CH₂CH₃) → chiral centre [1½].`},
-    {tag:"3.2.7",marks:2,q:`State what is meant by a chiral carbon and a racemic mixture.`,a:`A carbon bonded to four <em>different</em> groups [1]. A racemic mixture contains equal amounts of both enantiomers — no net rotation of plane-polarised light [1].`},
-    {tag:"3.2.8",marks:3,q:`A molecular ion appears at m/z = 60. Peaks also appear at m/z = 45 and 29. Suggest a structure consistent with these fragments.`,a:`M⁺ = 60. M−15 = 45 (loss of CH₃) and M−31 = 29 (loss of CH₂OH or CHO⁺) [1]. Consistent with propan-1-ol (M = 60): CH₃⁺ lost (45 = C₂H₅O⁺) and CHO⁺ = 29 [2].`},
-    {tag:"3.2.9",marks:2,q:`Describe how IR spectroscopy can distinguish between propan-1-ol and propanal.`,a:`Propan-1-ol: broad O–H stretch at 3200–3600 cm⁻¹, no strong C=O peak [1]. Propanal: strong C=O stretch at ≈1720 cm⁻¹, no broad O–H [1].`},
-    {tag:"3.2.10",marks:3,q:`State the number of ¹H NMR signals expected for: (a) ethanol; (b) propan-2-ol; (c) propanone.`,a:`(a) ethanol CH₃CH₂OH → 3 signals (CH₃, CH₂, OH) [1]; (b) propan-2-ol (CH₃)₂CHOH → 3 signals (2×CH₃ equivalent, CH, OH) [1]; (c) propanone (CH₃)₂C=O → 1 signal [1].`},
-    {tag:"3.2.11",marks:2,q:`Predict the ¹H NMR splitting pattern for each signal in ethanol CH₃CH₂OH (apply the n+1 rule).`,a:`CH₃ (adjacent to 2H of CH₂) → triplet [1]. CH₂ (adjacent to 3H of CH₃) → quartet; OH typically singlet (fast exchange) [1].`},
-    {tag:"2.1.3",marks:4,q:`5.00 g of zinc reacts with 100 cm³ of 1.50 mol dm⁻³ HCl. Determine the limiting reactant and the maximum mass of H₂ produced.`,a:`n(Zn) = 5.00/65.38 = 0.0765 mol [1]. n(HCl) = 0.100 × 1.50 = 0.150 mol [1]. Zn + 2HCl → ZnCl₂ + H₂; 0.0765 mol Zn needs 0.153 mol HCl &gt; 0.150 available → HCl is limiting [1]. n(H₂) = 0.150/2 = 0.0750 mol; m(H₂) = 0.0750 × 2.02 = <strong>0.152 g</strong> [1].`},
-    {tag:"2.1.4",marks:2,q:`Theoretical yield of an ester is 6.40 g; experimental yield is 4.30 g. Calculate the % yield and suggest two reasons it is below 100%.`,a:`% yield = 4.30/6.40 × 100 = <strong>67.2%</strong> [1]. Any two: incomplete reaction; side reactions; losses on transfer/purification; equilibrium; impure reactants [1].`}
-  ]}
 }
 ];
 
+
 (function(){
-  var ICON_CHEV='<svg class="tchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
-  var CARET='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
-  var TICK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
-  var BOOK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h12v16H6a2 2 0 00-2 2z"/><path d="M18 17H6"/></svg>';
+  var ALL_TOPICS=[
+    'Particulate Matter & The Atom',
+    'Electron Configuration & Ionisation Energy',
+    'The Mole, Molar Mass & Concentration',
+    'Ideal Gases',
+    'The Periodic Table & Periodicity',
+    'Enthalpy, Calorimetry & Hess\u2019s Law',
+    'Bond Energy, Entropy & Gibbs',
+    'Fuels & Combustion',
+    'Ionic Bonding & Born\u2013Haber',
+    'Transition Metals',
+    'Covalent Bonding & VSEPR',
+    'Polarity, IMFs & Networks',
+    'Organic Chemistry & Spectroscopy'
+  ];
 
-  var reviewed={};            // topicId -> bool
-  var grades={};              // "tid-qi" -> 'got'|'miss'
-  var totalQ=0, totalMarks=0;
-  TOPICS.forEach(function(t){ totalQ+=t.quiz.questions.length; });
+  var reviewed={}, grades={};
+  var allMarks=0; TOPICS.forEach(function(t){allMarks+=t.quiz.max;});
 
-  /* countdown */
-  var days=Math.ceil((new Date(EXAM_DATE)-new Date())/86400000);
-  document.getElementById('cdNum').textContent= days>0?days:(days===0?'0':'past');
+  /* ---- countdown to the sample test ---- */
+  (function(){
+    var d=Math.ceil((new Date(EXAM_DATE)-new Date())/86400000);
+    document.getElementById('cdTest').textContent = d>0?d:(d===0?'0':'\u2014');
+  })();
 
-  /* build topics */
-  var host=document.getElementById('topics');
-  TOPICS.forEach(function(t,i){
-    var sec=document.createElement('section');
-    sec.className='topic fade';sec.id=t.id;
-    sec.style.animationDelay=(.24+i*.05)+'s';
-
-    var take=t.takeaways.map(function(x){return '<li>'+x+'</li>';}).join('');
-    var quiz=t.quiz.questions.map(function(q,qi){
-      var key=t.id+'-'+qi;
-      return '<div class="q" data-q="'+key+'">'+
-        '<div class="qhead"><span class="qt">'+q.tag+'</span>'+
-        '<span class="qx">'+q.q+' <span class="qm">['+q.marks+']</span></span></div>'+
-        '<button class="reveal" data-rev="'+key+'">Reveal mark scheme'+CARET+'</button>'+
-        '<div class="ans" id="ans-'+key+'"><div>'+
-          '<div class="ansin"><div class="ml">Mark scheme · '+q.marks+' marks</div>'+q.a+
-          '<div class="selfgrade">'+
-            '<button class="got" data-grade="'+key+'" data-v="got" data-m="'+q.marks+'">'+TICK+' Got it</button>'+
-            '<button class="miss" data-grade="'+key+'" data-v="miss" data-m="'+q.marks+'">Review again</button>'+
-          '</div></div>'+
-        '</div></div>'+
-        '</div>';
-    }).join('');
-
-    sec.innerHTML=
-      '<button class="thead" aria-expanded="false" data-acc="'+t.id+'">'+
-        '<span class="tnum"><span class="nm">'+t.n+'</span><span class="tk">'+TICK+'</span></span>'+
-        '<span class="tinfo"><h4>Topic '+t.n+' — '+t.title+'</h4>'+
-        '<span class="meta"><span class="scoretag" id="tag-'+t.id+'">0 / '+t.quiz.max+'</span>'+
-        '<span class="rf">'+t.refs+'</span></span></span>'+
-        ICON_CHEV+
-      '</button>'+
-      '<div class="panel" id="panel-'+t.id+'"><div class="in"><div class="body">'+
-        '<div class="sub"><span class="pip">'+BOOK+'</span>Key takeaways</div>'+
-        '<ul class="take">'+take+'</ul>'+
-        '<div class="callout pit"><div class="lbl">⚠ Common mistakes</div>'+t.pitfall+'</div>'+
-        '<div class="callout wkd"><div class="lbl">✓ Worked example</div>'+t.worked+'</div>'+
-        '<div class="quizcard">'+
-          '<div class="qhd"><b>Quiz — Topic '+t.n+'</b><span class="mx">Max '+t.quiz.max+' marks</span></div>'+
-          '<div class="tip"><b>Answer in your notebook first.</b> Reveal the mark scheme, then grade yourself honestly.</div>'+
-          quiz+
-        '</div>'+
-        '<div class="topicfoot"><div class="res">Topic score <b id="res-'+t.id+'">0 / '+t.quiz.max+'</b></div>'+
-        '<button class="donebtn" data-review="'+t.id+'">'+TICK+'<span class="lab">Mark reviewed</span></button></div>'+
-      '</div></div></div>';
-    host.appendChild(sec);
-  });
-
-  /* progress bars */
-  var barHost=document.getElementById('bars');
-  TOPICS.forEach(function(t){
-    var b=document.createElement('i');b.dataset.bar=t.id;barHost.appendChild(b);
-  });
-  /* pad bars to 13 to represent full course */
-  for(var k=TOPICS.length;k<TOTAL_TOPICS;k++){
-    var pb=document.createElement('i');barHost.appendChild(pb);
-  }
-
-  function topicScore(tid){
-    var t=TOPICS.filter(function(x){return x.id===tid;})[0];
-    var s=0;
-    t.quiz.questions.forEach(function(q,qi){
-      if(grades[tid+'-'+qi]==='got') s+=q.marks;
+  /* ---- contents list ---- */
+  function renderContents(){
+    var html='<div class="exam-sep">Topics 1\u20134 \u00b7 ready</div>';
+    ALL_TOPICS.forEach(function(name,i){
+      var n=i+1, nn=(n<10?'0'+n:n);
+      if(n===5)html+='<div class="exam-sep">Topics 5\u201313 \u00b7 coming soon</div>';
+      if(n<=4){
+        html+='<a class="trow" href="#t'+n+'" data-jump="t'+n+'" id="toc-t'+n+'">'+
+          '<span class="trow-n">'+nn+'</span><span class="trow-name">'+name+'</span>'+
+          '<span class="trow-st" id="tocst-t'+n+'">Open</span></a>';
+      }else{
+        html+='<div class="trow soon"><span class="trow-n">'+nn+'</span>'+
+          '<span class="trow-name">'+name+'</span><span class="trow-st">Soon</span></div>';
+      }
     });
-    return s;
-  }
-  function topicGraded(tid){
-    var t=TOPICS.filter(function(x){return x.id===tid;})[0];
-    var c=0;
-    t.quiz.questions.forEach(function(q,qi){ if(grades[tid+'-'+qi]) c++; });
-    return c;
+    document.getElementById('contents').innerHTML=html;
   }
 
-  function refresh(){
-    var doneCount=0, marks=0, got=0, gradedAll=0;
+  /* ---- topic cards ---- */
+  function renderTopics(){
+    var html='';
     TOPICS.forEach(function(t){
-      var sc=topicScore(t.id);
-      marks+=sc;
-      document.getElementById('tag-'+t.id).textContent=sc+' / '+t.quiz.max;
-      document.getElementById('tag-'+t.id).classList.toggle('has',sc>0);
-      document.getElementById('res-'+t.id).textContent=sc+' / '+t.quiz.max;
-      var gc=topicGraded(t.id);
-      gradedAll+=gc;
-      t.quiz.questions.forEach(function(q,qi){ if(grades[t.id+'-'+qi]==='got') got++; });
-      var bar=document.querySelector('[data-bar="'+t.id+'"]');
-      if(reviewed[t.id]){doneCount++;bar.className='on';}
-      else if(gc>0){bar.className='partial';}
-      else{bar.className='';}
+      var take=t.takeaways.map(function(x){return '<li>'+x+'</li>';}).join('');
+      var quiz=t.quiz.questions.map(function(q,qi){
+        var key=t.id+'-'+qi;
+        return '<div class="q" data-q="'+key+'">'+
+          '<div class="qhead"><span class="qno">'+(qi+1)+'</span>'+
+          '<div class="qmain"><span class="qtag">'+q.tag+'</span>'+
+          '<span class="qtext">'+q.q+'</span> <span class="qmarks">['+q.marks+']</span></div></div>'+
+          '<button class="reveal" data-rev="'+key+'">'+
+            '<span class="rl">Reveal mark scheme</span><span class="rc">\u203A</span></button>'+
+          '<div class="ans" id="ans-'+key+'"><div><div class="ansbox">'+
+            '<span class="anslabel">Mark scheme \u00b7 '+q.marks+' marks</span>'+q.a+
+            '<div class="grade">'+
+              '<button class="got" data-grade="'+key+'" data-v="got">Got it</button>'+
+              '<button class="miss" data-grade="'+key+'" data-v="miss">Review again</button>'+
+            '</div>'+
+          '</div></div></div>'+
+        '</div>';
+      }).join('');
+
+      html+='<section class="topic" id="'+t.id+'">'+
+        '<button class="thead" aria-expanded="false" data-acc="'+t.id+'">'+
+          '<span class="tnum"><span class="num">'+t.n+'</span><span class="tick">\u2713</span></span>'+
+          '<span class="ttext"><span class="ttitle">Topic '+t.n+' \u2014 '+t.title+'</span>'+
+          '<span class="trefs">'+t.refs+'</span></span>'+
+          '<span class="tchev">\u203A</span>'+
+        '</button>'+
+        '<div class="tpanel" id="panel-'+t.id+'"><div class="tinner"><div class="tbody">'+
+          '<h3 class="blockh">Key takeaways</h3><ul class="takeaways">'+take+'</ul>'+
+          '<div class="callout warn"><span class="clabel">Common mistakes</span>'+t.pitfall+'</div>'+
+          '<div class="callout work"><span class="clabel">Worked example</span>'+t.worked+'</div>'+
+          '<div class="quiz"><h3 class="blockh">Quiz \u2014 Topic '+t.n+' \u00b7 max '+t.quiz.max+' marks</h3>'+
+            '<div class="qnote"><b>Answer in your notebook first.</b> Reveal each mark scheme only after writing your answer, then grade yourself.</div>'+
+            quiz+
+          '</div>'+
+          '<div class="reviewrow"><button class="reviewbtn" data-review="'+t.id+'">'+
+            '<span class="rk">\u2713</span><span class="rl">Mark Topic '+t.n+' as reviewed</span></button></div>'+
+        '</div></div></div>'+
+      '</section>';
     });
-    /* header score */
-    document.getElementById('scoreNum').textContent=marks;
-    var allMarks=0;TOPICS.forEach(function(t){allMarks+=t.quiz.max;});
-    var pct=allMarks?Math.round(marks/allMarks*100):0;
-    document.getElementById('scorePct').textContent=pct+'%';
-    document.getElementById('scoreRing').style.background=
-      'conic-gradient(var(--moss) '+(pct*3.6)+'deg,var(--line) 0deg)';
-    /* bento stats */
-    document.getElementById('revNum').textContent=doneCount;
-    document.getElementById('progFrac').textContent=doneCount+' / '+TOTAL_TOPICS;
-    var totGraded=0;TOPICS.forEach(function(t){totGraded+=topicGraded(t.id);});
-    document.getElementById('accNum').textContent=
-      totGraded? Math.round(got/totGraded*100)+'%' : '—';
+    document.getElementById('topics').innerHTML=html;
+  }
+
+  /* ---- progress ---- */
+  function refresh(){
+    var done=0, marks=0, got=0, graded=0;
+    TOPICS.forEach(function(t){
+      t.quiz.questions.forEach(function(q,qi){
+        var g=grades[t.id+'-'+qi];
+        if(g)graded++;
+        if(g==='got'){got++;marks+=q.marks;}
+      });
+      if(reviewed[t.id])done++;
+    });
+    document.getElementById('revTxt').textContent=done+' / '+TOTAL_TOPICS;
+    document.getElementById('revBar').style.width=(done/TOTAL_TOPICS*100)+'%';
+    document.getElementById('markTxt').textContent=marks+' / '+allMarks;
+    document.getElementById('markBar').style.width=(marks/allMarks*100)+'%';
+    var acc=graded?Math.round(got/graded*100):0;
+    document.getElementById('accTxt').textContent=graded?acc+'%':'\u2014';
+    document.getElementById('accBar').style.width=(graded?acc:0)+'%';
   }
 
   function setAcc(id,open){
-    var h=document.querySelector('[data-acc="'+id+'"]');
+    document.querySelector('[data-acc="'+id+'"]').setAttribute('aria-expanded',open?'true':'false');
     document.getElementById('panel-'+id).classList.toggle('open',open);
-    h.setAttribute('aria-expanded',open?'true':'false');
   }
 
+  /* ---- interaction ---- */
   document.body.addEventListener('click',function(e){
     var acc=e.target.closest('[data-acc]');
-    if(acc){setAcc(acc.dataset.acc,acc.getAttribute('aria-expanded')!=='true');return;}
+    if(acc){ setAcc(acc.dataset.acc,acc.getAttribute('aria-expanded')!=='true'); return; }
 
     var rev=e.target.closest('[data-rev]');
     if(rev){
       var box=document.getElementById('ans-'+rev.dataset.rev);
       var on=box.classList.toggle('open');
       rev.classList.toggle('on',on);
-      rev.firstChild.textContent=on?'Hide mark scheme':'Reveal mark scheme';
+      rev.querySelector('.rl').textContent=on?'Hide mark scheme':'Reveal mark scheme';
       return;
     }
 
     var g=e.target.closest('[data-grade]');
     if(g){
       var key=g.dataset.grade, v=g.dataset.v;
-      grades[key]= (grades[key]===v)? null : v;
-      var qEl=document.querySelector('[data-q="'+key+'"]');
-      qEl.querySelectorAll('[data-grade]').forEach(function(b){
-        b.classList.toggle('sel',grades[key]===b.dataset.v);
-      });
+      grades[key]=(grades[key]===v)?null:v;
+      document.querySelector('[data-q="'+key+'"]').querySelectorAll('[data-grade]')
+        .forEach(function(b){ b.classList.toggle('on',grades[key]===b.dataset.v); });
       refresh();
       return;
     }
@@ -929,12 +638,32 @@ const TOPICS = [
       var id=rb.dataset.review;
       reviewed[id]=!reviewed[id];
       document.getElementById(id).classList.toggle('done',reviewed[id]);
-      rb.querySelector('.lab').textContent=reviewed[id]?'Reviewed':'Mark reviewed';
+      rb.querySelector('.rl').textContent=reviewed[id]
+        ? 'Reviewed \u2014 tap to undo'
+        : 'Mark Topic '+id.slice(1)+' as reviewed';
+      var row=document.getElementById('toc-'+id);
+      if(row){
+        row.classList.toggle('done',reviewed[id]);
+        document.getElementById('tocst-'+id).textContent=reviewed[id]?'Done':'Open';
+      }
       refresh();
+      return;
+    }
+
+    var jp=e.target.closest('[data-jump]');
+    if(jp){
+      e.preventDefault();
+      var tid=jp.dataset.jump;
+      setAcc(tid,true);
+      var el=document.getElementById(tid);
+      window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-14,behavior:'smooth'});
       return;
     }
   });
 
+  renderContents();
+  renderTopics();
+  setAcc('t1',true);   /* first topic open by default */
   refresh();
 })();
 </script>
